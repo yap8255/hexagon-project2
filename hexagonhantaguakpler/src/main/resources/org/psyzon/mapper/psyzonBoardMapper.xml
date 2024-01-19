@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.psyzon.mapper.psyzonBoardMapper">
+
+
+<select id="totalList" resultType="org.psyzon.domain.MemberListVO">
+
+		SELECT * FROM (SELECT ROWNUM NUM, MEMBER_LIST.* FROM MEMBER_LIST) WHERE NUM BETWEEN (#{pageNum}-1)*#{size}+1 AND (#{pageNum})*#{size}
+		
+		
+</select>
+
+<select id="totalCount" resultType="int">
+		select count(*) from member_list
+		
+		
+</select>
+
+<select id="WorkCount" resultType="int">
+		select count(*) from member_list where M_CONDITION = '재직'
+
+</select>
+
+<select id="WorkCount2" resultType="int">
+		select count(*) from member_list where M_CONDITION = '퇴사'
+
+</select>
+
+<select id="TypeCount" resultType="int">
+		select count(*) from member_list where M_TYPE = '정규직'
+
+</select>
+
+<select id="TypeCount2" resultType="int">
+		select count(*) from member_list where M_TYPE = '계약직'
+
+</select>
+
+<select id="TypeCount3" resultType="int">
+		select count(*) from member_list where M_TYPE = '임시직'
+
+</select>
+
+<select id="TypeCount4" resultType="int">
+		select count(*) from member_list where M_TYPE = '파견직'
+
+</select>
+
+<select id="TypeCount5" resultType="int">
+		select count(*) from member_list where M_TYPE = '위촉직'
+
+</select>
+
+<select id="TypeCount6" resultType="int">
+		select count(*) from member_list where M_TYPE = '일용직'
+
+</select>
+
+
+
+
+
+
+</mapper>
