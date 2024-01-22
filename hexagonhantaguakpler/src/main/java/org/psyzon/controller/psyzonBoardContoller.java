@@ -1,5 +1,6 @@
 package org.psyzon.controller;
 
+import org.psyzon.domain.EmploymentInfo_1DTO;
 import org.psyzon.service.psyzonBoardService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -32,6 +33,16 @@ public class psyzonBoardContoller {
 		model.addAttribute("TypeCount5",service.TypeCount5());
 		model.addAttribute("TypeCount6",service.TypeCount6());
 
+	}
+	
+	@GetMapping("/MemberInformation")
+	public void MemberInformation(@RequestParam(name = "m_number") String m_number, Model model){
+		EmploymentInfo_1DTO test = service.EmploymentInfo_1DTO(m_number);
+		
+		model.addAttribute("MemberInfo",test);
+		
+		
+		
 	}
 	
 	

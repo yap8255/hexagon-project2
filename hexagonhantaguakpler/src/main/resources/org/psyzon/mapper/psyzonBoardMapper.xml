@@ -59,8 +59,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 </select>
 
+<select id = "AcademicAbilityVO" resultType = "org.psyzon.domain.AcademicAbilityVO">
+select * from Academic_ability where m_number = #{m_number}  
+</select>
 
+<select id="familyinfo" resultType="org.psyzon.domain.FamilyVO">
 
+		select * from member_family where m_number=#{m_number}
+
+</select>
+
+<select id="insuranceinfo" resultType="org.psyzon.domain.InsuranceVO">
+
+		select * from insurance where m_number=#{m_number}
+		</select>
+		
 
 
 

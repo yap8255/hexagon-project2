@@ -1048,7 +1048,8 @@ $( document ).ready( function() {
 <!-- 페이지 링크 -->
 <div class="paginate">
 <a href="#" onclick="msg_pagelink(''); return false;" class="prev">이전페이지</a> 
-<a href="#현재페이지" class="on"><strong>1</strong></a> <a href="#" onclick="msg_pagelink(''); return false;" class="next">다음페이지</a>
+<a href="#현재페이지" class="on"><strong>1</strong></a> 
+<a href="#" onclick="msg_pagelink(''); return false;" class="next">다음페이지</a>
 </div>
 <!-- 페이지 링크 끝 -->
 <script language="Javascript">

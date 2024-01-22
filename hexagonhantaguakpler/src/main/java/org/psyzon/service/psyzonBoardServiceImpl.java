@@ -2,6 +2,10 @@ package org.psyzon.service;
 
 import java.util.List;
 
+import org.psyzon.domain.AcademicAbilityVO;
+import org.psyzon.domain.EmploymentInfo_1DTO;
+import org.psyzon.domain.FamilyVO;
+import org.psyzon.domain.InsuranceVO;
 import org.psyzon.domain.MemberListVO;
 import org.psyzon.domain.psyzonBoardPageDTO;
 import org.psyzon.mapper.psyzonBoardMapper;
@@ -83,6 +87,20 @@ public class psyzonBoardServiceImpl implements psyzonBoardService {
 	public int TypeCount6() {
 		return mapper.TypeCount6();
 	
+	}
+	
+	@Override
+	public EmploymentInfo_1DTO EmploymentInfo_1DTO(String m_number) {
+		List<AcademicAbilityVO> academic = mapper.AcademicAbilityVO(m_number);
+		InsuranceVO insurance = mapper.insuranceinfo(m_number);
+		List<FamilyVO> family = mapper.familyinfo(m_number);
+		System.out.println("service" +academic);
+		
+		
+		
+		
+		
+		return new EmploymentInfo_1DTO(academic,family,insurance);
 	}
 
 }

@@ -1,5 +1,6 @@
 package org.psyzon.service;
 
+import org.psyzon.domain.EmploymentInfo_1DTO;
 import org.psyzon.domain.psyzonBoardPageDTO;
 
 public interface psyzonBoardService {
@@ -22,6 +23,6 @@ public interface psyzonBoardService {
 	
 	public int TypeCount6();
 	
-	
+	public EmploymentInfo_1DTO EmploymentInfo_1DTO(String m_number);
 
 }
