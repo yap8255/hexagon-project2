@@ -1,10 +1,13 @@
 package org.psyzon.controller;
 
 import org.psyzon.domain.EmploymentInfo_1DTO;
+import org.psyzon.domain.InsertInsuranceVO;
 import org.psyzon.service.psyzonBoardService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -42,6 +45,17 @@ public class psyzonBoardContoller {
 		model.addAttribute("MemberInfo",test);
 		
 		
+		
+	}
+	@PostMapping("/insert")
+	public String insert(@ModelAttribute InsertInsuranceVO insurance){
+		
+		System.out.println("controller" + insurance);
+		
+		
+		
+		
+		return "psyzon/test";
 		
 	}
 	

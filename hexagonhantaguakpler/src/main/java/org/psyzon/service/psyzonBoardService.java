@@ -24,5 +24,7 @@ public interface psyzonBoardService {
 	public int TypeCount6();
 	
 	public EmploymentInfo_1DTO EmploymentInfo_1DTO(String m_number);
+	
+	
 
 }

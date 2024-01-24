@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>	
@@ -28,7 +28,20 @@
   <!-- Google CDN jQuery with fallback to local -->
   <script type="text/javascript" async="" src="https://www.google-analytics.com/analytics.js"></script><script type="text/javascript" async="" src="https://www.googletagmanager.com/gtag/js?id=G-CCK8YDQV0H&amp;l=dataLayer&amp;cx=c"></script><script async="" src="//www.google-analytics.com/analytics.js"></script><script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
   <script>!window.jQuery && document.write(unescape('%3Cscript src="//www.payzon.co.kr/_commonJs/external/jquery-1.11.1.min.js"%3E%3C/script%3E'))</script>
+  
 
+
+<!-- 기타사항 출력 -->
+<script>
+    // Assume the value from the database is generated on the server side using JSP EL
+    var dbValue = '${MemberInfo.memberinfovo.l_etc}';
+
+    // Set the value of the textarea using the value from the database
+    window.onload = function() {
+        var textarea = document.getElementById('frmEmplMemo');
+        textarea.value = dbValue;
+    };
+</script>
   <script type="text/javascript" src="//www.payzon.co.kr/_commonJs/external/jquery-migrate-1.2.1.min.js"></script><!-- jquery-migrate-1.1.1.min.js -->
 
   <script type="text/javascript" src="//www.payzon.co.kr/_commonJs/external/jquery.cookie.js"></script>
@@ -58,7 +71,16 @@
 
 <!-- 라디오버튼 스킨: label_radio r_on -->
 <link rel="stylesheet" type="text/css" href="//www.payzon.co.kr/_commonCss/external/jquery.maratz.radio.css">
-
+select option 박스 전용
+<script>
+    function isSelected(selectedValue, comparisonValue) {
+        if (selectedValue === comparisonValue) {
+            return 'selected';
+        } else {
+            return '';
+        }
+    }
+</script>
 
 
   <!-- <script src="http://www.google.com/jsapi"></script> -->
@@ -81,6 +103,8 @@
   <!-- 단축 키 설정 -->
 <script src="//www.payzon.co.kr/_commonJs/shortKey.js"></script>  </head>
   <body class="has-js">
+  
+ 
   
 <!-- 2021-01-29 -->
 <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -812,10 +836,11 @@ console.log('label click');
 */
 
     // 퀵 저장(트리거)
-    $("#linkBtnEmplSave").click(function(){
+  /*   $("#linkBtnEmplSave").click(function(){
       $("#btnEmplSave").trigger("click");
+      btnEmplSave
       return;
-    });
+    }); */
     // 퀵 목록(트리거)
     $("#linkBtnLinkList").click(function(){
       $("#btnLinkList").trigger("click");
@@ -1212,7 +1237,7 @@ console.log('label click');
   <!-- ### 좌우 ### -->
   <!-- //사원등록_우측 :: 사원등록_폼 -->
   <div class="emreg_rt">
-<form name="frmEmployeeInputMain" id="frmEmployeeInputMain" onsubmit="return false;">
+<!-- <form name="frmEmployeeInputMain" id="frmEmployeeInputMain" onsubmit="return false;"> -->
 <input name="frmSetMode" id="frmSetMode" type="hidden" value="setUpd">
 <input name="frmEmplCode" id="frmEmplCode" type="hidden" value="31">
 <input name="frmEmplIndx" id="frmEmplIndx" type="hidden" value="1171353">
@@ -1223,59 +1248,59 @@ console.log('label click');
       <p class="caption"></p>
       <ul>
         <li class="titLeft p_l28" style="width:77px;"><strong>사원번호</strong></li>
-        <li class="w_275 con2"><input name="frmEmplNmbr" id="frmEmplNmbr" type="text" value="No-140034" class="white"></li>
+        <li class="w_275 con2"><input name="frmEmplNmbr" id="frmEmplNmbr" type="text" value="${MemberInfo.memberinfovo.m_number}" class="white"></li>
         <li class="titLeft p_l15" style="width:90px;"><font class="c_red">*</font> 고용형태</li>
         <li class="w_276 con2">
           <select name="frmEmplEmpl" id="frmEmplEmpl">
            <option value="">선택해주세요.</option>
-	<option value="정규직" selected="">정규직</option>
-	<option value="계약직">계약직</option>
-	<option value="임시직">임시직</option>
-	<option value="파견직">파견직</option>
-	<option value="위촉직">위촉직</option>
-	<option value="일용직">일용직</option>
+	<option value="정규직" <c:if test="${MemberInfo.memberinfovo.m_type eq '정규직'}">selected=""</c:if>>정규직</option>
+	<option value="계약직"<c:if test="${MemberInfo.memberinfovo.m_type eq '계약직'}">selected=""</c:if>>계약직</option>
+	<option value="임시직"<c:if test="${MemberInfo.memberinfovo.m_type eq '임시직'}">selected=""</c:if>>임시직</option>
+	<option value="파견직"<c:if test="${MemberInfo.memberinfovo.m_type eq '파견직'}">selected=""</c:if>>파견직</option>
+	<option value="위촉직"<c:if test="${MemberInfo.memberinfovo.m_type eq '위촉직'}">selected=""</c:if>>위촉직</option>
+	<option value="일용직"<c:if test="${MemberInfo.memberinfovo.m_type eq '일용직'}">selected=""</c:if>>일용직</option>
           </select>
         </li>
       </ul>
       <ul>
         <li class="titLeft p_l15" style="width:90px;"><font class="c_red">*</font> 성명(한글)</li>
-        <li class="w_275 con2"><input name="frmEmplName" id="frmEmplName" type="text" value="이응열" class="white"></li>
+        <li class="w_275 con2"><input name="frmEmplName" id="frmEmplName" type="text" value="${MemberInfo.memberinfovo.m_name}" class="white"></li>
         <li class="titLeft p_l28" style="width:77px;">성명(영문)</li>
-        <li class="w_276 con2"><input name="frmEmplNam2" id="frmEmplNam2" type="text" value="Lee Eung Ryeol" class="white"></li>
+        <li class="w_276 con2"><input name="frmEmplNam2" id="frmEmplNam2" type="text" value="${MemberInfo.memberinfovo.l_nameeng}" class="white"></li>
       </ul>
       <ul>
         <li class="titLeft p_l15" style="width:90px;"><font class="c_red">*</font> 입사일</li>
-        <li class="w_275 con2"><input id="frmEmplJndt" name="frmEmplJndt" type="text" value="2000-02-22" class="white frmCalendar hasDatepicker" maxlength="10" style="width:200px;"></li>
+        <li class="w_275 con2"><input id="frmEmplJndt" name="frmEmplJndt" type="text" value="${MemberInfo.memberinfovo.m_newdate}" class="white frmCalendar hasDatepicker" maxlength="10" style="width:200px;"></li>
         <li class="titLeft p_l28" style="width:77px;">퇴사일</li>
-        <li class="w_276 con2"><input id="frmEmplQtdt" name="frmEmplQtdt" type="text" value="" class="white" maxlength="10" style="width:200px;" readonly=""></li>
+        <li class="w_276 con2"><input id="frmEmplQtdt" name="frmEmplQtdt" type="text" value="${MemberInfo.memberinfovo.m_byedate}" class="white" maxlength="10" style="width:200px;" readonly=""></li>
       </ul>
       <ul>
         <li class="titLeft p_l28" style="width:77px;">부서</li>
         <li class="w_275 con2">
           <select name="frmDprtCode" id="frmDprtCode" style="float: left;" ;="">
            <option value="">선택해주세요.</option>
-<option value="007" selected="">사장실</option>
-<option value="003">개발팀</option>
-<option value="005">콘텐츠팀</option>
-<option value="004">업무지원팀</option>
-<option value="001">디자인팀</option>
-<option value="006">관리팀</option>
-<option value="002">기획전략팀</option>
+<option value="007" <c:if test="${MemberInfo.memberinfovo.m_class eq '사장실'}">selected=""</c:if>>사장실</option>
+<option value="003" <c:if test="${MemberInfo.memberinfovo.m_class eq '개발팀'}">selected=""</c:if>>개발팀</option>
+<option value="005"<c:if test="${MemberInfo.memberinfovo.m_class eq '콘텐츠팀'}">selected=""</c:if>>콘텐츠팀</option>
+<option value="004"<c:if test="${MemberInfo.memberinfovo.m_class eq '업무지원팀'}">selected=""</c:if>>업무지원팀</option>
+<option value="001"<c:if test="${MemberInfo.memberinfovo.m_class eq '디자인팀'}">selected=""</c:if>>디자인팀</option>
+<option value="006"<c:if test="${MemberInfo.memberinfovo.m_class eq '관리팀'}">selected=""</c:if>>관리팀</option>
+<option value="002"<c:if test="${MemberInfo.memberinfovo.m_class eq '기획전략팀'}">selected=""</c:if>>기획전략팀</option>
           </select> <div class="img"><span class="anchor"><img name="idCmpnDprtSet" id="idCmpnDprtSet" src="https://img.payzon.co.kr/_commonImg/btn_settingadmin.png" width="42px" height="20px" alt="부서명 관리" title="부서명 관리"></span></div>
         </li>
         <li class="titLeft p_l28" style="width:77px;">직위</li>
         <li class="w_276 con2">
           <select name="frmPstnCode" id="frmPstnCode" style="float:left;">
            <option value="">선택해주세요.</option>
-<option value="02">이사</option>
-<option value="04">차장</option>
-<option value="01" selected="">사장</option>
-<option value="03">부장</option>
-<option value="08">과장</option>
-<option value="05">대리</option>
-<option value="06">주임</option>
-<option value="07">사원</option>
-<option value="09">실장</option>
+<option value="02" <c:if test="${MemberInfo.memberinfovo.m_position eq '이사'}">selected=""</c:if>>이사</option>
+<option value="04"<c:if test="${MemberInfo.memberinfovo.m_position eq '차장'}">selected=""</c:if>>차장</option>
+<option value="01" <c:if test="${MemberInfo.memberinfovo.m_position eq '사장'}">selected=""</c:if>>사장</option>
+<option value="03"<c:if test="${MemberInfo.memberinfovo.m_position eq '부장'}">selected=""</c:if>>부장</option>
+<option value="08"<c:if test="${MemberInfo.memberinfovo.m_position eq '과장'}">selected=""</c:if>>과장</option>
+<option value="05"<c:if test="${MemberInfo.memberinfovo.m_position eq '대리'}">selected=""</c:if>>대리</option>
+<option value="06"<c:if test="${MemberInfo.memberinfovo.m_position eq '주임'}">selected=""</c:if>>주임</option>
+<option value="07"<c:if test="${MemberInfo.memberinfovo.m_position eq '사원'}">selected=""</c:if>>사원</option>
+<option value="09"<c:if test="${MemberInfo.memberinfovo.m_position eq '실장'}">selected=""</c:if>>실장</option>
               </select><div class="img"><span class="anchor"><img name="idCmpnPstnSet" id="idCmpnPstnSet" src="https://img.payzon.co.kr/_commonImg/btn_settingadmin.png" width="42px" height="20px" alt="부서명 관리" title="부서명 관리"></span></div>
         </li>
       </ul>
@@ -1283,13 +1308,13 @@ console.log('label click');
         <li class="titLeft p_l28" style="width:77px;">내/외국인</li>
         <li class="w_275 con2">
           <select name="frmEmplKorB" id="frmEmplKorB">
-           <option value="">선택해주세요.</option>
-           <option value="1" selected="">내국인</option>
-           <option value="0">외국인</option>
+           <option value="" <c:if test="${MemberInfo.memberinfovo.l_foreign eq ''}">selected=""</c:if>>선택해주세요.</option>
+           <option value="1" <c:if test="${MemberInfo.memberinfovo.l_foreign eq '내국인'}">selected=""</c:if>>내국인</option>
+           <option value="0" <c:if test="${MemberInfo.memberinfovo.l_foreign eq '외국인'}">selected=""</c:if>>외국인</option>
           </select>
         </li>
         <li class="titLeft p_l28" style="width:77px;">주민번호</li>
-        <li class="w_276 con2"><input name="frmEmplUnq1" id="frmEmplUnq1" type="text" value="610101" class="white" style="width:45px;" maxlength="6"> - <input name="frmEmplUnq2" id="frmEmplUnq2" type="text" value="0000000" class="white" style="width:50px;" maxlength="7"></li>
+        <li class="w_276 con2"><input name="frmEmplUnq1" id="frmEmplUnq1" type="text" value="${MemberInfo.memberinfovo.m_resi_number}" class="white" style="width:100px;" maxlength="20"></li>
       </ul>
       <ul class="caption_01"></ul>
       <ul>
@@ -1298,9 +1323,10 @@ console.log('label click');
         <!-- jQuery와 Postcodify를 로딩한다
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>-->
         <script src="//cdn.poesis.kr/post/search.min.js"></script>
+        
         <!-- "검색" 단추를 누르면 팝업 레이어가 열리도록 설정한다 -->
         <script> $(function() { $("#postcodify_search_button").postcodifyPopUp(); }); </script>
-        <input name="frmEmplPos1" id="frmEmplPos1" type="text" value="133110" class="postcodify_postcode5 white" style="width:50px;" maxlength="5"><input name="btnFindZipCode" id="postcodify_search_button" type="button" value="우편번호" class="btn"> <input name="frmEmplAdd1" id="frmEmplAdd1" type="text" value="서울특별시 성동구 성수동1가 코오롱디지털 타워 3차 901호" class="postcodify_address white" style="width:469px;">
+        <input name="frmEmplPos1" id="frmEmplPos1" type="text" value="${MemberInfo.memberinfovo.l_postnumber}" class="postcodify_postcode5 white" style="width:50px;" maxlength="5"><input name="btnFindZipCode" id="postcodify_search_button" type="button" value="우편번호" class="btn"> <input name="frmEmplAdd1" id="frmEmplAdd1" type="text" value="${MemberInfo.memberinfovo.l_address}" class="postcodify_address white" style="width:469px;">
 <!--
         <input name="frmEmplPos1" id="frmEmplPos1" type="text" value="133" class='white' style='width:25px;' maxlength="3"> - <input name="frmEmplPos2" id="frmEmplPos2" type="text" value="110" class='white' style='width:30px;' maxlength="3"><input name="btnFindZipCode" id="btnFindZipCode" type='button' value='우편번호' class='btn'> <input name="frmEmplAdd1" id="frmEmplAdd1" type="text" value="서울특별시 성동구 성수동1가 코오롱디지털 타워 3차 901호" class='white' style='width:469px;'>
 -->
@@ -1311,54 +1337,55 @@ console.log('label click');
         <li class="w_275 con2">
           <select name="frmEmplTel1" id="frmEmplTel1">
             <option value="">선택</option>
-	<option value="00" selected="">대표(없음)</option>
-	<option value="050">인터넷(050)</option>
-	<option value="0507">인터넷(0507)</option>
-	<option value="070">인터넷(070)</option>
-	<option value="0303">인터넷(0303)</option>
-	<option value="0504">인터넷(0504)</option>
-	<option value="02">서울(02)</option>
-	<option value="051">부산(051)</option>
-	<option value="053">대구(053)</option>
-	<option value="032">인천(032)</option>
-	<option value="062">광주(062)</option>
-	<option value="042">대전(042)</option>
-	<option value="052">울산(052)</option>
-	<option value="044">세종(044)</option>
-	<option value="031">경기(031)</option>
-	<option value="033">강원(033)</option>
-	<option value="043">충북(043)</option>
-	<option value="041">충남(041)</option>
-	<option value="063">전북(063)</option>
-	<option value="061">전남(061)</option>
-	<option value="054">경북(054)</option>
-	<option value="055">경남(055)</option>
-	<option value="064">제주(064)</option>
-          </select>&nbsp; - <input name="frmEmplTel2" id="frmEmplTel2" type="text" value="1588" class="white c" style="width:40px;" maxlength="4"> - <input name="frmEmplTel3" id="frmEmplTel3" type="text" value="2390" class="white c" style="width:40px;" maxlength="4">
+	<option value="00" <c:if test="${MemberInfo.memberinfovo.l_tellephone1 eq '대표(없음)'}">selected=""</c:if>>대표(없음)</option>
+	<option value="050"<c:if test="${MemberInfo.memberinfovo.l_tellephone1 eq '050'}">selected=""</c:if>>인터넷(050)</option>
+	<option value="0507"<c:if test="${MemberInfo.memberinfovo.l_tellephone1 eq '0507'}">selected=""</c:if>>인터넷(0507)</option>
+	<option value="070"<c:if test="${MemberInfo.memberinfovo.l_tellephone1 eq '070'}">selected=""</c:if>>인터넷(070)</option>
+	<option value="0303"<c:if test="${MemberInfo.memberinfovo.l_tellephone1 eq '0303'}">selected=""</c:if>>인터넷(0303)</option>
+	<option value="0504"<c:if test="${MemberInfo.memberinfovo.l_tellephone1 eq '0504'}">selected=""</c:if>>인터넷(0504)</option>
+	<option value="02"<c:if test="${MemberInfo.memberinfovo.l_tellephone1 eq '02'}">selected=""</c:if>>서울(02)</option>
+	<option value="051"<c:if test="${MemberInfo.memberinfovo.l_tellephone1 eq '051'}">selected=""</c:if>>부산(051)</option>
+	<option value="053"<c:if test="${MemberInfo.memberinfovo.l_tellephone1 eq '053'}">selected=""</c:if>>대구(053)</option>
+	<option value="032"<c:if test="${MemberInfo.memberinfovo.l_tellephone1 eq '032'}">selected=""</c:if>>인천(032)</option>
+	<option value="062"<c:if test="${MemberInfo.memberinfovo.l_tellephone1 eq '062'}">selected=""</c:if>>광주(062)</option>
+	<option value="042"<c:if test="${MemberInfo.memberinfovo.l_tellephone1 eq '042'}">selected=""</c:if>>대전(042)</option>
+	<option value="052"<c:if test="${MemberInfo.memberinfovo.l_tellephone1 eq '052'}">selected=""</c:if>>울산(052)</option>
+	<option value="044"<c:if test="${MemberInfo.memberinfovo.l_tellephone1 eq '044'}">selected=""</c:if>>세종(044)</option>
+	<option value="031"<c:if test="${MemberInfo.memberinfovo.l_tellephone1 eq '031'}">selected=""</c:if>>경기(031)</option>
+	<option value="033"<c:if test="${MemberInfo.memberinfovo.l_tellephone1 eq '033'}">selected=""</c:if>>강원(033)</option>
+	<option value="043"<c:if test="${MemberInfo.memberinfovo.l_tellephone1 eq '043'}">selected=""</c:if>>충북(043)</option>
+	<option value="041"<c:if test="${MemberInfo.memberinfovo.l_tellephone1 eq '041'}">selected=""</c:if>>충남(041)</option>
+	<option value="063"<c:if test="${MemberInfo.memberinfovo.l_tellephone1 eq '063'}">selected=""</c:if>>전북(063)</option>
+	<option value="061"<c:if test="${MemberInfo.memberinfovo.l_tellephone1 eq '061'}">selected=""</c:if>>전남(061)</option>
+	<option value="054"<c:if test="${MemberInfo.memberinfovo.l_tellephone1 eq '054'}">selected=""</c:if>>경북(054)</option>
+	<option value="055"<c:if test="${MemberInfo.memberinfovo.l_tellephone1 eq '055'}">selected=""</c:if>>경남(055)</option>
+	<option value="064"<c:if test="${MemberInfo.memberinfovo.l_tellephone1 eq '064'}">selected=""</c:if>>제주(064)</option>
+          </select>&nbsp; - <input name="frmEmplTel2" id="frmEmplTel2" type="text" value="${MemberInfo.memberinfovo.l_tellephone2}" class="white c" style="width:40px;" maxlength="4"> - <input name="frmEmplTel3" id="frmEmplTel3" type="text" value="${MemberInfo.memberinfovo.l_tellephone3}" class="white c" style="width:40px;" maxlength="4">
         </li>
         <li class="tit_s p_l28" style="width:77px;">휴대폰</li>
         <li class="w_276 con2">
           <select name="frmEmplPho1" id="frmEmplPho1">
-            <option value="">선택</option>
-	<option value="010" selected="">010</option>
-	<option value="011">011</option>
-	<option value="016">016</option>
-	<option value="017">017</option>
-	<option value="018">018</option>
-	<option value="019">019</option>
+            <option value="" <c:if test="${MemberInfo.memberinfovo.l_phone1 eq ''}">selected=""</c:if>>선택</option>
+	<option value="010" <c:if test="${MemberInfo.memberinfovo.l_phone1 eq '010'}">selected=""</c:if>>010</option>
+	<option value="011" <c:if test="${MemberInfo.memberinfovo.l_phone1 eq '011'}">selected=""</c:if>>011</option>
+	<option value="016" <c:if test="${MemberInfo.memberinfovo.l_phone1 eq '016'}">selected=""</c:if>>016</option>
+	<option value="017" <c:if test="${MemberInfo.memberinfovo.l_phone1 eq '017'}">selected=""</c:if>>017</option>
+	<option value="018" <c:if test="${MemberInfo.memberinfovo.l_phone1 eq '018'}">selected=""</c:if>>018</option>
+	<option value="019" <c:if test="${MemberInfo.memberinfovo.l_phone1 eq '019'}">selected=""</c:if>>019</option>
           </select>&nbsp; - <input name="frmEmplPho2" id="frmEmplPho2" type="text" value="1111" class="white c" style="width:40px;" maxlength="4"> - <input name="frmEmplPho3" id="frmEmplPho3" type="text" value="0000" class="white c" style="width:40px;" maxlength="4">
         </li>
       </ul>
       <ul>
         <li class="tit_s p_l28" style="width:77px;">이메일</li>
-        <li class="w_275 con2"><input name="frmEmplMail" id="frmEmplMail" type="text" value="ceo@yesform.com" class="white"></li>
+        <li class="w_275 con2"><input name="frmEmplMail" id="frmEmplMail" type="text" value="${MemberInfo.memberinfovo.m_mail}" class="white"></li>
         <li class="tit_s p_l28" style="width:77px;">SNS</li>
-        <li class="w_276 con2"><input name="frmEmplSnsA" id="frmEmplSnsA" type="text" value="" class="white"></li>
+        <li class="w_276 con2"><input name="frmEmplSnsA" id="frmEmplSnsA" type="text" value="${MemberInfo.memberinfovo.l_sns}" class="white"></li>
       </ul>
       <ul>
         <li class="tit_s p_l28" style="width:77px; height:60px;">기타사항</li>
-        <li class="w_670 con2" style="height:60px;"><textarea name="frmEmplMemo" id="frmEmplMemo" style="width:660px;min-height:50px;padding:4px;font-family: 'Nanum Gothic', 돋움, Dotum; font-size: 12px;" maxlength="150"></textarea></li>
+        <li class="w_670 con2" style="height:60px;"><textarea name="frmEmplMemo" id="frmEmplMemo" style="width:660px;min-height:50px;padding:4px;font-family: 'Nanum Gothic', 돋움, Dotum; font-size: 12px;" maxlength="150" ></textarea></li>
       </ul>
+      
       </div><!-- //divBsic// -->
     </ul>
     <!-- //폼.입력.기본정보// -->
@@ -1702,40 +1729,71 @@ console.log('label click');
     <!-- //4대보험: G2 -->
     <ul class="p_b5 c_blue "><strong><span class="c_red b ">+</span> 4대보험</strong></ul>
     <ul>
+  
+        
       <div id="table1">
+              
       <p class="caption"></p>
+      
+     
       <ul>
         <li class="w_105 tit"><strong>구분</strong></li>
         <li class="w_330 tit">  기호번호</li>
         <li class="w_180 tit"> 취득일 </li>
         <li class="w_180 tit">  상실일</li>
       </ul>
+<form:form modelAttribute="InsertInsuranceVO" action="/psyzon/insert" method = "post" id = "insuranceInfo">          
       <ul>
+
         <li class="w_105 tit_s c">국민연금</li><!-- national pension -->
-        <li class="w_330 con3"><input name="frmEm4iInNbNP" id="frmEm4iInNbNP" type="text" value="${MemberInfo.insurancevo.k_number}" class="white G2" maxlength="20"></li>
-        <li class="w_180 con3"><input name="frmEm4iInDSNP" id="frmEm4iInDSNP" type="text" value="${MemberInfo.insurancevo.k_date}" class="white G2 frmCalendar c hasDatepicker" maxlength="10"></li>
-        <li class="w_180 con3"><input name="frmEm4iInDENP" id="frmEm4iInDENP" type="text" value="${MemberInfo.insurancevo.nk_date}" class="white G2 frmCalendar c hasDatepicker" maxlength="10"></li>
+        
+        <li class="w_330 con3"><input name="k_number" id="frmEm4iInNbNP" type="text" value="${MemberInfo.insurancevo.k_number}" class="white G2" maxlength="20"></li>
+        <li class="w_180 con3"><input name="k_date" id="frmEm4iInDSNP" type="text" value="${MemberInfo.insurancevo.k_date}" class="white G2 frmCalendar c hasDatepicker" maxlength="10"></li>
+        <li class="w_180 con3"><input name="nk_date" id="frmEm4iInDENP" type="text" value="${MemberInfo.insurancevo.nk_date}" class="white G2 frmCalendar c hasDatepicker" maxlength="10"></li>
+       
+
       </ul>
+       
+     
+         
+          
       <ul>
         <li class="w_105 tit_s c">건강보험</li><!-- health insurance -->
-        <li class="w_330 con3"><input name="frmEm4iInNbHI" id="frmEm4iInNbHI" type="text" value="${MemberInfo.insurancevo.h_number}" class="white G2" maxlength="20"></li>
-        <li class="w_180 con3"><input name="frmEm4iInDSHI" id="frmEm4iInDSHI" type="text" value="${MemberInfo.insurancevo.h_date}" class="white G2 frmCalendar c hasDatepicker" maxlength="10"></li>
-        <li class="w_180 con3"><input name="frmEm4iInDEHI" id="frmEm4iInDEHI" type="text" value="${MemberInfo.insurancevo.nh_date}" class="white G2 frmCalendar c hasDatepicker" maxlength="10"></li>
+        <li class="w_330 con3"><input name="h_number" id="frmEm4iInNbHI" type="text" value="${MemberInfo.insurancevo.h_number}" class="white G2" maxlength="20"></li>
+        <li class="w_180 con3"><input name="h_date" id="frmEm4iInDSHI" type="text" value="${MemberInfo.insurancevo.h_date}" class="white G2 frmCalendar c hasDatepicker" maxlength="10"></li>
+        <li class="w_180 con3"><input name="nh_date" id="frmEm4iInDEHI" type="text" value="${MemberInfo.insurancevo.nh_date}" class="white G2 frmCalendar c hasDatepicker" maxlength="10"></li>
       </ul>
+     
+  
+      
+      
+     
+        
       <ul>
         <li class="w_105 tit_s c">고용보험</li><!-- unemployment insurance -->
-        <li class="w_330 con3"><input name="frmEm4iInNbUI" id="frmEm4iInNbUI" type="text" value="${MemberInfo.insurancevo.e_number}" class="white G2" maxlength="20"></li>
-        <li class="w_180 con3"><input name="frmEm4iInDSUI" id="frmEm4iInDSUI" type="text" value="${MemberInfo.insurancevo.e_date}" class="white G2 frmCalendar c hasDatepicker" maxlength="10"></li>
-        <li class="w_180 con3"><input name="frmEm4iInDEUI" id="frmEm4iInDEUI" type="text" value="${MemberInfo.insurancevo.ne_date}" class="white G2 frmCalendar c hasDatepicker" maxlength="10"></li>
+        <li class="w_330 con3"><input name="e_number" id="frmEm4iInNbUI" type="text" value="${MemberInfo.insurancevo.e_number}" class="white G2" maxlength="20"></li>
+        <li class="w_180 con3"><input name="e_date" id="frmEm4iInDSUI" type="text" value="${MemberInfo.insurancevo.e_date}" class="white G2 frmCalendar c hasDatepicker" maxlength="10"></li>
+        <li class="w_180 con3"><input name="ne_date" id="frmEm4iInDEUI" type="text" value="${MemberInfo.insurancevo.ne_date}" class="white G2 frmCalendar c hasDatepicker" maxlength="10"></li>
       </ul>
+      
       <ul>
         <li class="w_105 tit_s c">산재보험</li><!-- safety insurance -->
-        <li class="w_330 con3"><input name="frmEm4iInNbSI" id="frmEm4iInNbSI" type="text" value="${MemberInfo.insurancevo.i_number}" class="white G2" maxlength="20"></li>
-        <li class="w_180 con3"><input name="frmEm4iInDSSI" id="frmEm4iInDSSI" type="text" value="${MemberInfo.insurancevo.i_date}" class="white G2 frmCalendar c hasDatepicker" maxlength="10"></li>
-        <li class="w_180 con3"><input name="frmEm4iInDESI" id="frmEm4iInDESI" type="text" value="${MemberInfo.insurancevo.ni_date}" class="white G2 frmCalendar c hasDatepicker" maxlength="10"></li>
+        <li class="w_330 con3"><input name="i_number" id="frmEm4iInNbSI" type="text" value="${MemberInfo.insurancevo.i_number}" class="white G2" maxlength="20"></li>
+        <li class="w_180 con3"><input name="i_date" id="frmEm4iInDSSI" type="text" value="${MemberInfo.insurancevo.i_date}" class="white G2 frmCalendar c hasDatepicker" maxlength="10"></li>
+        <li class="w_180 con3"><input name="ni_date" id="frmEm4iInDESI" type="text" value="${MemberInfo.insurancevo.ni_date}" class="white G2 frmCalendar c hasDatepicker" maxlength="10"></li>
       </ul>
+           
+      </form:form>
+      
+      
+
       </div>
+       
+
+    
     </ul>
+    
+    
     <!-- //4대보험: G2// -->
     <hr class="hr_5">
 
@@ -1744,6 +1802,8 @@ console.log('label click');
  <ul id="lblDepe"><img src="https://img.payzon.co.kr/_commonImg/emreg_tit_04.gif" width="65px" height="19px" vspace="8" hspace="5" border="0" alt="부양가족" title="부양가족"><span class="f_right  p_t5"><input name="btnDepeAdd" id="btnDepeAdd" type="image" value="추가하기" src="https://img.payzon.co.kr/_commonImg/btn_plus.gif" width="54px" height="21px" alt="추가하기">&nbsp;<input name="btnDepeDel" id="btnDepeDel" type="image" value="선택삭제" src="https://img.payzon.co.kr/_commonImg/btn_s_delete.gif" width="61px" height="21px" alt="선택삭제"></span></ul>
 
   <ul>
+
+        
       <div id="table1">
       <p class="caption"></p>
       <ul>
@@ -2043,10 +2103,14 @@ console.log('label click');
     <!-- //병역: G6// -->
 
     <hr class="hr_5">
+    
+    
       <ul class="emreg_btn c">
-        <input name="btnEmplSave" id="btnEmplSave" type="image" value="저장하기" src="https://img.payzon.co.kr/_commonImg/btn_img_save_s.png" hspace="5" alt="저장하기" title="저장하기"><input name="btnEmplSaveCancel" id="btnEmplSaveCancel" type="image" value="취소하기" src="https://img.payzon.co.kr/_commonImg/btn_img_cancle_s.png" hspace="5" alt="취소하기" title="취소하기"><input name="btnLinkList" id="btnLinkList" type="image" value="리스트" src="https://img.payzon.co.kr/_commonImg/btn_img_list_s.png" hspace="5" alt="리스트" title="리스트"> <a href="/pzPersonnel/employeeIns.php"><img src="https://img.payzon.co.kr/_commonImg/btn_new_employee_s1.png" hspace="5" alt="신규사원등록하기" title="신규사원등록하기"></a>
+        <!-- <button type="button" id="insuranceInfoBtn">저장하기</button> -->
+        <input name="btnEmplSave" id="insuranceInfoBtn" type="image" value="저장하기" src="https://img.payzon.co.kr/_commonImg/btn_img_save_s.png" hspace="5" alt="저장하기" title="저장하기"/>
+        <input name="btnEmplSaveCancel" id="btnEmplSaveCancel" type="image" value="취소하기" src="https://img.payzon.co.kr/_commonImg/btn_img_cancle_s.png" hspace="5" alt="취소하기" title="취소하기"><input name="btnLinkList" id="btnLinkList" type="image" value="리스트" src="https://img.payzon.co.kr/_commonImg/btn_img_list_s.png" hspace="5" alt="리스트" title="리스트"> <a href="/pzPersonnel/employeeIns.php"><img src="https://img.payzon.co.kr/_commonImg/btn_new_employee_s1.png" hspace="5" alt="신규사원등록하기" title="신규사원등록하기"></a>
     </ul>
-</form>
+
   </div>
   <!-- //사원등록_우측 :: 사원등록_폼// -->
 
@@ -2057,6 +2121,16 @@ console.log('label click');
 </section>
 <!-- //SECTION// -->
 
+  <script>
+    document.getElementById('insuranceInfoBtn').addEventListener('click', function() {
+        submitForm();
+    });
+
+    function submitForm() {
+        var form = document.getElementById('insuranceInfo');
+        form.submit();
+    }
+</script>
 <!-- footer -->
       <footer>
         <iframe ref="nofollow" name="iFrmMulti" id="iFrmMulti" src="about:blank" tabindex="-1" width="0px" height="0px" frameborder="0" scrolling="yes" marginheight="0" marginwidth="0"></iframe>

@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 import org.psyzon.domain.AcademicAbilityVO;
 import org.psyzon.domain.FamilyVO;
 import org.psyzon.domain.InsuranceVO;
+import org.psyzon.domain.MemberInformationVO;
 import org.psyzon.domain.MemberListVO;
 
 @Mapper
@@ -38,5 +39,8 @@ public interface psyzonBoardMapper {
 	public List<FamilyVO> familyinfo(@Param("m_number") String m_number);
 
 	public InsuranceVO insuranceinfo(@Param("m_number") String m_number);
+	
+	public MemberInformationVO memberinfo(@Param("m_number") String m_number);
+	
 
 }

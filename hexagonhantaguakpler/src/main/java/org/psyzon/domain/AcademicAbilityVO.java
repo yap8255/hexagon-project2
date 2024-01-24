@@ -14,4 +14,5 @@ public class AcademicAbilityVO {
 	String a_major;
 	String a_finish;
 
+	
 }
