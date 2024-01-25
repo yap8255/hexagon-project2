@@ -2644,7 +2644,7 @@ console.log('label click');
 				<hr class="hr_5">
 
 				<a name="aTagMenu04"></a>
-				<!-- //경력: G5 -->
+				<!-- //경력: G5 경력추가하기 -->
 				<ul id="lblCrer">
 					<img src="/_commonImg/emreg_tit_06.gif" width="65px" height="19px"
 						vspace="8" hspace="5" border="0" alt="경력" title="경력">
