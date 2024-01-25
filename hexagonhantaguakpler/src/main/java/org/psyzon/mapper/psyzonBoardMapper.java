@@ -5,10 +5,13 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.psyzon.domain.AcademicAbilityVO;
+import org.psyzon.domain.CareerVO;
 import org.psyzon.domain.FamilyVO;
 import org.psyzon.domain.InsuranceVO;
 import org.psyzon.domain.MemberInformationVO;
 import org.psyzon.domain.MemberListVO;
+import org.psyzon.domain.MiliVO;
+import org.psyzon.domain.PaymentVO;
 
 @Mapper
 public interface psyzonBoardMapper {
@@ -41,6 +44,12 @@ public interface psyzonBoardMapper {
 	public InsuranceVO insuranceinfo(@Param("m_number") String m_number);
 	
 	public MemberInformationVO memberinfo(@Param("m_number") String m_number);
+	
+	public List<CareerVO> CareerVO(@Param("m_number") String m_number);
+
+	public List<MiliVO> MiliVO(@Param("m_number") String m_number);
+
+	public List<PaymentVO> PaymentVO(@Param("m_number") String m_number);
 	
 
 }

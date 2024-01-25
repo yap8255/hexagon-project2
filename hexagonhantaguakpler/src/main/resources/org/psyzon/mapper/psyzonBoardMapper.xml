@@ -75,7 +75,17 @@ select * from Academic_ability where m_number = #{m_number}
 		SELECT B.M_NUMBER, B.M_TYPE, B.M_NAME, A.L_NAMEENG,B.M_NEWDATE,B.M_BYEDATE,B.M_CLASS,B.M_POSITION,A.L_FOREIGN,B.M_RESI_NUMBER,A.L_ADDRESS,A.L_POSTNUMBER,A.L_TELLEPHONE1,A.L_TELLEPHONE2,A.L_TELLEPHONE3,A.L_PHONE1,A.L_PHONE2,A.L_PHONE3,B.M_MAIL,A.L_SNS,A.L_ETC
 FROM INFORMATION_LIST A, MEMBER_LIST B WHERE A.M_NUMBER = B.M_NUMBER AND A.M_NUMBER = #{m_number}
 		</select>
-		
+<select id = "CareerVO" resultType = "org.psyzon.domain.CareerVO">
+select * from Career where m_number = #{m_number}  
+</select>
+
+<select id = "MiliVO" resultType = "org.psyzon.domain.MiliVO">
+select * from Mili_service where m_number = #{m_number}  
+</select>
+
+<select id = "PaymentVO" resultType = "org.psyzon.domain.PaymentVO">
+select * from Payment where m_number = #{m_number}  
+</select>		
 
 
 

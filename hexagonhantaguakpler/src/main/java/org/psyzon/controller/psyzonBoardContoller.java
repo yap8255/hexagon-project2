@@ -48,12 +48,21 @@ public class psyzonBoardContoller {
 		
 		
 	}
-	@PostMapping("/insert")
-	public String insert(@ModelAttribute("InsertDTO") InsertDTO InsertDTO){
+	@PostMapping("/insertacademic")
+	public String insertacademic(@ModelAttribute("InsertDTO") InsertDTO InsertDTO){
 		
-		System.out.println("controller insurance" + InsertDTO.getInsurance());
+		
 		System.out.println("controller academic" + InsertDTO.getAcademic());
 
+		return "psyzon/insert";
+		
+	}
+	@PostMapping("/insertinsurance")
+	public String insertinsurance(@ModelAttribute("InsertDTO") InsertDTO InsertDTO){
+		
+		System.out.println("controller insurance" + InsertDTO.getInsurance());
+		
+		
 		return "psyzon/insert";
 		
 	}
