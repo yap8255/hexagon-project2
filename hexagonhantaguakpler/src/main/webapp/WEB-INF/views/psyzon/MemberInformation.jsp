@@ -204,7 +204,7 @@ select option 박스 전용
 	z-index: 1;
 }
 </style>
-		<script>
+<script>
 
 $( document ).ready( function() {
   if($( '.jbMenu' ).length > 0){
@@ -218,6 +218,7 @@ $( document ).ready( function() {
       }
     });
   }
+  
   /* ------------------------------------------------------- */
   $("#insuranceInfo").submit(function (event) {
     	  event.preventDefault();
@@ -225,8 +226,26 @@ $( document ).ready( function() {
     	     // 서버로 데이터를 전송
           $.ajax({
               type: "POST",
-              url: "/psyzon/insertinsurance",
+              url: "/psyzon/updateinsurance",
               data: insurance,
+              success: function (data) {
+                  // 서버 응답에 대한 처리
+                  console.log(data);
+              },
+              error: function (error) {
+                  // 오류 처리
+                  console.error(error);
+              }
+          });
+  });
+  $("#miliInfo").submit(function (event) {
+    	  event.preventDefault();
+    	  var mili = $("#miliInfo").serialize();
+    	     // 서버로 데이터를 전송
+          $.ajax({
+              type: "POST",
+              url: "/psyzon/updatemili",
+              data: mili,
               success: function (data) {
                   // 서버 응답에 대한 처리
                   console.log(data);
@@ -244,8 +263,6 @@ $( document ).ready( function() {
       // 폼이 서버로 전송되는 것을 막음
       event.preventDefault();
   
-      
-      
       // serialize() 함수를 사용하여 데이터를 직렬화
       var formData = $("#academicForm").serialize();
       
@@ -253,7 +270,34 @@ $( document ).ready( function() {
       // 서버로 데이터를 전송
       $.ajax({
           type: "POST",
-          url: "/psyzon/insertacademic",
+          url: "/psyzon/updateacademic",
+          data: formData,
+          success: function (data) {
+              // 서버 응답에 대한 처리
+              console.log(data);
+          },
+          error: function (error) {
+              // 오류 처리
+              console.error(error);
+          }
+      });
+ 
+  });
+  // 폼이 제출되면 이벤트 핸들러 실행
+  $("#paymentInfo").submit(function (event) {
+      // 폼이 서버로 전송되는 것을 막음
+      event.preventDefault();
+  
+      
+      
+      // serialize() 함수를 사용하여 데이터를 직렬화
+      var formData = $("#paymentInfo").serialize();
+      
+      
+      // 서버로 데이터를 전송
+      $.ajax({
+          type: "POST",
+          url: "/psyzon/updatepayment",
           data: formData,
           success: function (data) {
               // 서버 응답에 대한 처리
@@ -272,6 +316,8 @@ $( document ).ready( function() {
       // #academicForm을 서브밋
       $("#academicForm").submit();
       $("#insuranceInfo").submit();
+      $("#paymentInfo").submit();
+      $("#miliInfo").submit();
       
       
       
@@ -1895,16 +1941,19 @@ console.log('label click');
 
 				     <ul>
       <div id="table1">
+      <form:form modelAttribute="UpdatePaymentVO" action="/psyzon/insertpayment" method = "post" id = "paymentInfo">
+      <c:forEach var="MemberInfo" items="${MemberInfo.paymentvo}" varStatus = "status">
       <p class="caption"></p>
+      <input type="hidden" name="payment[${status.index}].m_number" value="${MemberInfo.m_number}">
       <ul>
-       <c:forEach var="MemberInfo" items="${MemberInfo.paymentvo}">
+       
         <li class="titLeft p_l5" style="width:145px;"><font class="c_red">*</font> <strong>4대보험</strong></li>
         <li class="con2" style="width:630px;">
-          <label class="label_check c_on" for="frmEmp4Insu1" style="float:left;margin-top:6px;margin-right:40px;"><input name="frmEmp4Insu1" id="frmEmp4Insu1" value="1" type="checkbox" class="G1"<c:if test="${MemberInfo.p_national_pension eq 1}">checked=""</c:if>> 국민연금</label>
-          <label class="label_check c_on" for="frmEmp4Insu2" style="float:left;margin-top:6px;"><input name="frmEmp4Insu2" id="frmEmp4Insu2" value="2" type="checkbox" <c:if test="${MemberInfo.p_health_insurance eq 1}">checked=""</c:if> class="G1"> 건강보험</label>
+          <label class="label_check c_on" for="frmEmp4Insu1" style="float:left;margin-top:6px;margin-right:40px;"><input name="payment[${status.index}].p_national_pension" id="frmEmp4Insu1" value="1" type="checkbox" class="G1"<c:if test="${MemberInfo.p_national_pension eq 1}">checked=""</c:if>> 국민연금</label>
+          <label class="label_check c_on" for="frmEmp4Insu2" style="float:left;margin-top:6px;"><input name="payment[${status.index}].p_health_insurance" id="frmEmp4Insu2" value="2" type="checkbox" <c:if test="${MemberInfo.p_health_insurance eq 1}">checked=""</c:if> class="G1"> 건강보험</label>
 
           <span class="select_front" style="float:left;margin-top:6px;">(감면:</span>
-          <select name="selEmp4HIDc" id="selEmp4HIDc" class="G1" style="float:left;margin-top:1px;">
+          <select name="payment[${status.index}].p_hi_discount" id="selEmp4HIDc" class="G1" style="float:left;margin-top:1px;">
            <option value=""<c:if test="${MemberInfo.p_hi_discount eq '' }">selected</c:if>>선택</option>";
            <option value="10"<c:if test="${MemberInfo.p_hi_discount eq '10' }">selected</c:if>>10%</option>
            <option value="30"<c:if test="${MemberInfo.p_hi_discount eq '30' }">selected</c:if>>30%</option>
@@ -1916,21 +1965,21 @@ console.log('label click');
           <label class="label_check c_on" for="frmEmp4Insu4" style="float:left;margin-top:6px;"><input name="frmEmp4Insu4" id="frmEmp4Insu4" value="32" type="checkbox" class="G1"<c:if test="${MemberInfo.p_longterm_eldery_insurance eq 1}">checked=""</c:if>>노인장기요양보험 포함</label>
 
           <span class="select_front" style="float:left;margin-top:6px;">(감면:</span>
-          <select name="selEmp4LTCI" id="selEmp4LTCI" class="G1" style="float:left;margin-top:1px;">
+          <select name="payment[${status.index}].p_longterm_discount" id="selEmp4LTCI" class="G1" style="float:left;margin-top:1px;">
            <option value=""<c:if test="${MemberInfo.p_longterm_discount eq '' }">selected</c:if>>선택</option>
            <option value="30"<c:if test="${MemberInfo.p_longterm_discount eq '30' }">selected</c:if>>30%</option>
           </select>
           <span style="float:left;margin-top:6px;margin-right:40px;">)</span>
 
-          <label class="label_check" for="frmEmp4Insu3" style="margin-top:6px;"><input name="frmEmp4Insu3" id="frmEmp4Insu3" value="4" type="checkbox" class="G1"<c:if test="${MemberInfo.p_employment_insurance eq 1}">checked=""</c:if>> 고용보험</label>
+          <label class="label_check" for="frmEmp4Insu3" style="margin-top:6px;"><input name="payment[${status.index}].p_employment_insurance" id="frmEmp4Insu3" value="4" type="checkbox" class="G1"<c:if test="${MemberInfo.p_employment_insurance eq 1}">checked=""</c:if>> 고용보험</label>
         </li>
       </ul>
       <ul>
         <li class="titLeft p_l5" style="width:145px;height:50px;"><font class="c_red">*</font> 갑근세</li>
         <li class="con2" style="width:630px;height:51px;">
           <div class="top-5">
-            <label class="label_radio r_on" for="frmEmp4Ict1" style="float:left;"><input name="frmEmp4IcTx" id="frmEmp4Ict1" type="radio" value="근로소득자"class="G1"<c:if test="${MemberInfo.p_sudden_tax eq 1}">checked=""</c:if>>근로소득자(근로소득간이세액표)</label>&nbsp;&nbsp; <span style="float:left; display:block; margin:6px 5px 0 10px;">세액:</span>
-            <select name="frmEmp4TxRt" id="frmEmp4TxRt" style="float:left;width:68px;" class="G1">
+            <label class="label_radio r_on" for="frmEmp4Ict1" style="float:left;"><input name="payment[${status.index}].p_sudden_tax" id="frmEmp4Ict1" type="radio" value="1"class="G1"<c:if test="${MemberInfo.p_sudden_tax eq 1}">checked=""</c:if>>근로소득자(근로소득간이세액표)</label>&nbsp;&nbsp; <span style="float:left; display:block; margin:6px 5px 0 10px;">세액:</span>
+            <select name="payment[${status.index}].p_lei_discount" id="frmEmp4TxRt" style="float:left;width:68px;" class="G1">
               <option value="" <c:if test="${MemberInfo.p_lei_discount eq '' }">selected</c:if>>선택</option>
               <option value="30"<c:if test="${MemberInfo.p_lei_discount eq '30' }">selected</c:if>>30%</option>
               <option value="50"<c:if test="${MemberInfo.p_lei_discount eq '50' }">selected</c:if>>50%</option>
@@ -1938,8 +1987,8 @@ console.log('label click');
               <option value="100" <c:if test="${MemberInfo.p_lei_discount eq '100' }">selected</c:if>>100%</option>
               <option value="120"<c:if test="${MemberInfo.p_lei_discount eq '120' }">selected</c:if>>120%</option>
             </select>
-            <label class="label_check" for="chkEmp4TxYM" style="float:left; margin:6px 10px -2px 26px;"><input name="chkEmp4TxYM" id="chkEmp4TxYM" type="checkbox" value="1" class="G1" <c:if test="${MemberInfo.p_medium_business_discount eq 1}">checked=""</c:if>style="vertical-align:middle; margin-top:2px;">중소기업 청년 소득세 감면</label>&nbsp;&nbsp;
-            <select name="selEmp4TxYM" id="selEmp4TxYM" style="float:left;width:68px;margin-top:1px;" class="G1">
+            <label class="label_check" for="chkEmp4TxYM" style="float:left; margin:6px 10px -2px 26px;"><input name="payment[${status.index}].p_medium_business_discount" id="chkEmp4TxYM" type="checkbox" value="1" class="G1" <c:if test="${MemberInfo.p_medium_business_discount eq 1}">checked=""</c:if>style="vertical-align:middle; margin-top:2px;">중소기업 청년 소득세 감면</label>&nbsp;&nbsp;
+            <select name="payment[${status.index}].p_tax" id="selEmp4TxYM" style="float:left;width:68px;margin-top:1px;" class="G1">
               <option value=""<c:if test="${MemberInfo.p_tax eq '' }">selected</c:if>>선택</option>
               <option value="50"<c:if test="${MemberInfo.p_tax eq '50' }">selected</c:if>>50%</option>
               <option value="70"<c:if test="${MemberInfo.p_tax eq '70' }">selected</c:if>>70%</option>
@@ -1947,11 +1996,11 @@ console.log('label click');
               <option value="100"<c:if test="${MemberInfo.p_tax eq '100' }">selected</c:if>>100%</option>
             </select>
             <br>
-            <label class="label_radio" for="frmEmp4Ict2"><input name="frmEmp4IcTx" id="frmEmp4Ict2" type="radio" value="사업소득자" class="G1"<c:if test="${MemberInfo.p_sudden_tax eq 2}">checked=""</c:if>>사업소득자(3.3%)</label>&nbsp;&nbsp;
-            <label class="label_radio" for="frmEmp4Ict3"><input name="frmEmp4IcTx" id="frmEmp4Ict3" type="radio" value="일용직" class="G1"<c:if test="${MemberInfo.p_sudden_tax eq 3}">checked=""</c:if>>일용직(2.97%)</label>&nbsp;&nbsp;
-            <label class="label_radio" for="frmEmp4Ict6"><input name="frmEmp4IcTx" id="frmEmp4Ict6" type="radio" value="기타소득자" class="G1"<c:if test="${MemberInfo.p_sudden_tax eq 4}">checked=""</c:if>>기타소득자(8.8%)</label>&nbsp;&nbsp;
-            <label class="label_radio" for="frmEmp4Ict5"><input name="frmEmp4IcTx" id="frmEmp4Ict5" type="radio" value="근로|사업" class="G1"<c:if test="${MemberInfo.p_sudden_tax eq 5}">checked=""</c:if>>근로/사업소득자</label>&nbsp;&nbsp;
-            <label class="label_radio" for="frmEmp4Ict4"><input name="frmEmp4IcTx" id="frmEmp4Ict4" type="radio" value="면제" class="G1"<c:if test="${MemberInfo.p_sudden_tax eq 6}">checked=""</c:if>>면제</label>
+            <label class="label_radio" for="frmEmp4Ict2"><input name="payment[${status.index}].p_sudden_tax" id="frmEmp4Ict2" type="radio" value="2" class="G1"<c:if test="${MemberInfo.p_sudden_tax eq 2}">checked=""</c:if>>사업소득자(3.3%)</label>&nbsp;&nbsp;
+            <label class="label_radio" for="frmEmp4Ict3"><input name="payment[${status.index}].p_sudden_tax" id="frmEmp4Ict3" type="radio" value="3" class="G1"<c:if test="${MemberInfo.p_sudden_tax eq 3}">checked=""</c:if>>일용직(2.97%)</label>&nbsp;&nbsp;
+            <label class="label_radio" for="frmEmp4Ict6"><input name="payment[${status.index}].p_sudden_tax" id="frmEmp4Ict6" type="radio" value="4" class="G1"<c:if test="${MemberInfo.p_sudden_tax eq 4}">checked=""</c:if>>기타소득자(8.8%)</label>&nbsp;&nbsp;
+            <label class="label_radio" for="frmEmp4Ict5"><input name="payment[${status.index}].p_sudden_tax" id="frmEmp4Ict5" type="radio" value="5" class="G1"<c:if test="${MemberInfo.p_sudden_tax eq 5}">checked=""</c:if>>근로/사업소득자</label>&nbsp;&nbsp;
+            <label class="label_radio" for="frmEmp4Ict4"><input name="payment[${status.index}].p_sudden_tax" id="frmEmp4Ict4" type="radio" value="6" class="G1"<c:if test="${MemberInfo.p_sudden_tax eq 6}">checked=""</c:if>>면제</label>
           </div>
         </li>
       </ul>
@@ -1961,10 +2010,10 @@ console.log('label click');
         </li>
         <li class="con2" style="width:630px;height:63px;">
           <div id="durunuriMerge" class="top-5">
-            <label class="label_radio r_on" for="rdoDurunuri00"><input name="rdoDurunuri" id="rdoDurunuri00" value="0" type="radio"class="G1"<c:if test="${MemberInfo.p_dorunuri eq 1}">checked=""</c:if>> 해당 없음   </label>&nbsp;&nbsp;
+            <label class="label_radio r_on" for="rdoDurunuri00"><input name="payment[${status.index}].p_dorunuri" id="rdoDurunuri00" value="0" type="radio"class="G1"<c:if test="${MemberInfo.p_dorunuri eq 1}">checked=""</c:if>> 해당 없음   </label>&nbsp;&nbsp;
             <!-- <label class="label_radio r_on" for="rdoDurunuri02"><input name="rdoDurunuri" id="rdoDurunuri02" value="2" type="radio"  class="G1" /> 신규가입자(60% 지원)</label>&nbsp;&nbsp; -->
-            <label class="label_radio" for="rdoDurunuri03"><input name="rdoDurunuri" id="rdoDurunuri03" value="3" type="radio" class="G1"<c:if test="${MemberInfo.p_dorunuri eq 3}">checked=""</c:if>> 신규가입자(80% 지원)</label>&nbsp;&nbsp;
-            <label class="label_radio" for="rdoDurunuri04"><input name="rdoDurunuri" id="rdoDurunuri04" value="4" type="radio" class="G1"<c:if test="${MemberInfo.p_dorunuri eq 4}">checked=""</c:if>> 신규가입자(90% 지원)</label>&nbsp;&nbsp;
+            <label class="label_radio" for="rdoDurunuri03"><input name="payment[${status.index}].p_dorunuri" id="rdoDurunuri03" value="3" type="radio" class="G1"<c:if test="${MemberInfo.p_dorunuri eq 3}">checked=""</c:if>> 신규가입자(80% 지원)</label>&nbsp;&nbsp;
+            <label class="label_radio" for="rdoDurunuri04"><input name="payment[${status.index}].p_dorunuri" id="rdoDurunuri04" value="4" type="radio" class="G1"<c:if test="${MemberInfo.p_dorunuri eq 4}">checked=""</c:if>> 신규가입자(90% 지원)</label>&nbsp;&nbsp;
             <!-- <br><span style="color:#FFFFFF;">___________</span>
             <label class="label_radio r_on" for="rdoDurunuri01"><input name="rdoDurunuri" id="rdoDurunuri01" value="1" type="radio"  class="G1" /> 기존가입자(40% 지원)</label>&nbsp;&nbsp;
             <label class="label_radio r_on" for="rdoDurunuri05"><input name="rdoDurunuri" id="rdoDurunuri05" value="5" type="radio"  class="G1" /> 기존가입(30% 지원)</label> -->
@@ -1988,27 +2037,27 @@ console.log('label click');
       </ul>
       <ul>
         <li class="titLeft p_l5" style="width:145px;"><font class="c_red">*</font> 기본급/일급</li>
-        <li class="con2" style="width:250px;"><input name="frmEmp4PayB" id="frmEmp4PayB" type="text" value="${MemberInfo.p_nomal_payment}" class="money G1" style="width:80%;"> 원</li>
+        <li class="con2" style="width:250px;"><input name="payment[${status.index}].p_nomal_payment" id="frmEmp4PayB" type="text" value="${MemberInfo.p_nomal_payment}" class="money G1" style="width:80%;"> 원</li>
         <li class="con2 " style="width:362px;"><div class="p_t5">월급제의 경우 월 기본급, 일용직 근로자의 경우 일급을 입력합니다.</div></li>
       </ul>
     <ul>
      <li class="titLeft p_l15" style="width:135px;">국민연금 기준소득월액</li>
-        <li class="con2" style="width:250px;"><input name="frmEmp4Inco" id="frmEmp4Inco" type="text" value="${MemberInfo.p_national_i_payment}" class="money G1" style="width:80%;"> 원</li>
+        <li class="con2" style="width:250px;"><input name="payment[${status.index}].p_national_i_payment" id="frmEmp4Inco" type="text" value="${MemberInfo.p_national_i_payment}" class="money G1" style="width:80%;"> 원</li>
     <li class="con2 p_l15" style="width:362px; height:91px; margin-bottom:-71px; border-bottom:solid 1px #e2e2e2; background:#fff;"><br><br>입력시 4대보험 공제시 우선 적용되며,<br>
  미입력시 해당 근속월의 비과세를 제외한 과세합계로 적용됩니다.</li>
     </ul>
       <ul style="width:419px;">
         <li class="titLeft p_l15" style="width:135px;">건강보험 보수월액</li>
-        <li class="con2" style="width:250px;"><input name="frmEmp4PyM1" id="frmEmp4PyM1" type="text" value="${MemberInfo.p_health_i_payment}" class="money G1" style="width:80%;"> 원</li>
+        <li class="con2" style="width:250px;"><input name="payment[${status.index}].p_health_i_payment" id="frmEmp4PyM1" type="text" value="${MemberInfo.p_health_i_payment}" class="money G1" style="width:80%;"> 원</li>
   </ul>
   <ul style="width:419px;">
         <li class="titLeft p_l15" style="width:135px;">고용보험 보수월액</li>
-        <li class="con2" style="width:250px;"><input name="frmEmp4PyM2" id="frmEmp4PyM2" type="text" value="${MemberInfo.p_employment_i_payment}" class="money G1" style="width:80%;"> 원</li>
+        <li class="con2" style="width:250px;"><input name="payment[${status.index}].p_employment_i_payment" id="frmEmp4PyM2" type="text" value="${MemberInfo.p_employment_i_payment}" class="money G1" style="width:80%;"> 원</li>
       </ul>
       <ul>
         <li class="titLeft p_l15" style="width:135px;">급여계좌</li>
         <li class="con2" style="width:630px;">
-          <select name="frmEmp4BkNm" id="frmEmp4BkNm" class="G1">
+          <select name="payment[${status.index}].p_payment_bank" id="frmEmp4BkNm" class="G1">
            <option value=""<c:if test="${MemberInfo.p_payment_bank eq '' }">selected</c:if>>선택해주세요</option>
   	<option value="국민은행"<c:if test="${MemberInfo.p_payment_bank eq '국민은행' }">selected</c:if>>국민은행</option>
 	<option value="기업은행" <c:if test="${MemberInfo.p_payment_bank eq '기업은행' }">selected</c:if>>기업은행</option>
@@ -2081,13 +2130,20 @@ console.log('label click');
 	<option value="NH투자증권"<c:if test="${MemberInfo.p_payment_bank eq 'NH투자증권' }">selected</c:if>>NH투자증권</option>
 	<option value="SK증권"<c:if test="${MemberInfo.p_payment_bank eq 'SK증권' }">selected</c:if>>SK증권</option>
           </select>
-          <input name="frmEmp4BkNb" id="frmEmp4BkNb" type="text" value="${MemberInfo.p_bank_number}" class="text G1" maxlength="25" style="width:190px;" placeholder="계좌번호">
+          <input name="payment[${status.index}].p_bank_number" id="frmEmp4BkNb" type="text" value="${MemberInfo.p_bank_number}" class="text G1" maxlength="25" style="width:190px;" placeholder="계좌번호">
           <input type="image" src="https://img.payzon.co.kr/_commonImg/btn_depositor_search.png" alt="예금주 조회" id="btnDepositorSearch" style="vertical-align:middle">
         </li>
         
+        
       </ul>
-      </div>
       </c:forEach>
+      </form:form>
+      </div>
+      
+      
+      </ul>
+      
+      
 
 
 
@@ -2111,8 +2167,9 @@ console.log('label click');
 							<li class="w_180 tit">취득일</li>
 							<li class="w_180 tit">상실일</li>
 						</ul>
-						<form:form modelAttribute="InsertAcademicAbilityVO"
-							action="/psyzon/insertinsurance" method="post" id="insuranceInfo">
+						<form:form modelAttribute="UpdateInsuranceVO"
+							action="/psyzon/updateinsurance" method="post" id="insuranceInfo">
+							<input type="hidden" name="insurance.m_number" value="${MemberInfo.insurancevo.m_number}">
 							<ul>
 
 								<li class="w_105 tit_s c">국민연금</li>
@@ -2447,10 +2504,12 @@ console.log('label click');
 						<ul class="clsDragItemSort ui-sortable"
 							style="border: 0px; cursor: pointer;">
 
-							<form:form modelAttribute="InsertAcademicAbilityVO"
-								action="/psyzon/insertacademic" method="post" id="academicForm">
+							<form:form modelAttribute="UpdateAcademicAbilityVO"
+								action="/psyzon/updateacademic" method="post" id="academicForm">
+								
 								<c:forEach var="MemberInfo"
 									items="${MemberInfo.academicabilityvo}" varStatus="status">
+									  <input type="hidden" name="academic[${status.index}].m_number" value="${MemberInfo.m_number}">
 									<ul id="grpEmacIdx0" class="grpEmac">
 										<!-- ### G4 0 ### -->
 										<li class="w_24 con3_check "><label class="label_check"
@@ -2516,7 +2575,7 @@ console.log('label click');
 
 									</ul>
 								</c:forEach>
-								<input type="submit" value="検索">
+								
 							</form:form>
 							<ul id="grpEmacIdx2" class="grpEmac">
 								<!-- ### G4 2 ### -->
@@ -2631,7 +2690,9 @@ console.log('label click');
         <li class="w_100 tit">병과</li>
         <li class="tit" style="width:217px;">미필사유</li>
       </ul>
-      <c:forEach var="MemberInfo" items="${MemberInfo.milivo}">
+      <form:form modelAttribute="UpdateMiliVO" action="/psyzon/updatemili" method="post" id="miliInfo">
+      <c:forEach var="MemberInfo" items="${MemberInfo.milivo}" varStatus = "status">
+      <input type="hidden" name="mili[${status.index}].m_number" value="${MemberInfo.m_number}">
       <ul>
         <li class="w_105 con3" style="padding-left:30px; width:75px"><!-- <input name="frmEmmlType" id="frmEmmlType" type='text' value=""  class="white G6"  style='width:90%;'> -->
           <select name="frmEmmlType" id="frmEmmlType" class="G6" style="width:60px">
@@ -2657,9 +2718,11 @@ console.log('label click');
         <li class="w_100 con3"><input name="frmEmmlSper" id="frmEmmlSper" type="text" value="${MemberInfo.ms_army_kind }" class="white G6" style="width:90%;"></li>
         <li class="con3" style="width:217px;"><input name="frmEmmlUfns" id="frmEmmlUfns" type="text" value="${MemberInfo.ms_reason }" class="white G6" style="width:90%;"></li>
       </ul>
+      </c:forEach>
+      </form:form>
       </div>
     </ul>
-    </c:forEach>
+    
     <!-- //병역: G6// -->
 
 				<hr class="hr_5">

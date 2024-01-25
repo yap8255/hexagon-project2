@@ -23,7 +23,7 @@ public class psyzonUpdateContoller {
 	private psyzonBoardService service;
 	
 	
-	@PostMapping("/insertacademic")
+	@PostMapping("/updateacademic")
 	public String insertacademic(@ModelAttribute("InsertDTO") UpdateDTO InsertDTO){
 		
 		
@@ -32,7 +32,7 @@ public class psyzonUpdateContoller {
 		return "psyzon/insert";
 		
 	}
-	@PostMapping("/insertinsurance")
+	@PostMapping("/updateinsurance")
 	public String insertinsurance(@ModelAttribute("InsertDTO") UpdateDTO InsertDTO){
 		
 		System.out.println("controller insurance" + InsertDTO.getInsurance());
@@ -41,6 +41,37 @@ public class psyzonUpdateContoller {
 		return "psyzon/insert";
 		
 	}
+	
+	@PostMapping("/updatepayment")
+	public String updatepayment(@ModelAttribute("InsertDTO") UpdateDTO InsertDTO){
+		
+		System.out.println("controller PAYMENT" + InsertDTO.getPayment());
+		
+		
+		return "psyzon/insert";
+		
+	}
+	@PostMapping("/updatemili")
+	public String updatemili(@ModelAttribute("InsertDTO") UpdateDTO InsertDTO){
+		
+		System.out.println("controller mili" + InsertDTO.getMili());
+		
+		
+		return "psyzon/insert";
+		
+	}
+	@PostMapping("/updatememberinfo")
+	public String updatememberinfo(@ModelAttribute("InsertDTO") UpdateDTO InsertDTO){
+		
+		System.out.println("controller memberinfo1" + InsertDTO.getInformation());
+		System.out.println("controller memberinfo2" + InsertDTO.getMemberlist());
+		
+		
+		return "psyzon/insert";
+		
+	}
+	
+	
 	
 	
 	

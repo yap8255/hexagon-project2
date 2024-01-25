@@ -9,5 +9,9 @@ public class UpdateDTO {
 	
 	List<UpdateAcademicAbilityVO> academic;
 	UpdateInsuranceVO insurance;
+	List<UpdatePaymentVO> payment;
+	List<UpdateMiliVO> mili;
+	UpdateInformationVO information;
+	UpdateMemberListVO memberlist;
 
 }
