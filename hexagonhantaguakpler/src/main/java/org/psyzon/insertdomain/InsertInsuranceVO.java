@@ -1,9 +1,10 @@
-package org.psyzon.domain;
+package org.psyzon.insertdomain;
 
 import lombok.Data;
 
 @Data
 public class InsertInsuranceVO {
+	
 	
 	private String m_number;
 	private String k_number;
