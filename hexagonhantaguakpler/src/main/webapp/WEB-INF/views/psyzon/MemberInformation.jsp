@@ -225,7 +225,7 @@ $( document ).ready( function() {
     	     // 서버로 데이터를 전송
           $.ajax({
               type: "POST",
-              url: "/psyzon/insert",
+              url: "/psyzon/insertinsurance",
               data: insurance,
               success: function (data) {
                   // 서버 응답에 대한 처리
@@ -253,7 +253,7 @@ $( document ).ready( function() {
       // 서버로 데이터를 전송
       $.ajax({
           type: "POST",
-          url: "/psyzon/insert",
+          url: "/psyzon/insertacademic",
           data: formData,
           success: function (data) {
               // 서버 응답에 대한 처리
@@ -1762,20 +1762,10 @@ console.log('label click');
 
 				<a name="aTagMenu01"></a>
 				<!-- //폼.입력.급여/4대보험-->
-				<!-- //급여: G1 -->
-				<ul id="lblPayN4" style="height: 50px;">
-					<img src="https://img.payzon.co.kr/_commonImg/emreg_tit_03.gif"
-						width="112px" height="19px" vspace="8" hspace="5" border="0"
-						alt="급여/4대보험" title="급여/4대보험">
-					<span id="btnTipPayN4" class="anchor"><img
-						src="https://img.payzon.co.kr/_commonImg/icon_help_s.gif"
-						width="15px" height="14px" vspace="10" hspace="0" border="0"
-						alt="팁" title="팁"></span>
-				</ul>
-				<ul class="p_b5 c_blue">
-					<strong><span class="c_red b">+</span> 급여</strong>
-				</ul>
-				<!--    <ul>
+				   <!-- //급여: G1 -->
+    <ul id="lblPayN4" style="height:50px;"><img src="https://img.payzon.co.kr/_commonImg/emreg_tit_03.gif" width="112px" height="19px" vspace="8" hspace="5" border="0" alt="급여/4대보험" title="급여/4대보험"><span id="btnTipPayN4" class="anchor"><img src="https://img.payzon.co.kr/_commonImg/icon_help_s.gif" width="15px" height="14px" vspace="10" hspace="0" border="0" alt="팁" title="팁"></span></ul>
+    <ul class="p_b5 c_blue"><strong><span class="c_red b">+</span> 급여</strong></ul>
+ <!--    <ul>
       <div id='table1'>
       <p class='caption'></p>
       <ul>
@@ -1903,273 +1893,205 @@ console.log('label click');
 
 
 
-				<ul>
-					<div id="table1">
-						<p class="caption"></p>
-						<ul>
-							<li class="titLeft p_l5" style="width: 145px;"><font
-								class="c_red">*</font> <strong>4대보험</strong></li>
-							<li class="con2" style="width: 630px;"><label
-								class="label_check c_on" for="frmEmp4Insu1"
-								style="float: left; margin-top: 6px; margin-right: 40px;"><input
-									name="frmEmp4Insu1" id="frmEmp4Insu1" value="1" type="checkbox"
-									checked="" class="G1"> 국민연금</label> <label
-								class="label_check c_on" for="frmEmp4Insu2"
-								style="float: left; margin-top: 6px;"><input
-									name="frmEmp4Insu2" id="frmEmp4Insu2" value="2" type="checkbox"
-									checked="" class="G1"> 건강보험</label> <span class="select_front"
-								style="float: left; margin-top: 6px;">(감면:</span> <select
-								name="selEmp4HIDc" id="selEmp4HIDc" class="G1"
-								style="float: left; margin-top: 1px;">
-									<option value="">선택</option>";
-									<option value="10">10%</option>
-									<option value="30">30%</option>
-									<option value="50">50%</option>
-									<option value="60">60%</option>
-							</select> <span style="float: left; margin-top: 6px;">) / &nbsp;</span> <label
-								class="label_check c_on" for="frmEmp4Insu4"
-								style="float: left; margin-top: 6px;"><input
-									name="frmEmp4Insu4" id="frmEmp4Insu4" value="32"
-									type="checkbox" checked="" class="G1">노인장기요양보험 포함</label> <span
-								class="select_front" style="float: left; margin-top: 6px;">(감면:</span>
-								<select name="selEmp4LTCI" id="selEmp4LTCI" class="G1"
-								style="float: left; margin-top: 1px;">
-									<option value="">선택</option>
-									<option value="30">30%</option>
-							</select> <span style="float: left; margin-top: 6px; margin-right: 40px;">)</span>
+				     <ul>
+      <div id="table1">
+      <p class="caption"></p>
+      <ul>
+       <c:forEach var="MemberInfo" items="${MemberInfo.paymentvo}">
+        <li class="titLeft p_l5" style="width:145px;"><font class="c_red">*</font> <strong>4대보험</strong></li>
+        <li class="con2" style="width:630px;">
+          <label class="label_check c_on" for="frmEmp4Insu1" style="float:left;margin-top:6px;margin-right:40px;"><input name="frmEmp4Insu1" id="frmEmp4Insu1" value="1" type="checkbox" class="G1"<c:if test="${MemberInfo.p_national_pension eq 1}">checked=""</c:if>> 국민연금</label>
+          <label class="label_check c_on" for="frmEmp4Insu2" style="float:left;margin-top:6px;"><input name="frmEmp4Insu2" id="frmEmp4Insu2" value="2" type="checkbox" <c:if test="${MemberInfo.p_health_insurance eq 1}">checked=""</c:if> class="G1"> 건강보험</label>
 
-								<label class="label_check" for="frmEmp4Insu3"
-								style="margin-top: 6px;"><input name="frmEmp4Insu3"
-									id="frmEmp4Insu3" value="4" type="checkbox" class="G1">
-									고용보험</label></li>
-						</ul>
-						<ul>
-							<li class="titLeft p_l5" style="width: 145px; height: 50px;"><font
-								class="c_red">*</font> 갑근세</li>
-							<li class="con2" style="width: 630px; height: 51px;">
-								<div class="top-5">
-									<label class="label_radio r_on" for="frmEmp4Ict1"
-										style="float: left;"><input name="frmEmp4IcTx"
-										id="frmEmp4Ict1" type="radio" value="근로소득자" checked=""
-										class="G1">근로소득자(근로소득간이세액표)</label>&nbsp;&nbsp; <span
-										style="float: left; display: block; margin: 6px 5px 0 10px;">세액:</span>
-									<select name="frmEmp4TxRt" id="frmEmp4TxRt"
-										style="float: left; width: 68px;" class="G1">
-										<option value="">선택</option>
-										<option value="30">30%</option>
-										<option value="50">50%</option>
-										<option value="80">80%</option>
-										<option value="100" selected="">100%</option>
-										<option value="120">120%</option>
-									</select> <label class="label_check" for="chkEmp4TxYM"
-										style="float: left; margin: 6px 10px -2px 26px;"><input
-										name="chkEmp4TxYM" id="chkEmp4TxYM" type="checkbox" value="1"
-										class="G1" style="vertical-align: middle; margin-top: 2px;">중소기업
-										청년 소득세 감면</label>&nbsp;&nbsp; <select name="selEmp4TxYM"
-										id="selEmp4TxYM"
-										style="float: left; width: 68px; margin-top: 1px;" class="G1">
-										<option value="">선택</option>
-										<option value="50">50%</option>
-										<option value="70">70%</option>
-										<option value="90">90%</option>
-										<option value="100">100%</option>
-									</select> <br> <label class="label_radio" for="frmEmp4Ict2"><input
-										name="frmEmp4IcTx" id="frmEmp4Ict2" type="radio" value="사업소득자"
-										class="G1">사업소득자(3.3%)</label>&nbsp;&nbsp; <label
-										class="label_radio" for="frmEmp4Ict3"><input
-										name="frmEmp4IcTx" id="frmEmp4Ict3" type="radio" value="일용직"
-										class="G1">일용직(2.97%)</label>&nbsp;&nbsp; <label
-										class="label_radio" for="frmEmp4Ict6"><input
-										name="frmEmp4IcTx" id="frmEmp4Ict6" type="radio" value="기타소득자"
-										class="G1">기타소득자(8.8%)</label>&nbsp;&nbsp; <label
-										class="label_radio" for="frmEmp4Ict5"><input
-										name="frmEmp4IcTx" id="frmEmp4Ict5" type="radio" value="근로|사업"
-										class="G1">근로/사업소득자</label>&nbsp;&nbsp; <label
-										class="label_radio" for="frmEmp4Ict4"><input
-										name="frmEmp4IcTx" id="frmEmp4Ict4" type="radio" value="면제"
-										class="G1">면제</label>
-								</div>
-							</li>
-						</ul>
-						<ul>
-							<li class="titLeft p_l5"
-								style="width: 145px; line-height: 18px; height: 62px;"><font
-								class="c_red">*</font> 두루누리<br>&nbsp;&nbsp;&nbsp;사회보험 지원
-								<p style="font-weight: normal; margin: 5px 0 0 5px;">
-									<input type="checkbox" name="durunuriSet" value="division"
-										class="G1" style="vertical-align: bottom;">분리설정
-								</p></li>
-							<li class="con2" style="width: 630px; height: 63px;">
-								<div id="durunuriMerge" class="top-5">
-									<label class="label_radio r_on" for="rdoDurunuri00"><input
-										name="rdoDurunuri" id="rdoDurunuri00" value="0" type="radio"
-										checked="" class="G1"> 해당 없음 </label>&nbsp;&nbsp;
-									<!-- <label class="label_radio r_on" for="rdoDurunuri02"><input name="rdoDurunuri" id="rdoDurunuri02" value="2" type="radio"  class="G1" /> 신규가입자(60% 지원)</label>&nbsp;&nbsp; -->
-									<label class="label_radio" for="rdoDurunuri03"><input
-										name="rdoDurunuri" id="rdoDurunuri03" value="3" type="radio"
-										class="G1"> 신규가입자(80% 지원)</label>&nbsp;&nbsp; <label
-										class="label_radio" for="rdoDurunuri04"><input
-										name="rdoDurunuri" id="rdoDurunuri04" value="4" type="radio"
-										class="G1"> 신규가입자(90% 지원)</label>&nbsp;&nbsp;
-									<!-- <br><span style="color:#FFFFFF;">___________</span>
+          <span class="select_front" style="float:left;margin-top:6px;">(감면:</span>
+          <select name="selEmp4HIDc" id="selEmp4HIDc" class="G1" style="float:left;margin-top:1px;">
+           <option value=""<c:if test="${MemberInfo.p_hi_discount eq '' }">selected</c:if>>선택</option>";
+           <option value="10"<c:if test="${MemberInfo.p_hi_discount eq '10' }">selected</c:if>>10%</option>
+           <option value="30"<c:if test="${MemberInfo.p_hi_discount eq '30' }">selected</c:if>>30%</option>
+           <option value="50"<c:if test="${MemberInfo.p_hi_discount eq '50' }">selected</c:if>>50%</option>
+           <option value="60"<c:if test="${MemberInfo.p_hi_discount eq '60' }">selected</c:if>>60%</option>
+          </select>
+          <span style="float:left;margin-top:6px;">) / &nbsp;</span>
+
+          <label class="label_check c_on" for="frmEmp4Insu4" style="float:left;margin-top:6px;"><input name="frmEmp4Insu4" id="frmEmp4Insu4" value="32" type="checkbox" class="G1"<c:if test="${MemberInfo.p_longterm_eldery_insurance eq 1}">checked=""</c:if>>노인장기요양보험 포함</label>
+
+          <span class="select_front" style="float:left;margin-top:6px;">(감면:</span>
+          <select name="selEmp4LTCI" id="selEmp4LTCI" class="G1" style="float:left;margin-top:1px;">
+           <option value=""<c:if test="${MemberInfo.p_longterm_discount eq '' }">selected</c:if>>선택</option>
+           <option value="30"<c:if test="${MemberInfo.p_longterm_discount eq '30' }">selected</c:if>>30%</option>
+          </select>
+          <span style="float:left;margin-top:6px;margin-right:40px;">)</span>
+
+          <label class="label_check" for="frmEmp4Insu3" style="margin-top:6px;"><input name="frmEmp4Insu3" id="frmEmp4Insu3" value="4" type="checkbox" class="G1"<c:if test="${MemberInfo.p_employment_insurance eq 1}">checked=""</c:if>> 고용보험</label>
+        </li>
+      </ul>
+      <ul>
+        <li class="titLeft p_l5" style="width:145px;height:50px;"><font class="c_red">*</font> 갑근세</li>
+        <li class="con2" style="width:630px;height:51px;">
+          <div class="top-5">
+            <label class="label_radio r_on" for="frmEmp4Ict1" style="float:left;"><input name="frmEmp4IcTx" id="frmEmp4Ict1" type="radio" value="근로소득자"class="G1"<c:if test="${MemberInfo.p_sudden_tax eq 1}">checked=""</c:if>>근로소득자(근로소득간이세액표)</label>&nbsp;&nbsp; <span style="float:left; display:block; margin:6px 5px 0 10px;">세액:</span>
+            <select name="frmEmp4TxRt" id="frmEmp4TxRt" style="float:left;width:68px;" class="G1">
+              <option value="" <c:if test="${MemberInfo.p_lei_discount eq '' }">selected</c:if>>선택</option>
+              <option value="30"<c:if test="${MemberInfo.p_lei_discount eq '30' }">selected</c:if>>30%</option>
+              <option value="50"<c:if test="${MemberInfo.p_lei_discount eq '50' }">selected</c:if>>50%</option>
+              <option value="80"<c:if test="${MemberInfo.p_lei_discount eq '80' }">selected</c:if>>80%</option>
+              <option value="100" <c:if test="${MemberInfo.p_lei_discount eq '100' }">selected</c:if>>100%</option>
+              <option value="120"<c:if test="${MemberInfo.p_lei_discount eq '120' }">selected</c:if>>120%</option>
+            </select>
+            <label class="label_check" for="chkEmp4TxYM" style="float:left; margin:6px 10px -2px 26px;"><input name="chkEmp4TxYM" id="chkEmp4TxYM" type="checkbox" value="1" class="G1" <c:if test="${MemberInfo.p_medium_business_discount eq 1}">checked=""</c:if>style="vertical-align:middle; margin-top:2px;">중소기업 청년 소득세 감면</label>&nbsp;&nbsp;
+            <select name="selEmp4TxYM" id="selEmp4TxYM" style="float:left;width:68px;margin-top:1px;" class="G1">
+              <option value=""<c:if test="${MemberInfo.p_tax eq '' }">selected</c:if>>선택</option>
+              <option value="50"<c:if test="${MemberInfo.p_tax eq '50' }">selected</c:if>>50%</option>
+              <option value="70"<c:if test="${MemberInfo.p_tax eq '70' }">selected</c:if>>70%</option>
+              <option value="90"<c:if test="${MemberInfo.p_tax eq '90' }">selected</c:if>>90%</option>
+              <option value="100"<c:if test="${MemberInfo.p_tax eq '100' }">selected</c:if>>100%</option>
+            </select>
+            <br>
+            <label class="label_radio" for="frmEmp4Ict2"><input name="frmEmp4IcTx" id="frmEmp4Ict2" type="radio" value="사업소득자" class="G1"<c:if test="${MemberInfo.p_sudden_tax eq 2}">checked=""</c:if>>사업소득자(3.3%)</label>&nbsp;&nbsp;
+            <label class="label_radio" for="frmEmp4Ict3"><input name="frmEmp4IcTx" id="frmEmp4Ict3" type="radio" value="일용직" class="G1"<c:if test="${MemberInfo.p_sudden_tax eq 3}">checked=""</c:if>>일용직(2.97%)</label>&nbsp;&nbsp;
+            <label class="label_radio" for="frmEmp4Ict6"><input name="frmEmp4IcTx" id="frmEmp4Ict6" type="radio" value="기타소득자" class="G1"<c:if test="${MemberInfo.p_sudden_tax eq 4}">checked=""</c:if>>기타소득자(8.8%)</label>&nbsp;&nbsp;
+            <label class="label_radio" for="frmEmp4Ict5"><input name="frmEmp4IcTx" id="frmEmp4Ict5" type="radio" value="근로|사업" class="G1"<c:if test="${MemberInfo.p_sudden_tax eq 5}">checked=""</c:if>>근로/사업소득자</label>&nbsp;&nbsp;
+            <label class="label_radio" for="frmEmp4Ict4"><input name="frmEmp4IcTx" id="frmEmp4Ict4" type="radio" value="면제" class="G1"<c:if test="${MemberInfo.p_sudden_tax eq 6}">checked=""</c:if>>면제</label>
+          </div>
+        </li>
+      </ul>
+      <ul>
+        <li class="titLeft p_l5" style="width:145px;line-height:18px;height:62px;"><font class="c_red">*</font> 두루누리<br>&nbsp;&nbsp;&nbsp;사회보험 지원
+        <p style="font-weight:normal; margin:5px 0 0 5px;"><input type="checkbox" name="durunuriSet" value="division" class="G1" style="vertical-align: bottom; ">분리설정</p>
+        </li>
+        <li class="con2" style="width:630px;height:63px;">
+          <div id="durunuriMerge" class="top-5">
+            <label class="label_radio r_on" for="rdoDurunuri00"><input name="rdoDurunuri" id="rdoDurunuri00" value="0" type="radio"class="G1"<c:if test="${MemberInfo.p_dorunuri eq 1}">checked=""</c:if>> 해당 없음   </label>&nbsp;&nbsp;
+            <!-- <label class="label_radio r_on" for="rdoDurunuri02"><input name="rdoDurunuri" id="rdoDurunuri02" value="2" type="radio"  class="G1" /> 신규가입자(60% 지원)</label>&nbsp;&nbsp; -->
+            <label class="label_radio" for="rdoDurunuri03"><input name="rdoDurunuri" id="rdoDurunuri03" value="3" type="radio" class="G1"<c:if test="${MemberInfo.p_dorunuri eq 3}">checked=""</c:if>> 신규가입자(80% 지원)</label>&nbsp;&nbsp;
+            <label class="label_radio" for="rdoDurunuri04"><input name="rdoDurunuri" id="rdoDurunuri04" value="4" type="radio" class="G1"<c:if test="${MemberInfo.p_dorunuri eq 4}">checked=""</c:if>> 신규가입자(90% 지원)</label>&nbsp;&nbsp;
+            <!-- <br><span style="color:#FFFFFF;">___________</span>
             <label class="label_radio r_on" for="rdoDurunuri01"><input name="rdoDurunuri" id="rdoDurunuri01" value="1" type="radio"  class="G1" /> 기존가입자(40% 지원)</label>&nbsp;&nbsp;
             <label class="label_radio r_on" for="rdoDurunuri05"><input name="rdoDurunuri" id="rdoDurunuri05" value="5" type="radio"  class="G1" /> 기존가입(30% 지원)</label> -->
-								</div>
-								<div id="durunuriDivision" style="display: none">
-									<div class="top-5 label_radio2">
-										<span style="margin-right: 20px;">[국민연금]</span> <input
-											name="rdoDurunuriPublic" id="rdoDurunuriPublic00" value="0"
-											type="radio" checked="" class="G1"><label
-											for="rdoDurunuriPublic00"> 해당 없음 </label>&nbsp;&nbsp; <input
-											name="rdoDurunuriPublic" id="rdoDurunuriPublic03" value="3"
-											type="radio" class="G1"><label
-											for="rdoDurunuriPublic03"> 신규가입자(80% 지원)</label>&nbsp;&nbsp;
-										<input name="rdoDurunuriPublic" id="rdoDurunuriPublic04"
-											value="4" type="radio" class="G1"><label
-											for="rdoDurunuriPublic04"> 신규가입자(90% 지원)</label>&nbsp;&nbsp;
-									</div>
-									<div class="top-5 label_radio2">
-										<span style="margin-right: 20px;">[고용보험]</span> <input
-											name="rdoDurunuriEmployment" id="rdoDurunuriEmployment00"
-											value="0" type="radio" class="G1"><label
-											for="rdoDurunuriEmployment00"> 해당 없음 </label>&nbsp;&nbsp; <input
-											name="rdoDurunuriEmployment" id="rdoDurunuriEmployment03"
-											value="3" type="radio" class="G1"><label
-											for="rdoDurunuriEmployment03"> 신규가입자(80% 지원)</label>&nbsp;&nbsp;
-										<input name="rdoDurunuriEmployment"
-											id="rdoDurunuriEmployment04" value="4" type="radio"
-											class="G1"><label for="rdoDurunuriEmployment04">
-											신규가입자(90% 지원)</label>&nbsp;&nbsp;
-									</div>
-								</div> <span style="color: #ff0000;">* 위 기본정보에서 외국인으로 설정된 사원은
-									국민연금 보험료 지원대상에서 제외됩니다.</span>
-							</li>
-						</ul>
-						<ul>
-							<li class="titLeft p_l5" style="width: 145px;"><font
-								class="c_red">*</font> 기본급/일급</li>
-							<li class="con2" style="width: 250px;"><input
-								name="frmEmp4PayB" id="frmEmp4PayB" type="text"
-								value="5,000,000" class="money G1" style="width: 80%;">
-								원</li>
-							<li class="con2 " style="width: 362px;"><div class="p_t5">월급제의
-									경우 월 기본급, 일용직 근로자의 경우 일급을 입력합니다.</div></li>
-						</ul>
-						<ul>
-							<li class="titLeft p_l15" style="width: 135px;">국민연금 기준소득월액</li>
-							<li class="con2" style="width: 250px;"><input
-								name="frmEmp4Inco" id="frmEmp4Inco" type="text"
-								value="5,000,000" class="money G1" style="width: 80%;">
-								원</li>
-							<li class="con2 p_l15"
-								style="width: 362px; height: 91px; margin-bottom: -71px; border-bottom: solid 1px #e2e2e2; background: #fff;"><br>
-								<br>입력시 4대보험 공제시 우선 적용되며,<br> 미입력시 해당 근속월의 비과세를 제외한
-								과세합계로 적용됩니다.</li>
-						</ul>
-						<ul style="width: 419px;">
-							<li class="titLeft p_l15" style="width: 135px;">건강보험 보수월액</li>
-							<li class="con2" style="width: 250px;"><input
-								name="frmEmp4PyM1" id="frmEmp4PyM1" type="text"
-								value="5,000,000" class="money G1" style="width: 80%;">
-								원</li>
-						</ul>
-						<ul style="width: 419px;">
-							<li class="titLeft p_l15" style="width: 135px;">고용보험 보수월액</li>
-							<li class="con2" style="width: 250px;"><input
-								name="frmEmp4PyM2" id="frmEmp4PyM2" type="text"
-								value="5,000,000" class="money G1" style="width: 80%;">
-								원</li>
-						</ul>
-						<ul>
-							<li class="titLeft p_l15" style="width: 135px;">급여계좌</li>
-							<li class="con2" style="width: 630px;"><select
-								name="frmEmp4BkNm" id="frmEmp4BkNm" class="G1">
-									<option value="">선택해주세요</option>
-									<option value="국민은행">국민은행</option>
-									<option value="기업은행" selected="">기업은행</option>
-									<option value="농협중앙회">농협중앙회</option>
-									<option value="농협은행">농협은행</option>
-									<option value="산업은행">산업은행</option>
-									<option value="신한은행">신한은행</option>
-									<option value="스탠다드차타드은행">스탠다드차타드은행</option>
-									<option value="우리은행">우리은행</option>
-									<option value="외환은행">외환은행</option>
-									<option value="하나은행">하나은행</option>
-									<option value="한국씨티은행">한국씨티은행</option>
-									<option value="경남은행">경남은행</option>
-									<option value="광주은행">광주은행</option>
-									<option value="지역농협">지역농협</option>
-									<option value="대구은행">대구은행</option>
-									<option value="부산은행">부산은행</option>
-									<option value="전북은행">전북은행</option>
-									<option value="제주은행">제주은행</option>
-									<option value="카카오뱅크">카카오뱅크</option>
-									<option value="케이뱅크">케이뱅크</option>
-									<option value="토스뱅크">토스뱅크</option>
-									<option value="산림조합">산림조합</option>
-									<option value="상호저축은행">상호저축은행</option>
-									<option value="새마을금고">새마을금고</option>
-									<option value="신용협동조합">신용협동조합</option>
-									<option value="수협중앙회">수협중앙회</option>
-									<option value="우체국">우체국</option>
-									<option value="도이치뱅크">도이치뱅크</option>
-									<option value="BOA">BOA</option>
-									<option value="에이비엔암로">에이비엔암로</option>
-									<option value="HSBC">HSBC</option>
-									<option value="JP모간">JP모간</option>
-									<option value="BNP파리바">BNP파리바</option>
-									<option value="골든브릿지투자증권">골든브릿지투자증권</option>
-									<option value="교보증권">교보증권</option>
-									<option value="대신증권">대신증권</option>
-									<option value="동부증권">동부증권</option>
-									<option value="리딩투자증권">리딩투자증권</option>
-									<option value="메리츠종합금융증권">메리츠종합금융증권</option>
-									<option value="미래에셋대우">미래에셋대우</option>
-									<option value="미래에셋증권">미래에셋증권</option>
-									<option value="바로투자증권">바로투자증권</option>
-									<option value="부국증권">부국증권</option>
-									<option value="삼성증권">삼성증권</option>
-									<option value="신영증권">신영증권</option>
-									<option value="신한금융투자">신한금융투자</option>
-									<option value="유안타증권">유안타증권</option>
-									<option value="유진투자증권">유진투자증권</option>
-									<option value="유화증권">유화증권</option>
-									<option value="이베스트투자증권">이베스트투자증권</option>
-									<option value="카카오페이증권">카카오페이증권</option>
-									<option value="코리아에셋투자증권">코리아에셋투자증권</option>
-									<option value="키움증권">키움증권</option>
-									<option value="토스증권">토스증권</option>
-									<option value="하나금융투자">하나금융투자</option>
-									<option value="하이투자증권">하이투자증권</option>
-									<option value="한국투자증권">한국투자증권</option>
-									<option value="한양증권">한양증권</option>
-									<option value="한화투자증권">한화투자증권</option>
-									<option value="현대증권">현대증권</option>
-									<option value="흥국증권">흥국증권</option>
-									<option value="BNK투자증권">BNK투자증권</option>
-									<option value="HMC투자증권">HMC투자증권</option>
-									<option value="IBK투자증권">IBK투자증권</option>
-									<option value="KB투자증권">KB투자증권</option>
-									<option value="KTB투자증권">KTB투자증권</option>
-									<option value="LIG투자증권">LIG투자증권</option>
-									<option value="NH투자증권">NH투자증권</option>
-									<option value="NH투자증권">NH투자증권</option>
-									<option value="SK증권">SK증권</option>
-							</select> <input name="frmEmp4BkNb" id="frmEmp4BkNb" type="text"
-								value="120-86-50680" class="text G1" maxlength="25"
-								style="width: 190px;" placeholder="계좌번호"> <input
-								type="image"
-								src="https://img.payzon.co.kr/_commonImg/btn_depositor_search.png"
-								alt="예금주 조회" id="btnDepositorSearch"
-								style="vertical-align: middle"></li>
-						</ul>
-					</div>
-				</ul>
+          </div>
+          <div id="durunuriDivision" style="display:none">
+            <div class="top-5 label_radio2">
+              <span style="margin-right:20px;">[국민연금]</span>
+              <input name="rdoDurunuriPublic" id="rdoDurunuriPublic00" value="0" type="radio" checked="" class="G1"><label for="rdoDurunuriPublic00"> 해당 없음   </label>&nbsp;&nbsp;
+              <input name="rdoDurunuriPublic" id="rdoDurunuriPublic03" value="3" type="radio" class="G1"><label for="rdoDurunuriPublic03"> 신규가입자(80% 지원)</label>&nbsp;&nbsp;
+              <input name="rdoDurunuriPublic" id="rdoDurunuriPublic04" value="4" type="radio" class="G1"><label for="rdoDurunuriPublic04"> 신규가입자(90% 지원)</label>&nbsp;&nbsp;
+            </div>
+            <div class="top-5 label_radio2">
+              <span style="margin-right:20px;">[고용보험]</span>
+              <input name="rdoDurunuriEmployment" id="rdoDurunuriEmployment00" value="0" type="radio" class="G1"><label for="rdoDurunuriEmployment00"> 해당 없음   </label>&nbsp;&nbsp;
+              <input name="rdoDurunuriEmployment" id="rdoDurunuriEmployment03" value="3" type="radio" class="G1"><label for="rdoDurunuriEmployment03"> 신규가입자(80% 지원)</label>&nbsp;&nbsp;
+              <input name="rdoDurunuriEmployment" id="rdoDurunuriEmployment04" value="4" type="radio" class="G1"><label for="rdoDurunuriEmployment04"> 신규가입자(90% 지원)</label>&nbsp;&nbsp;
+            </div>
+          </div>
+          <span style="color:#ff0000;">* 위 기본정보에서 외국인으로 설정된 사원은 국민연금 보험료 지원대상에서 제외됩니다.</span>
+        </li>
+      </ul>
+      <ul>
+        <li class="titLeft p_l5" style="width:145px;"><font class="c_red">*</font> 기본급/일급</li>
+        <li class="con2" style="width:250px;"><input name="frmEmp4PayB" id="frmEmp4PayB" type="text" value="${MemberInfo.p_nomal_payment}" class="money G1" style="width:80%;"> 원</li>
+        <li class="con2 " style="width:362px;"><div class="p_t5">월급제의 경우 월 기본급, 일용직 근로자의 경우 일급을 입력합니다.</div></li>
+      </ul>
+    <ul>
+     <li class="titLeft p_l15" style="width:135px;">국민연금 기준소득월액</li>
+        <li class="con2" style="width:250px;"><input name="frmEmp4Inco" id="frmEmp4Inco" type="text" value="${MemberInfo.p_national_i_payment}" class="money G1" style="width:80%;"> 원</li>
+    <li class="con2 p_l15" style="width:362px; height:91px; margin-bottom:-71px; border-bottom:solid 1px #e2e2e2; background:#fff;"><br><br>입력시 4대보험 공제시 우선 적용되며,<br>
+ 미입력시 해당 근속월의 비과세를 제외한 과세합계로 적용됩니다.</li>
+    </ul>
+      <ul style="width:419px;">
+        <li class="titLeft p_l15" style="width:135px;">건강보험 보수월액</li>
+        <li class="con2" style="width:250px;"><input name="frmEmp4PyM1" id="frmEmp4PyM1" type="text" value="${MemberInfo.p_health_i_payment}" class="money G1" style="width:80%;"> 원</li>
+  </ul>
+  <ul style="width:419px;">
+        <li class="titLeft p_l15" style="width:135px;">고용보험 보수월액</li>
+        <li class="con2" style="width:250px;"><input name="frmEmp4PyM2" id="frmEmp4PyM2" type="text" value="${MemberInfo.p_employment_i_payment}" class="money G1" style="width:80%;"> 원</li>
+      </ul>
+      <ul>
+        <li class="titLeft p_l15" style="width:135px;">급여계좌</li>
+        <li class="con2" style="width:630px;">
+          <select name="frmEmp4BkNm" id="frmEmp4BkNm" class="G1">
+           <option value=""<c:if test="${MemberInfo.p_payment_bank eq '' }">selected</c:if>>선택해주세요</option>
+  	<option value="국민은행"<c:if test="${MemberInfo.p_payment_bank eq '국민은행' }">selected</c:if>>국민은행</option>
+	<option value="기업은행" <c:if test="${MemberInfo.p_payment_bank eq '기업은행' }">selected</c:if>>기업은행</option>
+	<option value="농협중앙회"<c:if test="${MemberInfo.p_payment_bank eq '농협중앙회' }">selected</c:if>>농협중앙회</option>
+	<option value="농협은행"<c:if test="${MemberInfo.p_payment_bank eq '농협은행' }">selected</c:if>>농협은행</option>
+	<option value="산업은행"<c:if test="${MemberInfo.p_payment_bank eq '산업은행' }">selected</c:if>>산업은행</option>
+	<option value="신한은행"<c:if test="${MemberInfo.p_payment_bank eq '신한은행' }">selected</c:if>>신한은행</option>
+	<option value="스탠다드차타드은행"<c:if test="${MemberInfo.p_payment_bank eq '스탠다드차타드은행' }">selected</c:if>>스탠다드차타드은행</option>
+	<option value="우리은행"<c:if test="${MemberInfo.p_payment_bank eq '우리은행' }">selected</c:if>>우리은행</option>
+	<option value="외환은행"<c:if test="${MemberInfo.p_payment_bank eq '왼한은행' }">selected</c:if>>외환은행</option>
+	<option value="하나은행"<c:if test="${MemberInfo.p_payment_bank eq '하나은행' }">selected</c:if>>하나은행</option>
+	<option value="한국씨티은행"<c:if test="${MemberInfo.p_payment_bank eq '한국씨티은행' }">selected</c:if>>한국씨티은행</option>
+	<option value="경남은행"<c:if test="${MemberInfo.p_payment_bank eq '경남은행' }">selected</c:if>>경남은행</option>
+	<option value="광주은행"<c:if test="${MemberInfo.p_payment_bank eq '광주은행' }">selected</c:if>>광주은행</option>
+	<option value="지역농협"<c:if test="${MemberInfo.p_payment_bank eq '지역은행' }">selected</c:if>>지역농협</option>
+	<option value="대구은행"<c:if test="${MemberInfo.p_payment_bank eq '대구은행' }">selected</c:if>>대구은행</option>
+	<option value="부산은행"<c:if test="${MemberInfo.p_payment_bank eq '부산은행' }">selected</c:if>>부산은행</option>
+	<option value="전북은행"<c:if test="${MemberInfo.p_payment_bank eq '전북은행' }">selected</c:if>>전북은행</option>
+	<option value="제주은행"<c:if test="${MemberInfo.p_payment_bank eq '제주은행' }">selected</c:if>>제주은행</option>
+	<option value="카카오뱅크"<c:if test="${MemberInfo.p_payment_bank eq '카카오은행' }">selected</c:if>>카카오뱅크</option>
+	<option value="케이뱅크"<c:if test="${MemberInfo.p_payment_bank eq '케이은행' }">selected</c:if>>케이뱅크</option>
+	<option value="토스뱅크"<c:if test="${MemberInfo.p_payment_bank eq '토스은행' }">selected</c:if>>토스뱅크</option>
+	<option value="산림조합"<c:if test="${MemberInfo.p_payment_bank eq '산림조합' }">selected</c:if>>산림조합</option>
+	<option value="상호저축은행"<c:if test="${MemberInfo.p_payment_bank eq '상호저축은행' }">selected</c:if>>상호저축은행</option>
+	<option value="새마을금고"<c:if test="${MemberInfo.p_payment_bank eq '새마을금고' }">selected</c:if>>새마을금고</option>
+	<option value="신용협동조합"<c:if test="${MemberInfo.p_payment_bank eq '신용협동조합' }">selected</c:if>>신용협동조합</option>
+	<option value="수협중앙회"<c:if test="${MemberInfo.p_payment_bank eq '수협중앙회' }">selected</c:if>>수협중앙회</option>
+	<option value="우체국"<c:if test="${MemberInfo.p_payment_bank eq '우체국' }">selected</c:if>>우체국</option>
+	<option value="도이치뱅크"<c:if test="${MemberInfo.p_payment_bank eq '도이치뱅크' }">selected</c:if>>도이치뱅크</option>
+	<option value="BOA"<c:if test="${MemberInfo.p_payment_bank eq 'BOA' }">selected</c:if>>BOA</option>
+	<option value="에이비엔암로"<c:if test="${MemberInfo.p_payment_bank eq '에이비엔암로' }">selected</c:if>>에이비엔암로</option>
+	<option value="HSBC"<c:if test="${MemberInfo.p_payment_bank eq 'HSBC' }">selected</c:if>>HSBC</option>
+	<option value="JP모간"<c:if test="${MemberInfo.p_payment_bank eq 'JP모간' }">selected</c:if>>JP모간</option>
+	<option value="BNP파리바"<c:if test="${MemberInfo.p_payment_bank eq 'BNP파리바' }">selected</c:if>>BNP파리바</option>
+	<option value="골든브릿지투자증권"<c:if test="${MemberInfo.p_payment_bank eq '골든브릿지투자증권' }">selected</c:if>>골든브릿지투자증권</option>
+	<option value="교보증권"<c:if test="${MemberInfo.p_payment_bank eq '교보증권' }">selected</c:if>>교보증권</option>
+	<option value="대신증권"<c:if test="${MemberInfo.p_payment_bank eq '대신증권' }">selected</c:if>>대신증권</option>
+	<option value="동부증권"<c:if test="${MemberInfo.p_payment_bank eq '동부증권' }">selected</c:if>>동부증권</option>
+	<option value="리딩투자증권"<c:if test="${MemberInfo.p_payment_bank eq '리딩투자증권' }">selected</c:if>>리딩투자증권</option>
+	<option value="메리츠종합금융증권"<c:if test="${MemberInfo.p_payment_bank eq '메리츠종합금융증권' }">selected</c:if>>메리츠종합금융증권</option>
+	<option value="미래에셋대우"<c:if test="${MemberInfo.p_payment_bank eq '미래에셋대우' }">selected</c:if>>미래에셋대우</option>
+	<option value="미래에셋증권"<c:if test="${MemberInfo.p_payment_bank eq '미래에셋증권' }">selected</c:if>>미래에셋증권</option>
+	<option value="바로투자증권"<c:if test="${MemberInfo.p_payment_bank eq '바로투자증권' }">selected</c:if>>바로투자증권</option>
+	<option value="부국증권"<c:if test="${MemberInfo.p_payment_bank eq '부국증권' }">selected</c:if>>부국증권</option>
+	<option value="삼성증권"<c:if test="${MemberInfo.p_payment_bank eq '삼성증권' }">selected</c:if>>삼성증권</option>
+	<option value="신영증권"<c:if test="${MemberInfo.p_payment_bank eq '신영증권' }">selected</c:if>>신영증권</option>
+	<option value="신한금융투자"<c:if test="${MemberInfo.p_payment_bank eq '신한금융투자' }">selected</c:if>>신한금융투자</option>
+	<option value="유안타증권"<c:if test="${MemberInfo.p_payment_bank eq '유안타증권' }">selected</c:if>>유안타증권</option>
+	<option value="유진투자증권"<c:if test="${MemberInfo.p_payment_bank eq '유진투자증권' }">selected</c:if>>유진투자증권</option>
+	<option value="유화증권"<c:if test="${MemberInfo.p_payment_bank eq '유화증권' }">selected</c:if>>유화증권</option>
+	<option value="이베스트투자증권"<c:if test="${MemberInfo.p_payment_bank eq '이베스트투자증권' }">selected</c:if>>이베스트투자증권</option>
+	<option value="카카오페이증권"<c:if test="${MemberInfo.p_payment_bank eq '카카오페이증권' }">selected</c:if>>카카오페이증권</option>
+	<option value="코리아에셋투자증권"<c:if test="${MemberInfo.p_payment_bank eq '코리아에셋투자증권' }">selected</c:if>>코리아에셋투자증권</option>
+	<option value="키움증권"<c:if test="${MemberInfo.p_payment_bank eq '키움증권' }">selected</c:if>>키움증권</option>
+	<option value="토스증권"<c:if test="${MemberInfo.p_payment_bank eq '토스증권' }">selected</c:if>>토스증권</option>
+	<option value="하나금융투자"<c:if test="${MemberInfo.p_payment_bank eq '하나금융투자' }">selected</c:if>>하나금융투자</option>
+	<option value="하이투자증권"<c:if test="${MemberInfo.p_payment_bank eq '하이투자증권' }">selected</c:if>>하이투자증권</option>
+	<option value="한국투자증권"<c:if test="${MemberInfo.p_payment_bank eq '한국투자증권' }">selected</c:if>>한국투자증권</option>
+	<option value="한양증권"<c:if test="${MemberInfo.p_payment_bank eq '한양증권' }">selected</c:if>>한양증권</option>
+	<option value="한화투자증권"<c:if test="${MemberInfo.p_payment_bank eq '한화투자증권' }">selected</c:if>>한화투자증권</option>
+	<option value="현대증권"<c:if test="${MemberInfo.p_payment_bank eq '현대증권' }">selected</c:if>>현대증권</option>
+	<option value="흥국증권"<c:if test="${MemberInfo.p_payment_bank eq '흥국증권' }">selected</c:if>>흥국증권</option>
+	<option value="BNK투자증권"<c:if test="${MemberInfo.p_payment_bank eq 'BNK투자증권' }">selected</c:if>>BNK투자증권</option>
+	<option value="HMC투자증권"<c:if test="${MemberInfo.p_payment_bank eq 'HMC투자증권' }">selected</c:if>>HMC투자증권</option>
+	<option value="IBK투자증권"<c:if test="${MemberInfo.p_payment_bank eq 'IBK투자증권' }">selected</c:if>>IBK투자증권</option>
+	<option value="KB투자증권"<c:if test="${MemberInfo.p_payment_bank eq 'KB투자증권' }">selected</c:if>>KB투자증권</option>
+	<option value="KTB투자증권"<c:if test="${MemberInfo.p_payment_bank eq 'KTB투자증권' }">selected</c:if>>KTB투자증권</option>
+	<option value="LIG투자증권"<c:if test="${MemberInfo.p_payment_bank eq 'LIG투자증권' }">selected</c:if>>LIG투자증권</option>
+	<option value="NH투자증권"<c:if test="${MemberInfo.p_payment_bank eq 'NH투자증권' }">selected</c:if>>NH투자증권</option>
+	<option value="NH투자증권"<c:if test="${MemberInfo.p_payment_bank eq 'NH투자증권' }">selected</c:if>>NH투자증권</option>
+	<option value="SK증권"<c:if test="${MemberInfo.p_payment_bank eq 'SK증권' }">selected</c:if>>SK증권</option>
+          </select>
+          <input name="frmEmp4BkNb" id="frmEmp4BkNb" type="text" value="${MemberInfo.p_bank_number}" class="text G1" maxlength="25" style="width:190px;" placeholder="계좌번호">
+          <input type="image" src="https://img.payzon.co.kr/_commonImg/btn_depositor_search.png" alt="예금주 조회" id="btnDepositorSearch" style="vertical-align:middle">
+        </li>
+        
+      </ul>
+      </div>
+      </c:forEach>
 
 
 
-
-				<hr class="hr_0">
+    <hr class="hr_0">
 
 				<!-- //4대보험: G2 -->
 				<ul class="p_b5 c_blue ">
@@ -2190,7 +2112,7 @@ console.log('label click');
 							<li class="w_180 tit">상실일</li>
 						</ul>
 						<form:form modelAttribute="InsertAcademicAbilityVO"
-							action="/psyzon/insert" method="post" id="insuranceInfo">
+							action="/psyzon/insertinsurance" method="post" id="insuranceInfo">
 							<ul>
 
 								<li class="w_105 tit_s c">국민연금</li>
@@ -2526,7 +2448,7 @@ console.log('label click');
 							style="border: 0px; cursor: pointer;">
 
 							<form:form modelAttribute="InsertAcademicAbilityVO"
-								action="/psyzon/insert" method="post" id="academicForm">
+								action="/psyzon/insertacademic" method="post" id="academicForm">
 								<c:forEach var="MemberInfo"
 									items="${MemberInfo.academicabilityvo}" varStatus="status">
 									<ul id="grpEmacIdx0" class="grpEmac">
@@ -2641,200 +2563,104 @@ console.log('label click');
 				</ul>
 				<!-- //학력: G4// -->
 
-				<hr class="hr_5">
+			 <hr class="hr_5">
 
-				<a name="aTagMenu04"></a>
-				<!-- //경력: G5 -->
-				<ul id="lblCrer">
-					<img src="/_commonImg/emreg_tit_06.gif" width="65px" height="19px"
-						vspace="8" hspace="5" border="0" alt="경력" title="경력">
-					<span class="f_right p_t5"><input name="btnCrerAdd"
-						id="btnCrerAdd" type="image" value="추가하기"
-						src="/_commonImg/btn_plus.gif" width="54px" height="21px"
-						alt="추가하기">&nbsp;<input name="btnCrerDel" id="btnCrerDel"
-						type="image" value="선택삭제" src="/_commonImg/btn_s_delete.gif"
-						width="61px" height="21px" alt="선택삭제"></span>
-				</ul>
-				<ul>
-					<div id="table1">
-						<p class="caption"></p>
-						<ul>
-							<li class="w_24 tit"><label class="label_check"
-								for="chkBoxGrpCrer"><input id="chkBoxGrpCrer"
-									type="checkbox"></label></li>
-							<li class="w_120 tit ">회사명</li>
-							<li class="w_88 tit ">입사일자</li>
-							<li class="w_88 tit">퇴사일자</li>
-							<li class="w_135 tit">근무기간</li>
-							<li class="w_92 tit">최종직위</li>
-							<li class="w_88 tit">담당직무</li>
-							<li class="w_156 tit">퇴직사유</li>
-						</ul>
+    <a name="aTagMenu04"></a>
+    <!-- //경력: G5 -->
+    <ul id="lblCrer"><img src="/_commonImg/emreg_tit_06.gif" width="65px" height="19px" vspace="8" hspace="5" border="0" alt="경력" title="경력"><span class="f_right p_t5"><input name="btnCrerAdd" id="btnCrerAdd" type="image" value="추가하기" src="/_commonImg/btn_plus.gif" width="54px" height="21px" alt="추가하기">&nbsp;<input name="btnCrerDel" id="btnCrerDel" type="image" value="선택삭제" src="/_commonImg/btn_s_delete.gif" width="61px" height="21px" alt="선택삭제"></span></ul>
+    <ul>
+      <div id="table1">
+      <p class="caption"></p>
+      <ul>
+        <li class="w_24 tit"><label class="label_check" for="chkBoxGrpCrer"><input id="chkBoxGrpCrer" type="checkbox"></label></li>
+        <li class="w_120 tit ">회사명</li>
+        <li class="w_88 tit ">입사일자</li>
+        <li class="w_88 tit">퇴사일자</li>
+        <li class="w_135 tit">근무기간</li>
+        <li class="w_92 tit">최종직위</li>
+        <li class="w_88 tit">담당직무</li>
+        <li class="w_156 tit">퇴직사유</li>
+      </ul>
 
-						<ul class="clsDragItemSort ui-sortable"
-							style="border: 0px; cursor: pointer;">
-							<ul id="grpCrerIdx0" class="grpCrer">
-								<!-- ### G5 0 ### -->
-								<li class="w_24 con3_check"><label class="label_check"
-									for="grpCrerId0"><input type="checkbox"
-										name="grpCrerId" id="grpCrerId0" class="G5"></label></li>
-								<li class="w_120 con3"><input name="frmEmcrCpNm"
-									id="frmEmcrCpNm0" type="text" value="한국경제협회" class="white G5"
-									style="width: 90%;"></li>
-								<li class="w_88 con3"><input name="frmEmcrJind"
-									id="frmEmcrJind0" type="text" value="1990-04-04"
-									class="white G5 frmCalendar c hasDatepicker"
-									style="width: 90%;" maxlength="10"></li>
-								<li class="w_88 con3"><input name="frmEmcrGind"
-									id="frmEmcrGind0" type="text" value="1999-12-31"
-									class="white G5 frmCalendar c hasDatepicker"
-									style="width: 90%;" maxlength="10"></li>
-								<li class="w_135 con3"><input name="frmEmcrPerd1"
-									id="frmEmcrPerd10" type="text" value="09"
-									class="white G5 aling_r" style="width: 30%;" maxlength="2">년
-									<input name="frmEmcrPerd2" id="frmEmcrPerd20" type="text"
-									value="08" class="white G5 aling_r" style="width: 30%;"
-									maxlength="2">개월</li>
-								<li class="w_92 con3"><input name="frmEmcrPstn"
-									id="frmEmcrPstn0" type="text" value="부장" class="white G5"
-									style="width: 90%;"></li>
-								<li class="w_88 con3"><input name="frmEmcrDuty"
-									id="frmEmcrDuty0" type="text" value="산업경제연구" class="white G5"
-									style="width: 90%;"></li>
-								<li class="w_156 con3"><input name="frmEmcrPerc"
-									id="frmEmcrPerc0" type="text" value="창업" class="white G5"
-									style="width: 90%;"></li>
-							</ul>
-							<ul id="grpCrerIdx1" class="grpCrer">
-								<!-- ### G5 1 ### -->
-								<li class="w_24 con3_check"><label class="label_check"
-									for="grpCrerId1"><input type="checkbox"
-										name="grpCrerId" id="grpCrerId1" class="G5"></label></li>
-								<li class="w_120 con3"><input name="frmEmcrCpNm"
-									id="frmEmcrCpNm1" type="text" value="한국산업개발연구원"
-									class="white G5" style="width: 90%;"></li>
-								<li class="w_88 con3"><input name="frmEmcrJind"
-									id="frmEmcrJind1" type="text" value="1987-07-20"
-									class="white G5 frmCalendar c hasDatepicker"
-									style="width: 90%;" maxlength="10"></li>
-								<li class="w_88 con3"><input name="frmEmcrGind"
-									id="frmEmcrGind1" type="text" value="1990-04-03"
-									class="white G5 frmCalendar c hasDatepicker"
-									style="width: 90%;" maxlength="10"></li>
-								<li class="w_135 con3"><input name="frmEmcrPerd1"
-									id="frmEmcrPerd11" type="text" value="02"
-									class="white G5 aling_r" style="width: 30%;" maxlength="2">년
-									<input name="frmEmcrPerd2" id="frmEmcrPerd21" type="text"
-									value="10" class="white G5 aling_r" style="width: 30%;"
-									maxlength="2">개월</li>
-								<li class="w_92 con3"><input name="frmEmcrPstn"
-									id="frmEmcrPstn1" type="text" value="연구원" class="white G5"
-									style="width: 90%;"></li>
-								<li class="w_88 con3"><input name="frmEmcrDuty"
-									id="frmEmcrDuty1" type="text" value="경영컨설팅" class="white G5"
-									style="width: 90%;"></li>
-								<li class="w_156 con3"><input name="frmEmcrPerc"
-									id="frmEmcrPerc1" type="text" value="개인사유" class="white G5"
-									style="width: 90%;"></li>
-							</ul>
-							<ul id="grpCrerIdx2" class="grpCrer">
-								<!-- ### G5 2 ### -->
-								<li class="w_24 con3_check"><label class="label_check"
-									for="grpCrerId2"><input type="checkbox"
-										name="grpCrerId" id="grpCrerId2" class="G5"></label></li>
-								<li class="w_120 con3"><input name="frmEmcrCpNm"
-									id="frmEmcrCpNm2" type="text" value="" class="white G5"
-									style="width: 90%;"></li>
-								<li class="w_88 con3"><input name="frmEmcrJind"
-									id="frmEmcrJind2" type="text" value=""
-									class="white G5 frmCalendar c hasDatepicker"
-									style="width: 90%;" maxlength="10"></li>
-								<li class="w_88 con3"><input name="frmEmcrGind"
-									id="frmEmcrGind2" type="text" value=""
-									class="white G5 frmCalendar c hasDatepicker"
-									style="width: 90%;" maxlength="10"></li>
-								<li class="w_135 con3"><input name="frmEmcrPerd1"
-									id="frmEmcrPerd12" type="text" value="" class="white G5"
-									style="width: 30%;" maxlength="2">년 <input
-									name="frmEmcrPerd2" id="frmEmcrPerd22" type="text" value=""
-									class="white G5" style="width: 30%;" maxlength="2">개월</li>
-								<li class="w_92 con3"><input name="frmEmcrPstn"
-									id="frmEmcrPstn2" type="text" value="" class="white G5"
-									style="width: 90%;"></li>
-								<li class="w_88 con3"><input name="frmEmcrDuty"
-									id="frmEmcrDuty2" type="text" value="" class="white G5"
-									style="width: 90%;"></li>
-								<li class="w_156 con3"><input name="frmEmcrPerc"
-									id="frmEmcrPerc2" type="text" value="" class="white G5"
-									style="width: 90%;"></li>
-							</ul>
-						</ul>
-					</div>
-				</ul>
-				<!-- //경력: G5// -->
+<ul class="clsDragItemSort ui-sortable" style="border: 0px; cursor: pointer;"> 
+<c:forEach var="MemberInfo" items="${MemberInfo.careervo}">
+     <ul id="grpCrerIdx0" class="grpCrer"><!-- ### G5 0 ### -->  
+     
+        <li class="w_24 con3_check"><label class="label_check" for="grpCrerId0"><input type="checkbox" name="grpCrerId" id="grpCrerId0" class="G5"></label></li>
+        <li class="w_120 con3"><input name="frmEmcrCpNm" id="frmEmcrCpNm0" type="text" value="${MemberInfo.m_comany_name }" class="white G5" style="width:90%;"></li>
+        <li class="w_88 con3"><input name="frmEmcrJind" id="frmEmcrJind0" type="text" value="${MemberInfo.m_newdate }" class="white G5 frmCalendar c hasDatepicker" style="width:90%;" maxlength="10"></li>
+        <li class="w_88 con3"><input name="frmEmcrGind" id="frmEmcrGind0" type="text" value="${MemberInfo.m_byedate }" class="white G5 frmCalendar c hasDatepicker" style="width:90%;" maxlength="10"></li>
+        <li class="w_135 con3"><input name="frmEmcrPerd1" id="frmEmcrPerd10" type="text" value="${MemberInfo.m_period_year }" class="white G5 aling_r" style="width:30%;" maxlength="2">년 <input name="frmEmcrPerd2" id="frmEmcrPerd20" type="text" value="${MemberInfo.m_period_month }" class="white G5 aling_r" style="width:30%;" maxlength="2">개월</li>
+        <li class="w_92 con3"><input name="frmEmcrPstn" id="frmEmcrPstn0" type="text" value="${MemberInfo.m_final_class }" class="white G5" style="width:90%;"></li>
+        <li class="w_88 con3"><input name="frmEmcrDuty" id="frmEmcrDuty0" type="text" value="${MemberInfo.m_duty }" class="white G5" style="width:90%;"></li>
+        <li class="w_156 con3"><input name="frmEmcrPerc" id="frmEmcrPerc0" type="text" value="${MemberInfo.m_bye_why }" class="white G5" style="width:90%;"></li>
+     
+     </ul>
+      </c:forEach>
+    
+      <ul id="grpCrerIdx2" class="grpCrer"><!-- ### G5 2 ### -->
+      
+        <li class="w_24 con3_check"><label class="label_check" for="grpCrerId2"><input type="checkbox" name="grpCrerId" id="grpCrerId2" class="G5"></label></li>
+        <li class="w_120 con3"><input name="frmEmcrCpNm" id="frmEmcrCpNm2" type="text" value="" class="white G5" style="width:90%;"></li>
+        <li class="w_88 con3"><input name="frmEmcrJind" id="frmEmcrJind2" type="text" value="" class="white G5 frmCalendar c hasDatepicker" style="width:90%;" maxlength="10"></li>
+        <li class="w_88 con3"><input name="frmEmcrGind" id="frmEmcrGind2" type="text" value="" class="white G5 frmCalendar c hasDatepicker" style="width:90%;" maxlength="10"></li>
+        <li class="w_135 con3"><input name="frmEmcrPerd1" id="frmEmcrPerd12" type="text" value="" class="white G5" style="width:30%;" maxlength="2">년 <input name="frmEmcrPerd2" id="frmEmcrPerd22" type="text" value="" class="white G5" style="width:30%;" maxlength="2">개월</li>
+        <li class="w_92 con3"><input name="frmEmcrPstn" id="frmEmcrPstn2" type="text" value="" class="white G5" style="width:90%;"></li>
+        <li class="w_88 con3"><input name="frmEmcrDuty" id="frmEmcrDuty2" type="text" value="" class="white G5" style="width:90%;"></li>
+        <li class="w_156 con3"><input name="frmEmcrPerc" id="frmEmcrPerc2" type="text" value="" class="white G5" style="width:90%;"></li>
+      </ul>
+</ul>      </div>
+    </ul>
+    <!-- //경력: G5// -->
 
 				<hr class="hr_5">
 
 				<a name="aTagMenu05"></a>
-				<!-- //병역: G6 -->
-				<ul id="lblMili">
-					<img src="/_commonImg/emreg_tit_07.gif" width="65px" height="19px"
-						vspace="8" hspace="5" border="0" alt="병역" title="병역">
-				</ul>
-				<ul>
-					<div id="table1">
-						<input name="isG6Id" id="isG6Id" type="hidden" value="368079">
-						<p class="caption"></p>
-						<ul>
-							<li class="w_105 tit ">병역구분</li>
-							<li class="w_70 tit ">군별</li>
-							<li class="w_100 tit">복무기간(부터)</li>
-							<li class="w_100 tit">복무기간(까지)</li>
-							<li class="w_100 tit">최종계급</li>
-							<li class="w_100 tit">병과</li>
-							<li class="tit" style="width: 217px;">미필사유</li>
-						</ul>
-						<ul>
-							<li class="w_105 con3" style="padding-left: 30px; width: 75px">
-								<!-- <input name="frmEmmlType" id="frmEmmlType" type='text' value=""  class="white G6"  style='width:90%;'> -->
-								<select name="frmEmmlType" id="frmEmmlType" class="G6"
-								style="width: 60px">
-									<option value="">선택</option>
-									<option value="y">군필</option>
-									<option value="n">미필</option>
-							</select>
-							</li>
-							<li class="con3" style="padding-left: 7px; width: 63px;"><select
-								name="frmEmmlMltr" id="frmEmmlMltr" class="G6">
-									<option value="">선택</option>
-									<option value="육군" selected="">육군</option>
-									<option value="해군">해군</option>
-									<option value="공군">공군</option>
-									<option value="상비군">상비군</option>
-									<option value="면제">면제</option>
-									<option value="기타">기타</option>
-							</select></li>
-							<li class="w_100 con3"><input name="frmEmmlSttD"
-								id="frmEmmlSttD" type="text" value="1984-02-06"
-								class="white G6 frmCalendar c hasDatepicker" style="width: 90%;"
-								maxlength="10"></li>
-							<li class="w_100 con3"><input name="frmEmmlEndD"
-								id="frmEmmlEndD" type="text" value="1987-02-05"
-								class="white G6 frmCalendar c hasDatepicker" style="width: 90%;"
-								maxlength="10"></li>
-							<li class="w_100 con3"><input name="frmEmmlClss"
-								id="frmEmmlClss" type="text" value="병장" class="white G6"
-								style="width: 90%;"></li>
-							<li class="w_100 con3"><input name="frmEmmlSper"
-								id="frmEmmlSper" type="text" value="보병" class="white G6"
-								style="width: 90%;"></li>
-							<li class="con3" style="width: 217px;"><input
-								name="frmEmmlUfns" id="frmEmmlUfns" type="text" value=""
-								class="white G6" style="width: 90%;"></li>
-						</ul>
-					</div>
-				</ul>
-				<!-- //병역: G6// -->
+				 <!-- //병역: G6 -->
+    <ul id="lblMili"><img src="/_commonImg/emreg_tit_07.gif" width="65px" height="19px" vspace="8" hspace="5" border="0" alt="병역" title="병역"></ul>
+    <ul>
+      <div id="table1">
+      <input name="isG6Id" id="isG6Id" type="hidden" value="368079">
+      <p class="caption"></p>
+      <ul>
+        <li class="w_105 tit ">병역구분</li>
+        <li class="w_70 tit ">군별</li>
+        <li class="w_100 tit">복무기간(부터)</li>
+        <li class="w_100 tit">복무기간(까지)</li>
+        <li class="w_100 tit">최종계급</li>
+        <li class="w_100 tit">병과</li>
+        <li class="tit" style="width:217px;">미필사유</li>
+      </ul>
+      <c:forEach var="MemberInfo" items="${MemberInfo.milivo}">
+      <ul>
+        <li class="w_105 con3" style="padding-left:30px; width:75px"><!-- <input name="frmEmmlType" id="frmEmmlType" type='text' value=""  class="white G6"  style='width:90%;'> -->
+          <select name="frmEmmlType" id="frmEmmlType" class="G6" style="width:60px">
+            <option value=""<c:if test="${MemberInfo.ms_class eq '선택' }">selected</c:if>>선택</option>
+            <option value="y"<c:if test="${MemberInfo.ms_class eq '군필' }">selected</c:if>>군필</option>
+            <option value="n"<c:if test="${MemberInfo.ms_class eq '미필' }">selected</c:if>>미필</option>
+          </select>
+        </li>
+        <li class="con3" style="padding-left:7px; width:63px;">
+          <select name="frmEmmlMltr" id="frmEmmlMltr" class="G6">
+            <option value="">선택</option>
+	<option value="육군" <c:if test="${MemberInfo.ms_group eq '육군' }">selected</c:if>>육군</option>
+	<option value="해군"<c:if test="${MemberInfo.ms_group eq '해군' }">selected</c:if>>해군</option>
+	<option value="공군"<c:if test="${MemberInfo.ms_group eq '공군' }">selected</c:if>>공군</option>
+	<option value="상비군"<c:if test="${MemberInfo.ms_group eq '상비군' }">selected</c:if>>상비군</option>
+	<option value="면제"<c:if test="${MemberInfo.ms_group eq '면제' }">selected</c:if>>면제</option>
+	<option value="기타"<c:if test="${MemberInfo.ms_group eq '기타' }">selected</c:if>>기타</option>
+          </select>
+        </li>
+        <li class="w_100 con3"><input name="frmEmmlSttD" id="frmEmmlSttD" type="text" value="${MemberInfo.ms_start_date }" class="white G6 frmCalendar c hasDatepicker" style="width:90%;" maxlength="10"></li>
+        <li class="w_100 con3"><input name="frmEmmlEndD" id="frmEmmlEndD" type="text" value="${MemberInfo.ms_end_date }" class="white G6 frmCalendar c hasDatepicker" style="width:90%;" maxlength="10"></li>
+        <li class="w_100 con3"><input name="frmEmmlClss" id="frmEmmlClss" type="text" value="${MemberInfo.ms_final_class }" class="white G6" style="width:90%;"></li>
+        <li class="w_100 con3"><input name="frmEmmlSper" id="frmEmmlSper" type="text" value="${MemberInfo.ms_army_kind }" class="white G6" style="width:90%;"></li>
+        <li class="con3" style="width:217px;"><input name="frmEmmlUfns" id="frmEmmlUfns" type="text" value="${MemberInfo.ms_reason }" class="white G6" style="width:90%;"></li>
+      </ul>
+      </div>
+    </ul>
+    </c:forEach>
+    <!-- //병역: G6// -->
 
 				<hr class="hr_5">
 

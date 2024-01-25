@@ -11,15 +11,21 @@ public class EmploymentInfo_1DTO {
 	List<FamilyVO> familyvo;
 	InsuranceVO insurancevo;
 	MemberInformationVO memberinfovo;
+	List<CareerVO> careervo;
+	List<MiliVO> milivo;
+	List<PaymentVO> paymentvo;
 	
 	
 	
-public EmploymentInfo_1DTO(List<AcademicAbilityVO> academicabilityvo,List<FamilyVO> familyvo,InsuranceVO insurancevo,MemberInformationVO memberinfovo) {
+public EmploymentInfo_1DTO(List<AcademicAbilityVO> academicabilityvo,List<FamilyVO> familyvo,InsuranceVO insurancevo,MemberInformationVO memberinfovo,List<CareerVO> careervo,List<MiliVO> milivo,List<PaymentVO> paymentvo) {
 	
 	this.academicabilityvo = academicabilityvo;
 	this.familyvo = familyvo;
 	this.insurancevo = insurancevo;
 	this.memberinfovo = memberinfovo;
+	this.careervo=careervo;
+	this.milivo=milivo;
+	this.paymentvo=paymentvo;
 	
 	
 

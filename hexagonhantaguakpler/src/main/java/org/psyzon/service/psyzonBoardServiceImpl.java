@@ -3,11 +3,14 @@ package org.psyzon.service;
 import java.util.List;
 
 import org.psyzon.domain.AcademicAbilityVO;
+import org.psyzon.domain.CareerVO;
 import org.psyzon.domain.EmploymentInfo_1DTO;
 import org.psyzon.domain.FamilyVO;
 import org.psyzon.domain.InsuranceVO;
 import org.psyzon.domain.MemberInformationVO;
 import org.psyzon.domain.MemberListVO;
+import org.psyzon.domain.MiliVO;
+import org.psyzon.domain.PaymentVO;
 import org.psyzon.domain.psyzonBoardPageDTO;
 import org.psyzon.mapper.psyzonBoardMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -96,6 +99,9 @@ public class psyzonBoardServiceImpl implements psyzonBoardService {
 		InsuranceVO insurance = mapper.insuranceinfo(m_number);
 		List<FamilyVO> family = mapper.familyinfo(m_number);
 		MemberInformationVO memberinfo = mapper.memberinfo(m_number);
+		List<CareerVO> career =mapper.CareerVO(m_number);
+		List<MiliVO> mili=mapper.MiliVO(m_number);
+		List<PaymentVO> payment=mapper.PaymentVO(m_number);
 		
 		
 		System.out.println("service" +academic);
@@ -104,7 +110,7 @@ public class psyzonBoardServiceImpl implements psyzonBoardService {
 		
 		
 		
-		return new EmploymentInfo_1DTO(academic,family,insurance,memberinfo);
+		return new EmploymentInfo_1DTO(academic,family,insurance,memberinfo,career,mili,payment);
 	}
 
 }
