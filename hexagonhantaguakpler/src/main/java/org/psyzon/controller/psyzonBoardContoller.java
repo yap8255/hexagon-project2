@@ -1,9 +1,14 @@
 package org.psyzon.controller;
 
+import org.psyzon.domain.EmploymentInfo_1DTO;
+import org.psyzon.insertdomain.InsertDTO;
+import org.psyzon.insertdomain.InsertInsuranceVO;
 import org.psyzon.service.psyzonBoardService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -32,6 +37,25 @@ public class psyzonBoardContoller {
 		model.addAttribute("TypeCount5",service.TypeCount5());
 		model.addAttribute("TypeCount6",service.TypeCount6());
 
+	}
+	
+	@GetMapping("/MemberInformation")
+	public void MemberInformation(@RequestParam(name = "m_number") String m_number, Model model){
+		EmploymentInfo_1DTO test = service.EmploymentInfo_1DTO(m_number);
+		
+		model.addAttribute("MemberInfo",test);
+		
+		
+		
+	}
+	@PostMapping("/insert")
+	public String insert(@ModelAttribute("InsertDTO") InsertDTO InsertDTO){
+		
+		System.out.println("controller insurance" + InsertDTO.getInsurance());
+		System.out.println("controller academic" + InsertDTO.getAcademic());
+
+		return "psyzon/insert";
+		
 	}
 	
 	

@@ -7,10 +7,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 
 <select id="totalList" resultType="org.psyzon.domain.MemberListVO">
-
 		SELECT * FROM (SELECT ROWNUM NUM, MEMBER_LIST.* FROM MEMBER_LIST) WHERE NUM BETWEEN (#{pageNum}-1)*#{size}+1 AND (#{pageNum})*#{size}
-		
-		
 </select>
 
 <select id="totalCount" resultType="int">
@@ -59,8 +56,26 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 </select>
 
+<select id = "AcademicAbilityVO" resultType = "org.psyzon.domain.AcademicAbilityVO">
+select * from Academic_ability where m_number = #{m_number}  
+</select>
 
+<select id="familyinfo" resultType="org.psyzon.domain.FamilyVO">
 
+		select * from member_family where m_number=#{m_number}
+
+</select>
+
+<select id="insuranceinfo" resultType="org.psyzon.domain.InsuranceVO">
+
+		select * from insurance where m_number=#{m_number}
+		</select>
+<select id="memberinfo" resultType="org.psyzon.domain.MemberInformationVO">
+
+		SELECT B.M_NUMBER, B.M_TYPE, B.M_NAME, A.L_NAMEENG,B.M_NEWDATE,B.M_BYEDATE,B.M_CLASS,B.M_POSITION,A.L_FOREIGN,B.M_RESI_NUMBER,A.L_ADDRESS,A.L_POSTNUMBER,A.L_TELLEPHONE1,A.L_TELLEPHONE2,A.L_TELLEPHONE3,A.L_PHONE1,A.L_PHONE2,A.L_PHONE3,B.M_MAIL,A.L_SNS,A.L_ETC
+FROM INFORMATION_LIST A, MEMBER_LIST B WHERE A.M_NUMBER = B.M_NUMBER AND A.M_NUMBER = #{m_number}
+		</select>
+		
 
 
 
