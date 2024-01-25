@@ -5,9 +5,9 @@ import java.util.List;
 import lombok.Data;
 
 @Data
-public class InsertDTO {
+public class UpdateDTO {
 	
-	List<InsertAcademicAbilityVO> academic;
-	InsertInsuranceVO insurance;
+	List<UpdateAcademicAbilityVO> academic;
+	UpdateInsuranceVO insurance;
 
 }

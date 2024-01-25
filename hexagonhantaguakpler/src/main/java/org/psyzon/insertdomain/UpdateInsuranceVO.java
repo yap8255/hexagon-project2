@@ -3,7 +3,7 @@ package org.psyzon.insertdomain;
 import lombok.Data;
 
 @Data
-public class InsertInsuranceVO {
+public class UpdateInsuranceVO {
 	
 	
 	private String m_number;
