@@ -7,6 +7,8 @@ import lombok.Data;
 @Data
 public class CareerVO {
 	
+	private int m_key;
+	
 
 	private String m_number;
 	private String m_comany_name;

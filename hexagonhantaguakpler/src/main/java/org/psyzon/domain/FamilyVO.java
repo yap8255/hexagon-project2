@@ -4,6 +4,7 @@ import lombok.Data;
 
 @Data
 public class FamilyVO {
+	private int m_key;
 	private String m_number;
 	private String relation;
 	private String f_name;

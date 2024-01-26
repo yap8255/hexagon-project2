@@ -13,5 +13,8 @@ public class UpdateDTO {
 	List<UpdateMiliVO> mili;
 	UpdateInformationVO information;
 	UpdateMemberListVO memberlist;
+	List<UpdateCareerVO> career;
+	List<UpdateFamilyVO> family;
+
 
 }

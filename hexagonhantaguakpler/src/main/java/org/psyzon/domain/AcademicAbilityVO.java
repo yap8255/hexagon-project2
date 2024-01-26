@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class AcademicAbilityVO {
-	String m_key;
+	int m_key;
 	String m_number;
 	String a_type;
 	int a_entrance_year;

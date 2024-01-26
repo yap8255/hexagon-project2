@@ -274,6 +274,43 @@ $( document ).ready( function() {
               }
           });
   });
+  $("#familyForm").submit(function (event) {
+	  event.preventDefault();
+	  var family = $("#familyForm").serialize();
+	     // 서버로 데이터를 전송
+      $.ajax({
+          type: "POST",
+          url: "/psyzon/updatefamily",
+          data: family,
+          success: function (data) {
+              // 서버 응답에 대한 처리
+              console.log(data);
+          },
+          error: function (error) {
+              // 오류 처리
+              console.error(error);
+          }
+      });
+});
+  
+  $("#careerForm").submit(function (event) {
+	  event.preventDefault();
+	  var career = $("#careerForm").serialize();
+	     // 서버로 데이터를 전송
+      $.ajax({
+          type: "POST",
+          url: "/psyzon/updatecareer",
+          data: career,
+          success: function (data) {
+              // 서버 응답에 대한 처리
+              console.log(data);
+          },
+          error: function (error) {
+              // 오류 처리
+              console.error(error);
+          }
+      });
+});
     	  
   
   // 폼이 제출되면 이벤트 핸들러 실행
@@ -337,6 +374,8 @@ $( document ).ready( function() {
       $("#paymentInfo").submit();
       $("#miliInfo").submit();
       $("#memberinfoForm").submit();
+      $("#familyForm").submit();
+      $("#careerForm").submit();
       
       
       
@@ -2344,13 +2383,17 @@ console.log('label click');
 
 						<ul class="clsDragItemSort ui-sortable"
 							style="border: 0px; cursor: pointer;">
-							<c:forEach var="MemberInfo" items="${MemberInfo.familyvo}">
+							<form:form modelAttribute="UpdateFamilyVO"
+								action="/psyzon/updatefamily" method="post" id="familyForm">
+							<c:forEach var="MemberInfo" items="${MemberInfo.familyvo}" varStatus="status">
+							<input type="hidden" name="family[${status.index}].m_number" value="${MemberInfo.m_number}">
+							<input type="hidden" name="family[${status.index}].m_key" value="${MemberInfo.m_key}">
 								<ul id="grpDepeIdx0" class="grpDepe">
 									<li class="w_24 con3_check"><label class="label_check"
 										for="grpDepeId0"><input type="checkbox"
 											name="grpDepeId" id="grpDepeId0" class="G3" value="1"></label></li>
 									<li class="con3" style="padding-left: 7px; width: 78px"><select
-										name="frmEmdpRela" id="frmEmdpRela0" class="G3">
+										name="family[${status.index}].relation" id="frmEmdpRela0" class="G3">
 											<option value="">선택</option>
 											<option value="배우자"
 												<c:if test="${MemberInfo.relation eq '배우자' }">selected</c:if>>배우자</option>
@@ -2383,51 +2426,52 @@ console.log('label click');
 											<option value="손녀"
 												<c:if test="${MemberInfo.relation eq '손녀' }">selected</c:if>>손녀</option>
 									</select></li>
-									<li class="w_64 con3"><input name="frmEmdpName"
+									<li class="w_64 con3"><input name="family[${status.index}].f_name"
 										id="frmEmdpName0" type="text" value="${MemberInfo.f_name}"
 										class="white G3" style="width: 60px;"></li>
 									<li class="con3" style="padding-left: 7px; width: 63px"><select
-										name="frmEmdpNati" id="frmEmdpNati0" class="G3">
+										name="family[${status.index}].f_type" id="frmEmdpNati0" class="G3">
 											<option value="">선택</option>
 											<option value="내국인"
 												<c:if test="${MemberInfo.f_type eq '내국인' }">selected</c:if>>내국인</option>
 											<option value="외국인">외국인</option>
 									</select></li>
 									<li class="w_135 con3"><div>
-											<input name="frmEmdpUnq1" id="frmEmdpUnq10" type="text"
+											<input name="family[${status.index}].f_resi_number" id="frmEmdpUnq10" type="text"
 												value="${MemberInfo.f_resi_number}" class="white G3"
 												style="width: 100px;" maxlength="15">
 										</div></li>
 									<li class="w_70 con3_check"><label class="label_check"
-										for="frmEmdpDisa0"><input name="frmEmdpDisa"
+										for="frmEmdpDisa0"><input name="family[${status.index}].f_handi"
 											id="frmEmdpDisa0" type="checkbox" value="1" class="G3"
 											<c:if test="${MemberInfo.f_handi eq 1}">checked=""</c:if>></label></li>
 									<li class="w_70 con3_check"><label class="label_check"
-										for="frmEmdpDedu0"><input name="frmEmdpDedu"
+										for="frmEmdpDedu0"><input name="family[${status.index}].f_per_de"
 											id="frmEmdpDedu0" type="checkbox" value="1" class="G3"
 											<c:if test="${MemberInfo.f_per_de eq 1}">checked=""</c:if>></label></li>
 									<li class="w_70 con3_check"><label class="label_check"
-										for="frmEmdpInsu0"><input name="frmEmdpInsu"
+										for="frmEmdpInsu0"><input name="family[${status.index}].f_hel_in"
 											id="frmEmdpInsu0" type="checkbox" value="1" class="G3"
 											<c:if test="${MemberInfo.f_hel_in eq 1}">checked=""</c:if>
 											style="height: 30px;"></label></li>
 									<li class="w_70 con3_check"><label
 										class="label_check c_on" for="frmEmdpLvTg0"><input
-											name="frmEmdpLvTg" id="frmEmdpLvTg0" type="checkbox"
+											name="family[${status.index}].f_stay_with" id="frmEmdpLvTg0" type="checkbox"
 											value="1" class="G3"
 											<c:if test="${MemberInfo.f_stay_with eq 1}">checked=""</c:if>></label></li>
 									<li class="w_60 tit con3_check"><label
 										class="label_check c_on" for="frmEmdpMtTx0"><input
-											name="frmEmdpMtTx" id="frmEmdpMtTx0" type="checkbox"
+											name="family[${status.index}].f_in_tax" id="frmEmdpMtTx0" type="checkbox"
 											value="1" class="G3"
 											<c:if test="${MemberInfo.f_in_tax eq 1}">checked=""</c:if>></label></li>
 									<!-- 2016-02-11 갑근세 -->
 									<li class="w_70 con3_check"><label class="label_check"
-										for="frmEmdpMtCh0"><input name="frmEmdpMtCh"
+										for="frmEmdpMtCh0"><input name="family[${status.index}].f_mul_child"
 											id="frmEmdpMtCh0" type="checkbox" value="1" class="G3"
 											<c:if test="${MemberInfo.f_mul_child eq 1}">checked=""</c:if>></label></li>
 								</ul>
 							</c:forEach>
+							</form:form>
 
 
 							<ul id="grpDepeIdx3" class="grpDepe">
@@ -2664,20 +2708,25 @@ console.log('label click');
 
 <ul class="clsDragItemSort ui-sortable" style="border: 0px; cursor: pointer;"> 
 
-<c:forEach var="MemberInfo" items="${MemberInfo.careervo}">
+<form:form modelAttribute="CareerVO"
+								action="/psyzon/updatecareer" method="post" id="careerForm">
+<c:forEach var="MemberInfo" items="${MemberInfo.careervo}" varStatus="status">
+     <input type="hidden" name="career[${status.index}].m_number" value="${MemberInfo.m_number}" >
+     <input type="hidden" name="career[${status.index}].m_key" value="${MemberInfo.m_key}" >
      <ul id="grpCrerIdx0" class="grpCrer"><!-- ### G5 0 ### -->  
      
         <li class="w_24 con3_check"><label class="label_check" for="grpCrerId0"><input type="checkbox" name="grpCrerId" id="grpCrerId0" class="G5"></label></li>
-        <li class="w_120 con3"><input name="frmEmcrCpNm" id="frmEmcrCpNm0" type="text" value="${MemberInfo.m_comany_name }" class="white G5" style="width:90%;"></li>
-        <li class="w_88 con3"><input name="frmEmcrJind" id="frmEmcrJind0" type="text" value="${MemberInfo.m_newdate }" class="white G5 frmCalendar c hasDatepicker" style="width:90%;" maxlength="10"></li>
-        <li class="w_88 con3"><input name="frmEmcrGind" id="frmEmcrGind0" type="text" value="${MemberInfo.m_byedate }" class="white G5 frmCalendar c hasDatepicker" style="width:90%;" maxlength="10"></li>
-        <li class="w_135 con3"><input name="frmEmcrPerd1" id="frmEmcrPerd10" type="text" value="${MemberInfo.m_period_year }" class="white G5 aling_r" style="width:30%;" maxlength="2">년 <input name="frmEmcrPerd2" id="frmEmcrPerd20" type="text" value="${MemberInfo.m_period_month }" class="white G5 aling_r" style="width:30%;" maxlength="2">개월</li>
-        <li class="w_92 con3"><input name="frmEmcrPstn" id="frmEmcrPstn0" type="text" value="${MemberInfo.m_final_class }" class="white G5" style="width:90%;"></li>
-        <li class="w_88 con3"><input name="frmEmcrDuty" id="frmEmcrDuty0" type="text" value="${MemberInfo.m_duty }" class="white G5" style="width:90%;"></li>
-        <li class="w_156 con3"><input name="frmEmcrPerc" id="frmEmcrPerc0" type="text" value="${MemberInfo.m_bye_why }" class="white G5" style="width:90%;"></li>
+        <li class="w_120 con3"><input name="career[${status.index}].m_comany_name" id="frmEmcrCpNm0" type="text" value="${MemberInfo.m_comany_name }" class="white G5" style="width:90%;"></li>
+        <li class="w_88 con3"><input name="career[${status.index}].m_newdate" id="frmEmcrJind0" type="text" value="${MemberInfo.m_newdate }" class="white G5 frmCalendar c hasDatepicker" style="width:90%;" maxlength="10"></li>
+        <li class="w_88 con3"><input name="career[${status.index}].m_byedate" id="frmEmcrGind0" type="text" value="${MemberInfo.m_byedate }" class="white G5 frmCalendar c hasDatepicker" style="width:90%;" maxlength="10"></li>
+        <li class="w_135 con3"><input name="career[${status.index}].m_period_year" id="frmEmcrPerd10" type="text" value="${MemberInfo.m_period_year }" class="white G5 aling_r" style="width:30%;" maxlength="2">년 <input name="frmEmcrPerd2" id="frmEmcrPerd20" type="text" value="${MemberInfo.m_period_month }" class="white G5 aling_r" style="width:30%;" maxlength="2">개월</li>
+        <li class="w_92 con3"><input name="career[${status.index}].m_final_class" id="frmEmcrPstn0" type="text" value="${MemberInfo.m_final_class }" class="white G5" style="width:90%;"></li>
+        <li class="w_88 con3"><input name="career[${status.index}].m_duty" id="frmEmcrDuty0" type="text" value="${MemberInfo.m_duty }" class="white G5" style="width:90%;"></li>
+        <li class="w_156 con3"><input name="career[${status.index}].m_bye_why" id="frmEmcrPerc0" type="text" value="${MemberInfo.m_bye_why }" class="white G5" style="width:90%;"></li>
      
      </ul>
       </c:forEach>
+      </form:form>
     
       <ul id="grpCrerIdx2" class="grpCrer"><!-- ### G5 2 ### -->
       

@@ -71,6 +71,25 @@ public class psyzonUpdateContoller {
 		
 	}
 	
+	@PostMapping("/updatecareer")
+	public String updatecareer(@ModelAttribute("UpdateDTO") UpdateDTO InsertDTO){
+		
+		 System.out.println("controller career" + InsertDTO.getCareer()); 
+		
+		
+		return "psyzon/insert";
+		
+	}
+	@PostMapping("/updatefamily")
+	public String updatefamily(@ModelAttribute("UpdateDTO") UpdateDTO InsertDTO){
+		
+		 System.out.println("controller family" + InsertDTO.getFamily()); 
+		
+		
+		return "psyzon/insert";
+		
+	}
+	
 	
 	
 	
