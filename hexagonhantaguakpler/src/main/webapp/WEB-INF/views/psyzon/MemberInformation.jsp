@@ -2434,7 +2434,7 @@ console.log('label click');
 											<option value="">선택</option>
 											<option value="내국인"
 												<c:if test="${MemberInfo.f_type eq '내국인' }">selected</c:if>>내국인</option>
-											<option value="외국인">외국인</option>
+											<option value="외국인" <c:if test="${MemberInfo.f_type eq '외국인' }">selected</c:if>>외국인</option>
 									</select></li>
 									<li class="w_135 con3"><div>
 											<input name="family[${status.index}].f_resi_number" id="frmEmdpUnq10" type="text"

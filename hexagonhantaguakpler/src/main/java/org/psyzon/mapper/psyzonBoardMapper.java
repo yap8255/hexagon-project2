@@ -12,6 +12,7 @@ import org.psyzon.domain.MemberInformationVO;
 import org.psyzon.domain.MemberListVO;
 import org.psyzon.domain.MiliVO;
 import org.psyzon.domain.PaymentVO;
+import org.psyzon.insertdomain.UpdateFamilyVO;
 import org.psyzon.insertdomain.UpdateMiliVO;
 
 @Mapper
@@ -56,6 +57,8 @@ public interface psyzonBoardMapper {
 	/*---------------------------------------Update-------------------------------------------------*/
 	
 	 public void UpdateMili(List<UpdateMiliVO> mili); 
-	
+	 
+	 public void UpdateFamily(List<UpdateFamilyVO> family); 
+	/* void UpdateFamily(Map<String, Object> paramMap); */
 
 }

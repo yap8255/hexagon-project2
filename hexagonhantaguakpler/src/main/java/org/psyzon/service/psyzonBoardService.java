@@ -3,8 +3,8 @@ package org.psyzon.service;
 import java.util.List;
 
 import org.psyzon.domain.EmploymentInfo_1DTO;
-import org.psyzon.domain.MiliVO;
 import org.psyzon.domain.psyzonBoardPageDTO;
+import org.psyzon.insertdomain.UpdateFamilyVO;
 import org.psyzon.insertdomain.UpdateMiliVO;
 
 public interface psyzonBoardService {
@@ -30,7 +30,9 @@ public interface psyzonBoardService {
 	public EmploymentInfo_1DTO EmploymentInfo_1DTO(String m_number);
 	
 	public void updateMiliList(List<UpdateMiliVO> miliList);
+
+	 public void updateFamilyList(List<UpdateFamilyVO> familyList); 
 	
-	
+	/* public void updateFamilyList(List<UpdateFamilyVO> familyList); */
 
 }

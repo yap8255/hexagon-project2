@@ -92,7 +92,7 @@ select * from Payment where m_number = #{m_number}
 
 
   <update id="UpdateMili" parameterType="java.util.List">
-    <foreach collection="list" item="item" separator=";">
+    <foreach collection="list" item="item" separator=";"  open="DECLARE BEGIN" close=";END;">
       UPDATE mili_service
       SET
         ms_class = #{item.ms_class, jdbcType=VARCHAR},
@@ -104,6 +104,26 @@ select * from Payment where m_number = #{m_number}
         ms_reason = #{item.ms_reason, jdbcType=VARCHAR}
       WHERE m_number = #{item.m_number, jdbcType=VARCHAR}
     </foreach>
+  </update>
+  
+  <update id="UpdateFamily" parameterType="java.util.List">
+  
+    <foreach collection="list" item="item" separator=";" open="DECLARE BEGIN" close=";END;">
+      UPDATE member_family
+      SET
+        relation = #{item.relation, jdbcType=VARCHAR},
+        f_name = #{item.f_name, jdbcType=VARCHAR},
+        f_type = #{item.f_type, jdbcType=VARCHAR},
+        f_resi_number = #{item.f_resi_number, jdbcType=VARCHAR},
+        f_handi = #{item.f_handi, jdbcType=INTEGER},
+        f_per_de = #{item.f_per_de, jdbcType=INTEGER},
+        f_hel_in = #{item.f_hel_in, jdbcType=INTEGER},
+        f_stay_with = #{item.f_stay_with, jdbcType=INTEGER},
+        f_in_tax = #{item.f_in_tax, jdbcType=INTEGER},
+        f_mul_child = #{item.f_mul_child, jdbcType=INTEGER}
+      WHERE m_key = #{item.m_key, jdbcType=INTEGER}
+    </foreach>
+  
   </update>
     
 

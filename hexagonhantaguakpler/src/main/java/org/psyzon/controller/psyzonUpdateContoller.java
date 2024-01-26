@@ -49,7 +49,7 @@ public class psyzonUpdateContoller {
 	@PostMapping("/updatemili")
 	public String updatemili(@ModelAttribute("UpdateDTO") UpdateDTO InsertDTO){
 		
-		 System.out.println("controller mili" + InsertDTO.getMili()); 
+		/* System.out.println("controller mili" + InsertDTO.getMili()); */ 
 		service.updateMiliList(InsertDTO.getMili());
 		
 		
@@ -74,7 +74,7 @@ public class psyzonUpdateContoller {
 	@PostMapping("/updatecareer")
 	public String updatecareer(@ModelAttribute("UpdateDTO") UpdateDTO InsertDTO){
 		
-		 System.out.println("controller career" + InsertDTO.getCareer()); 
+		/* System.out.println("controller career" + InsertDTO.getCareer()); */
 		
 		
 		return "psyzon/insert";
@@ -83,8 +83,8 @@ public class psyzonUpdateContoller {
 	@PostMapping("/updatefamily")
 	public String updatefamily(@ModelAttribute("UpdateDTO") UpdateDTO InsertDTO){
 		
-		 System.out.println("controller family" + InsertDTO.getFamily()); 
-		
+		/* System.out.println("controller family" + InsertDTO.getFamily()); */ 
+		service.updateFamilyList(InsertDTO.getFamily());
 		
 		return "psyzon/insert";
 		
