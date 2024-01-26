@@ -7,13 +7,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <select id="list" resultType="org.payzon.domain.PayStubListVO">
 
-select from 
+
 
 </select>
 
-
-
-
+<select id="payroll" resultType="org.payzon.domain.PayRollVO">
+SELECT * FROM PAYROLL;
+</select>
 
 
 </mapper>

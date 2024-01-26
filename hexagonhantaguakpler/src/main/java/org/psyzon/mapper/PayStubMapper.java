@@ -1,5 +1,8 @@
 package org.psyzon.mapper;
 
-public class PayStubMapper {
+import org.apache.ibatis.annotations.Mapper;
+
+@Mapper
+public interface PayStubMapper {
 
 }
