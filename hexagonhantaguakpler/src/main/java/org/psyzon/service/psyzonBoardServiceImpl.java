@@ -12,6 +12,7 @@ import org.psyzon.domain.MemberListVO;
 import org.psyzon.domain.MiliVO;
 import org.psyzon.domain.PaymentVO;
 import org.psyzon.domain.psyzonBoardPageDTO;
+import org.psyzon.insertdomain.UpdateMiliVO;
 import org.psyzon.mapper.psyzonBoardMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,6 +28,13 @@ public class psyzonBoardServiceImpl implements psyzonBoardService {
 	
 	@Setter(onMethod_ = @Autowired)
 	private psyzonBoardMapper mapper;
+	
+	
+
+    
+	
+
+
 	
 	
 	
@@ -102,15 +110,18 @@ public class psyzonBoardServiceImpl implements psyzonBoardService {
 		List<CareerVO> career =mapper.CareerVO(m_number);
 		List<MiliVO> mili=mapper.MiliVO(m_number);
 		List<PaymentVO> payment=mapper.PaymentVO(m_number);
-		
-		
+	
 		System.out.println("service" +academic);
-		
-		
-		
-		
-		
+	
 		return new EmploymentInfo_1DTO(academic,family,insurance,memberinfo,career,mili,payment);
 	}
+	
+	  @Override
+	    public void updateMiliList(List<UpdateMiliVO> miliList) {
+	        mapper.UpdateMili(miliList);
+	    }
+	
+
+	
 
 }

@@ -86,13 +86,26 @@ select * from Mili_service where m_number = #{m_number}
 <select id = "PaymentVO" resultType = "org.psyzon.domain.PaymentVO">
 select * from Payment where m_number = #{m_number}  
 </select>		
+<!-- ==================================select================================== -->
+
+<!-- ==================================update================================== -->
 
 
-
-<!-- <update id = "PaymentVO" resultType = "org.psyzon.domain.PaymentVO">
-  
-</update> -->		
-
+  <update id="UpdateMili" parameterType="java.util.List">
+    <foreach collection="list" item="item" separator=";">
+      UPDATE mili_service
+      SET
+        ms_class = #{item.ms_class, jdbcType=VARCHAR},
+        ms_group = #{item.ms_group, jdbcType=VARCHAR},
+        ms_start_date = #{item.ms_start_date, jdbcType=DATE},
+        ms_end_date = #{item.ms_end_date, jdbcType=DATE},
+        ms_final_class = #{item.ms_final_class, jdbcType=VARCHAR},
+        ms_army_kind = #{item.ms_army_kind, jdbcType=VARCHAR},
+        ms_reason = #{item.ms_reason, jdbcType=VARCHAR}
+      WHERE m_number = #{item.m_number, jdbcType=VARCHAR}
+    </foreach>
+  </update>
+    
 
 
 

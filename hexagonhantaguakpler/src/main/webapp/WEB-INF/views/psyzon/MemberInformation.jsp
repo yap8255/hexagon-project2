@@ -2715,6 +2715,7 @@ console.log('label click');
      <form:form modelAttribute="UpdateMiliVO" action="/psyzon/updatemili" method="post" id="miliInfo">
       <c:forEach var="MemberInfo" items="${MemberInfo.milivo}" varStatus = "status">
       <input type="hidden" name="mili[${status.index}].m_number" value="${MemberInfo.m_number}">
+      <input type="hidden" name="mili[${status.index}].m_key" value="1">
       <ul>
         <li class="w_105 con3" style="padding-left:30px; width:75px"><!-- <input name="frmEmmlType" id="frmEmmlType" type='text' value=""  class="white G6"  style='width:90%;'> -->
           <select name="mili[${status.index}].ms_class" id="frmEmmlType" class="G6" style="width:60px">

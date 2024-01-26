@@ -1,7 +1,6 @@
 package org.psyzon.controller;
 
 import org.psyzon.insertdomain.UpdateDTO;
-import org.psyzon.insertdomain.UpdateMemberListVO;
 import org.psyzon.service.psyzonBoardService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -23,7 +22,7 @@ public class psyzonUpdateContoller {
 	public String insertacademic(@ModelAttribute("UpdateDTO") UpdateDTO InsertDTO){
 		
 		
-		 System.out.println("controller academic" + InsertDTO.getAcademic()); 
+		/* System.out.println("controller academic" + InsertDTO.getAcademic()); */
 
 		return "psyzon/insert";
 		
@@ -31,7 +30,7 @@ public class psyzonUpdateContoller {
 	@PostMapping("/updateinsurance")
 	public String insertinsurance(@ModelAttribute("UpdateDTO") UpdateDTO InsertDTO){
 		
-		 System.out.println("controller insurance" + InsertDTO.getInsurance()); 
+		/* System.out.println("controller insurance" + InsertDTO.getInsurance()); */ 
 		
 		
 		return "psyzon/insert";
@@ -41,7 +40,7 @@ public class psyzonUpdateContoller {
 	@PostMapping("/updatepayment")
 	public String updatepayment(@ModelAttribute("UpdateDTO") UpdateDTO InsertDTO){
 		
-		 System.out.println("controller PAYMENT" + InsertDTO.getPayment()); 
+		/* System.out.println("controller PAYMENT" + InsertDTO.getPayment()); */ 
 		
 		
 		return "psyzon/insert";
@@ -51,6 +50,7 @@ public class psyzonUpdateContoller {
 	public String updatemili(@ModelAttribute("UpdateDTO") UpdateDTO InsertDTO){
 		
 		 System.out.println("controller mili" + InsertDTO.getMili()); 
+		service.updateMiliList(InsertDTO.getMili());
 		
 		
 		return "psyzon/insert";
@@ -59,12 +59,12 @@ public class psyzonUpdateContoller {
 	@PostMapping("/updatememberinfo")
 	public String updatememberinfo(@ModelAttribute("UpdateDTO") UpdateDTO InsertDTO){
 		
-		System.out.println("controller memberinfo1" + InsertDTO.getInformation());
+		/* System.out.println("controller memberinfo1" + InsertDTO.getInformation()); */
 		String memberListPhone  = InsertDTO.getInformation().getL_phone1().concat("-").concat(InsertDTO.getInformation().getL_phone2()).concat("-").concat(InsertDTO.getInformation().getL_phone3());
 		
 		InsertDTO.getMemberlist().setM_phone(memberListPhone);;
 		
-		System.out.println("controller memberinfo2" + InsertDTO.getMemberlist());
+		/* System.out.println("controller memberinfo2" + InsertDTO.getMemberlist()); */
 		
 		
 		return "psyzon/insert";
