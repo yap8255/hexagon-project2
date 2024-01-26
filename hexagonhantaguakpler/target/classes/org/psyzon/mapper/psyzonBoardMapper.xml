@@ -126,7 +126,40 @@ select * from Payment where m_number = #{m_number}
   
   </update>
     
-
+<update id="UpdateMemberInfo"
+		parameterType="org.psyzon.insertdomain.UpdateMemberListVO">
+		update member_list set 
+		m_type = #{m_type},
+	m_newdate = #{m_newdate},
+	m_number = #{m_number},
+	m_name = #{m_name},
+	m_class = #{m_class},
+	m_position = #{m_position},
+	m_resi_number = #{m_resi_number},
+	m_phone = #{m_phone},
+	m_mail = #{m_mail},
+	m_byedate = #{m_byedate} where m_number = #{m_number} 
+	</update>
+<update id="UpdateInformation"
+		parameterType="org.psyzon.insertdomain.UpdateInformationVO">
+		update INFORMATION_LIST set 
+		m_number = #{m_number},
+	l_nameeng = #{l_nameeng},
+	l_foreign = #{l_foreign},
+	l_address = #{l_address},
+	l_postnumber = #{l_postnumber},
+	l_tellephone1 = #{l_tellephone1},
+	l_tellephone2 = #{l_tellephone2},
+	l_tellephone3 = #{l_tellephone3},
+	l_phone1 = #{l_phone1},
+	l_phone2 = #{l_phone2},
+	l_phone3 = #{l_phone3},
+	l_sns = #{l_sns},
+	l_etc = #{l_etc}
+	 where m_number = #{m_number} 
+	</update>
+	
+	
 
 
 

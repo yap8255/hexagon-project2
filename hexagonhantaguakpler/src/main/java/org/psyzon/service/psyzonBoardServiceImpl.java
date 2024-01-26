@@ -1,8 +1,6 @@
 package org.psyzon.service;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.psyzon.domain.AcademicAbilityVO;
 import org.psyzon.domain.CareerVO;
@@ -15,6 +13,8 @@ import org.psyzon.domain.MiliVO;
 import org.psyzon.domain.PaymentVO;
 import org.psyzon.domain.psyzonBoardPageDTO;
 import org.psyzon.insertdomain.UpdateFamilyVO;
+import org.psyzon.insertdomain.UpdateInformationVO;
+import org.psyzon.insertdomain.UpdateMemberListVO;
 import org.psyzon.insertdomain.UpdateMiliVO;
 import org.psyzon.mapper.psyzonBoardMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -127,6 +127,16 @@ public class psyzonBoardServiceImpl implements psyzonBoardService {
 	  public void updateFamilyList(List<UpdateFamilyVO> familyList) {
 
 		   mapper.UpdateFamily(familyList);
+	  }
+	  
+	  @Override
+	  public void updateMemberList(UpdateMemberListVO memberlist) {
+		mapper.UpdateMemberInfo(memberlist);  
+	  }
+	  
+	  @Override
+	  public void UpdateInformation(UpdateInformationVO information) {
+		  mapper.UpdateInformation(information);
 	  }
 	
 

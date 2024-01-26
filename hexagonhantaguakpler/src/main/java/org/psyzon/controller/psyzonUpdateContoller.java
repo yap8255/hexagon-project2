@@ -59,12 +59,15 @@ public class psyzonUpdateContoller {
 	@PostMapping("/updatememberinfo")
 	public String updatememberinfo(@ModelAttribute("UpdateDTO") UpdateDTO InsertDTO){
 		
-		/* System.out.println("controller memberinfo1" + InsertDTO.getInformation()); */
+		 System.out.println("controller memberinfo1" + InsertDTO.getInformation()); 
 		String memberListPhone  = InsertDTO.getInformation().getL_phone1().concat("-").concat(InsertDTO.getInformation().getL_phone2()).concat("-").concat(InsertDTO.getInformation().getL_phone3());
 		
-		InsertDTO.getMemberlist().setM_phone(memberListPhone);;
+		InsertDTO.getMemberlist().setM_phone(memberListPhone);
+		 System.out.println("controller memberinfo2" + InsertDTO.getMemberlist());
 		
-		/* System.out.println("controller memberinfo2" + InsertDTO.getMemberlist()); */
+		 service.updateMemberList(InsertDTO.getMemberlist()); 
+		 service.UpdateInformation(InsertDTO.getInformation());
+		 
 		
 		
 		return "psyzon/insert";

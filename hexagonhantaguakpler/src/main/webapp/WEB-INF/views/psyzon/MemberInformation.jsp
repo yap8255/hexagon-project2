@@ -1832,9 +1832,9 @@ console.log('label click');
 									<option value="019"
 										<c:if test="${MemberInfo.memberinfovo.l_phone1 eq '019'}">selected=""</c:if>>019</option>
 							</select>&nbsp; - <input name="information.l_phone2" id="frmEmplPho2" type="text"
-								value="1111" class="white c" style="width: 40px;" maxlength="4">
+								value="${MemberInfo.memberinfovo.l_phone2}" class="white c" style="width: 40px;" maxlength="4">
 								- <input name="information.l_phone3" id="frmEmplPho3" type="text"
-								value="0000" class="white c" style="width: 40px;" maxlength="4">
+								value="${MemberInfo.memberinfovo.l_phone3}" class="white c" style="width: 40px;" maxlength="4">
 							</li>
 						</ul>
 						<ul>

@@ -5,6 +5,8 @@ import java.util.List;
 import org.psyzon.domain.EmploymentInfo_1DTO;
 import org.psyzon.domain.psyzonBoardPageDTO;
 import org.psyzon.insertdomain.UpdateFamilyVO;
+import org.psyzon.insertdomain.UpdateInformationVO;
+import org.psyzon.insertdomain.UpdateMemberListVO;
 import org.psyzon.insertdomain.UpdateMiliVO;
 
 public interface psyzonBoardService {
@@ -33,6 +35,8 @@ public interface psyzonBoardService {
 
 	 public void updateFamilyList(List<UpdateFamilyVO> familyList); 
 	
-	/* public void updateFamilyList(List<UpdateFamilyVO> familyList); */
+	public void updateMemberList(UpdateMemberListVO memberlist);
+	
+	public void UpdateInformation(UpdateInformationVO information);
 
 }
