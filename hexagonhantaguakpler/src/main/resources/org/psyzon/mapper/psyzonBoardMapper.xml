@@ -89,4 +89,13 @@ select * from Payment where m_number = #{m_number}
 
 
 
+<!-- <update id = "PaymentVO" resultType = "org.psyzon.domain.PaymentVO">
+  
+</update> -->		
+
+
+
+
+
+
 </mapper>

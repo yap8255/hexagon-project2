@@ -220,6 +220,24 @@ $( document ).ready( function() {
   }
   
   /* ------------------------------------------------------- */
+  $("#memberinfoForm").submit(function (event) {
+    	  event.preventDefault();
+    	  var memberinfo = $("#memberinfoForm").serialize();
+    	     // 서버로 데이터를 전송
+          $.ajax({
+              type: "POST",
+              url: "/psyzon/updatememberinfo",
+              data: memberinfo,
+              success: function (data) {
+                  // 서버 응답에 대한 처리
+                  console.log(data);
+              },
+              error: function (error) {
+                  // 오류 처리
+                  console.error(error);
+              }
+          });
+  });
   $("#insuranceInfo").submit(function (event) {
     	  event.preventDefault();
     	  var insurance = $("#insuranceInfo").serialize();
@@ -318,6 +336,7 @@ $( document ).ready( function() {
       $("#insuranceInfo").submit();
       $("#paymentInfo").submit();
       $("#miliInfo").submit();
+      $("#memberinfoForm").submit();
       
       
       
@@ -1552,14 +1571,18 @@ console.log('label click');
 					<div id="table1">
 						<!-- //divBsic -->
 						<p class="caption"></p>
+						<form:form modelAttribute="UpdateDTO"	action="/psyzon/updatememberinfo" method="post" id="memberinfoForm">
 						<ul>
 							<li class="titLeft p_l28" style="width: 77px;"><strong>사원번호</strong></li>
-							<li class="w_275 con2"><input name="frmEmplNmbr"
+							
+							<li class="w_275 con2">
+							<input type="hidden" name ="memberlist.m_number" value="${MemberInfo.memberinfovo.m_number}">
+							<input name="information.m_number"
 								id="frmEmplNmbr" type="text"
 								value="${MemberInfo.memberinfovo.m_number}" class="white"></li>
 							<li class="titLeft p_l15" style="width: 90px;"><font
 								class="c_red">*</font> 고용형태</li>
-							<li class="w_276 con2"><select name="frmEmplEmpl"
+							<li class="w_276 con2"><select name="memberlist.m_type"
 								id="frmEmplEmpl">
 									<option value="">선택해주세요.</option>
 									<option value="정규직"
@@ -1579,11 +1602,11 @@ console.log('label click');
 						<ul>
 							<li class="titLeft p_l15" style="width: 90px;"><font
 								class="c_red">*</font> 성명(한글)</li>
-							<li class="w_275 con2"><input name="frmEmplName"
+							<li class="w_275 con2"><input name="memberlist.m_name"
 								id="frmEmplName" type="text"
 								value="${MemberInfo.memberinfovo.m_name}" class="white"></li>
 							<li class="titLeft p_l28" style="width: 77px;">성명(영문)</li>
-							<li class="w_276 con2"><input name="frmEmplNam2"
+							<li class="w_276 con2"><input name="information.l_nameeng"
 								id="frmEmplNam2" type="text"
 								value="${MemberInfo.memberinfovo.l_nameeng}" class="white"></li>
 						</ul>
@@ -1591,34 +1614,34 @@ console.log('label click');
 							<li class="titLeft p_l15" style="width: 90px;"><font
 								class="c_red">*</font> 입사일</li>
 							<li class="w_275 con2"><input id="frmEmplJndt"
-								name="frmEmplJndt" type="text"
+								name="memberlist.m_newdate" type="text"
 								value="${MemberInfo.memberinfovo.m_newdate}"
 								class="white frmCalendar hasDatepicker" maxlength="10"
 								style="width: 200px;"></li>
 							<li class="titLeft p_l28" style="width: 77px;">퇴사일</li>
 							<li class="w_276 con2"><input id="frmEmplQtdt"
-								name="frmEmplQtdt" type="text"
+								name="memberlist.m_byedate" type="text"
 								value="${MemberInfo.memberinfovo.m_byedate}" class="white"
 								maxlength="10" style="width: 200px;" readonly=""></li>
 						</ul>
 						<ul>
 							<li class="titLeft p_l28" style="width: 77px;">부서</li>
-							<li class="w_275 con2"><select name="frmDprtCode"
+							<li class="w_275 con2"><select name="memberlist.m_class"
 								id="frmDprtCode" style="float: left;";="">
 									<option value="">선택해주세요.</option>
-									<option value="007"
+									<option value="사장실"
 										<c:if test="${MemberInfo.memberinfovo.m_class eq '사장실'}">selected=""</c:if>>사장실</option>
-									<option value="003"
+									<option value="개발팀"
 										<c:if test="${MemberInfo.memberinfovo.m_class eq '개발팀'}">selected=""</c:if>>개발팀</option>
-									<option value="005"
+									<option value="콘텐츠팀"
 										<c:if test="${MemberInfo.memberinfovo.m_class eq '콘텐츠팀'}">selected=""</c:if>>콘텐츠팀</option>
-									<option value="004"
+									<option value="업무지원팀"
 										<c:if test="${MemberInfo.memberinfovo.m_class eq '업무지원팀'}">selected=""</c:if>>업무지원팀</option>
-									<option value="001"
+									<option value="디자인팀"
 										<c:if test="${MemberInfo.memberinfovo.m_class eq '디자인팀'}">selected=""</c:if>>디자인팀</option>
-									<option value="006"
+									<option value="관리팀"
 										<c:if test="${MemberInfo.memberinfovo.m_class eq '관리팀'}">selected=""</c:if>>관리팀</option>
-									<option value="002"
+									<option value="기획전략팀"
 										<c:if test="${MemberInfo.memberinfovo.m_class eq '기획전략팀'}">selected=""</c:if>>기획전략팀</option>
 							</select>
 								<div class="img">
@@ -1628,26 +1651,26 @@ console.log('label click');
 										width="42px" height="20px" alt="부서명 관리" title="부서명 관리"></span>
 								</div></li>
 							<li class="titLeft p_l28" style="width: 77px;">직위</li>
-							<li class="w_276 con2"><select name="frmPstnCode"
+							<li class="w_276 con2"><select name="memberlist.m_position"
 								id="frmPstnCode" style="float: left;">
 									<option value="">선택해주세요.</option>
-									<option value="02"
+									<option value="이사"
 										<c:if test="${MemberInfo.memberinfovo.m_position eq '이사'}">selected=""</c:if>>이사</option>
-									<option value="04"
+									<option value="차장"
 										<c:if test="${MemberInfo.memberinfovo.m_position eq '차장'}">selected=""</c:if>>차장</option>
-									<option value="01"
+									<option value="사장"
 										<c:if test="${MemberInfo.memberinfovo.m_position eq '사장'}">selected=""</c:if>>사장</option>
-									<option value="03"
+									<option value="부장"
 										<c:if test="${MemberInfo.memberinfovo.m_position eq '부장'}">selected=""</c:if>>부장</option>
-									<option value="08"
+									<option value="과장"
 										<c:if test="${MemberInfo.memberinfovo.m_position eq '과장'}">selected=""</c:if>>과장</option>
-									<option value="05"
+									<option value="대리"
 										<c:if test="${MemberInfo.memberinfovo.m_position eq '대리'}">selected=""</c:if>>대리</option>
-									<option value="06"
+									<option value="주임"
 										<c:if test="${MemberInfo.memberinfovo.m_position eq '주임'}">selected=""</c:if>>주임</option>
-									<option value="07"
+									<option value="사원"
 										<c:if test="${MemberInfo.memberinfovo.m_position eq '사원'}">selected=""</c:if>>사원</option>
-									<option value="09"
+									<option value="실장"
 										<c:if test="${MemberInfo.memberinfovo.m_position eq '실장'}">selected=""</c:if>>실장</option>
 							</select>
 								<div class="img">
@@ -1659,17 +1682,17 @@ console.log('label click');
 						</ul>
 						<ul class="b_none">
 							<li class="titLeft p_l28" style="width: 77px;">내/외국인</li>
-							<li class="w_275 con2"><select name="frmEmplKorB"
+							<li class="w_275 con2"><select name="information.l_foreign"
 								id="frmEmplKorB">
 									<option value=""
 										<c:if test="${MemberInfo.memberinfovo.l_foreign eq ''}">selected=""</c:if>>선택해주세요.</option>
-									<option value="1"
+									<option value="내국인"
 										<c:if test="${MemberInfo.memberinfovo.l_foreign eq '내국인'}">selected=""</c:if>>내국인</option>
-									<option value="0"
+									<option value="외국인"
 										<c:if test="${MemberInfo.memberinfovo.l_foreign eq '외국인'}">selected=""</c:if>>외국인</option>
 							</select></li>
 							<li class="titLeft p_l28" style="width: 77px;">주민번호</li>
-							<li class="w_276 con2"><input name="frmEmplUnq1"
+							<li class="w_276 con2"><input name="memberlist.m_resi_number"
 								id="frmEmplUnq1" type="text"
 								value="${MemberInfo.memberinfovo.m_resi_number}" class="white"
 								style="width: 100px;" maxlength="20"></li>
@@ -1682,12 +1705,12 @@ console.log('label click');
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>-->
 								<script src="//cdn.poesis.kr/post/search.min.js"></script> <!-- "검색" 단추를 누르면 팝업 레이어가 열리도록 설정한다 -->
 								<script> $(function() { $("#postcodify_search_button").postcodifyPopUp(); }); </script>
-								<input name="frmEmplPos1" id="frmEmplPos1" type="text"
+								<input name="information.l_postnumber" id="frmEmplPos1" type="text"
 								value="${MemberInfo.memberinfovo.l_postnumber}"
 								class="postcodify_postcode5 white" style="width: 50px;"
 								maxlength="5"><input name="btnFindZipCode"
 								id="postcodify_search_button" type="button" value="우편번호"
-								class="btn"> <input name="frmEmplAdd1" id="frmEmplAdd1"
+								class="btn"> <input name="information.l_address" id="frmEmplAdd1"
 								type="text" value="${MemberInfo.memberinfovo.l_address}"
 								class="postcodify_address white" style="width: 469px;">
 								<!--
@@ -1697,7 +1720,7 @@ console.log('label click');
 						</ul>
 						<ul>
 							<li class="tit_s p_l28" style="width: 77px;">전화번호</li>
-							<li class="w_275 con2"><select name="frmEmplTel1"
+							<li class="w_275 con2"><select name="information.l_tellephone1"
 								id="frmEmplTel1">
 									<option value="">선택</option>
 									<option value="00"
@@ -1746,14 +1769,14 @@ console.log('label click');
 										<c:if test="${MemberInfo.memberinfovo.l_tellephone1 eq '055'}">selected=""</c:if>>경남(055)</option>
 									<option value="064"
 										<c:if test="${MemberInfo.memberinfovo.l_tellephone1 eq '064'}">selected=""</c:if>>제주(064)</option>
-							</select>&nbsp; - <input name="frmEmplTel2" id="frmEmplTel2" type="text"
+							</select>&nbsp; - <input name="information.l_tellephone2" id="frmEmplTel2" type="text"
 								value="${MemberInfo.memberinfovo.l_tellephone2}" class="white c"
 								style="width: 40px;" maxlength="4"> - <input
-								name="frmEmplTel3" id="frmEmplTel3" type="text"
+								name="information.l_tellephone3" id="frmEmplTel3" type="text"
 								value="${MemberInfo.memberinfovo.l_tellephone3}" class="white c"
 								style="width: 40px;" maxlength="4"></li>
 							<li class="tit_s p_l28" style="width: 77px;">휴대폰</li>
-							<li class="w_276 con2"><select name="frmEmplPho1"
+							<li class="w_276 con2"><select name="information.l_phone1"
 								id="frmEmplPho1">
 									<option value=""
 										<c:if test="${MemberInfo.memberinfovo.l_phone1 eq ''}">selected=""</c:if>>선택</option>
@@ -1769,30 +1792,29 @@ console.log('label click');
 										<c:if test="${MemberInfo.memberinfovo.l_phone1 eq '018'}">selected=""</c:if>>018</option>
 									<option value="019"
 										<c:if test="${MemberInfo.memberinfovo.l_phone1 eq '019'}">selected=""</c:if>>019</option>
-							</select>&nbsp; - <input name="frmEmplPho2" id="frmEmplPho2" type="text"
+							</select>&nbsp; - <input name="information.l_phone2" id="frmEmplPho2" type="text"
 								value="1111" class="white c" style="width: 40px;" maxlength="4">
-								- <input name="frmEmplPho3" id="frmEmplPho3" type="text"
+								- <input name="information.l_phone3" id="frmEmplPho3" type="text"
 								value="0000" class="white c" style="width: 40px;" maxlength="4">
 							</li>
 						</ul>
 						<ul>
 							<li class="tit_s p_l28" style="width: 77px;">이메일</li>
-							<li class="w_275 con2"><input name="frmEmplMail"
+							<li class="w_275 con2"><input name="memberlist.m_mail"
 								id="frmEmplMail" type="text"
 								value="${MemberInfo.memberinfovo.m_mail}" class="white"></li>
 							<li class="tit_s p_l28" style="width: 77px;">SNS</li>
-							<li class="w_276 con2"><input name="frmEmplSnsA"
+							<li class="w_276 con2"><input name="information.l_sns"
 								id="frmEmplSnsA" type="text"
 								value="${MemberInfo.memberinfovo.l_sns}" class="white"></li>
 						</ul>
 						<ul>
 							<li class="tit_s p_l28" style="width: 77px; height: 60px;">기타사항</li>
 							<li class="w_670 con2" style="height: 60px;"><textarea
-									name="frmEmplMemo" id="frmEmplMemo"
+									name="information.l_etc" id="frmEmplMemo"
 									style="width: 660px; min-height: 50px; padding: 4px; font-family: 'Nanum Gothic', 돋움, Dotum; font-size: 12px;"
 									maxlength="150"></textarea></li>
-						</ul>
-
+						</ul></form:form>
 					</div>
 					<!-- //divBsic// -->
 				</ul>
@@ -2504,8 +2526,7 @@ console.log('label click');
 						<ul class="clsDragItemSort ui-sortable"
 							style="border: 0px; cursor: pointer;">
 
-							<form:form modelAttribute="UpdateAcademicAbilityVO"
-								action="/psyzon/updateacademic" method="post" id="academicForm">
+							<form:form modelAttribute="UpdateAcademicAbilityVO"	action="/psyzon/updateacademic" method="post" id="academicForm">
 								
 								<c:forEach var="MemberInfo"
 									items="${MemberInfo.academicabilityvo}" varStatus="status">
@@ -2642,6 +2663,7 @@ console.log('label click');
       </ul>
 
 <ul class="clsDragItemSort ui-sortable" style="border: 0px; cursor: pointer;"> 
+
 <c:forEach var="MemberInfo" items="${MemberInfo.careervo}">
      <ul id="grpCrerIdx0" class="grpCrer"><!-- ### G5 0 ### -->  
      
@@ -2690,33 +2712,33 @@ console.log('label click');
         <li class="w_100 tit">병과</li>
         <li class="tit" style="width:217px;">미필사유</li>
       </ul>
-      <form:form modelAttribute="UpdateMiliVO" action="/psyzon/updatemili" method="post" id="miliInfo">
+     <form:form modelAttribute="UpdateMiliVO" action="/psyzon/updatemili" method="post" id="miliInfo">
       <c:forEach var="MemberInfo" items="${MemberInfo.milivo}" varStatus = "status">
       <input type="hidden" name="mili[${status.index}].m_number" value="${MemberInfo.m_number}">
       <ul>
         <li class="w_105 con3" style="padding-left:30px; width:75px"><!-- <input name="frmEmmlType" id="frmEmmlType" type='text' value=""  class="white G6"  style='width:90%;'> -->
-          <select name="frmEmmlType" id="frmEmmlType" class="G6" style="width:60px">
-            <option value=""<c:if test="${MemberInfo.ms_class eq '선택' }">selected</c:if>>선택</option>
-            <option value="y"<c:if test="${MemberInfo.ms_class eq '군필' }">selected</c:if>>군필</option>
-            <option value="n"<c:if test="${MemberInfo.ms_class eq '미필' }">selected</c:if>>미필</option>
+          <select name="mili[${status.index}].ms_class" id="frmEmmlType" class="G6" style="width:60px">
+            <option value="선택"<c:if test="${MemberInfo.ms_class eq '선택' }">selected</c:if>>선택</option>
+            <option value="군필"<c:if test="${MemberInfo.ms_class eq '군필' }">selected</c:if>>군필</option>
+            <option value="미필"<c:if test="${MemberInfo.ms_class eq '미필' }">selected</c:if>>미필</option>
           </select>
         </li>
         <li class="con3" style="padding-left:7px; width:63px;">
-          <select name="frmEmmlMltr" id="frmEmmlMltr" class="G6">
+          <select name="mili[${status.index}].ms_group" id="frmEmmlMltr" class="G6">
             <option value="">선택</option>
-	<option value="육군" <c:if test="${MemberInfo.ms_group eq '육군' }">selected</c:if>>육군</option>
-	<option value="해군"<c:if test="${MemberInfo.ms_group eq '해군' }">selected</c:if>>해군</option>
-	<option value="공군"<c:if test="${MemberInfo.ms_group eq '공군' }">selected</c:if>>공군</option>
-	<option value="상비군"<c:if test="${MemberInfo.ms_group eq '상비군' }">selected</c:if>>상비군</option>
-	<option value="면제"<c:if test="${MemberInfo.ms_group eq '면제' }">selected</c:if>>면제</option>
-	<option value="기타"<c:if test="${MemberInfo.ms_group eq '기타' }">selected</c:if>>기타</option>
+   <option value="육군" <c:if test="${MemberInfo.ms_group eq '육군' }">selected</c:if>>육군</option>
+   <option value="해군"<c:if test="${MemberInfo.ms_group eq '해군' }">selected</c:if>>해군</option>
+   <option value="공군"<c:if test="${MemberInfo.ms_group eq '공군' }">selected</c:if>>공군</option>
+   <option value="상비군"<c:if test="${MemberInfo.ms_group eq '상비군' }">selected</c:if>>상비군</option>
+   <option value="면제"<c:if test="${MemberInfo.ms_group eq '면제' }">selected</c:if>>면제</option>
+   <option value="기타"<c:if test="${MemberInfo.ms_group eq '기타' }">selected</c:if>>기타</option>
           </select>
         </li>
-        <li class="w_100 con3"><input name="frmEmmlSttD" id="frmEmmlSttD" type="text" value="${MemberInfo.ms_start_date }" class="white G6 frmCalendar c hasDatepicker" style="width:90%;" maxlength="10"></li>
-        <li class="w_100 con3"><input name="frmEmmlEndD" id="frmEmmlEndD" type="text" value="${MemberInfo.ms_end_date }" class="white G6 frmCalendar c hasDatepicker" style="width:90%;" maxlength="10"></li>
-        <li class="w_100 con3"><input name="frmEmmlClss" id="frmEmmlClss" type="text" value="${MemberInfo.ms_final_class }" class="white G6" style="width:90%;"></li>
-        <li class="w_100 con3"><input name="frmEmmlSper" id="frmEmmlSper" type="text" value="${MemberInfo.ms_army_kind }" class="white G6" style="width:90%;"></li>
-        <li class="con3" style="width:217px;"><input name="frmEmmlUfns" id="frmEmmlUfns" type="text" value="${MemberInfo.ms_reason }" class="white G6" style="width:90%;"></li>
+        <li class="w_100 con3"><input name="mili[${status.index}].ms_start_date" id="frmEmmlSttD" type="text" value="${MemberInfo.ms_start_date }" class="white G6 frmCalendar c hasDatepicker" style="width:90%;" maxlength="10"></li>
+        <li class="w_100 con3"><input name="mili[${status.index}].ms_end_date" id="frmEmmlEndD" type="text" value="${MemberInfo.ms_end_date }" class="white G6 frmCalendar c hasDatepicker" style="width:90%;" maxlength="10"></li>
+        <li class="w_100 con3"><input name="mili[${status.index}].ms_final_class" id="frmEmmlClss" type="text" value="${MemberInfo.ms_final_class }" class="white G6" style="width:90%;"></li>
+        <li class="w_100 con3"><input name="mili[${status.index}].ms_army_kind" id="frmEmmlSper" type="text" value="${MemberInfo.ms_army_kind }" class="white G6" style="width:90%;"></li>
+        <li class="con3" style="width:217px;"><input name="mili[${status.index}].ms_reason" id="frmEmmlUfns" type="text" value="${MemberInfo.ms_reason }" class="white G6" style="width:90%;"></li>
       </ul>
       </c:forEach>
       </form:form>

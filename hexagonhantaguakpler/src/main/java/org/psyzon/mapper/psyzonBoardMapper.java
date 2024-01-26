@@ -51,5 +51,10 @@ public interface psyzonBoardMapper {
 
 	public List<PaymentVO> PaymentVO(@Param("m_number") String m_number);
 	
+	/*-----------------------------------List----------------------------------------------------*/
+	/*---------------------------------------Update-------------------------------------------------*/
+	
+	/* public void UpdateMili(MiliVO milivo); */
+	
 
 }
