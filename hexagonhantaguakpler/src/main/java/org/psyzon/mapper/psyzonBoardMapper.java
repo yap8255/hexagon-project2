@@ -12,14 +12,14 @@ import org.psyzon.domain.MemberInformationVO;
 import org.psyzon.domain.MemberListVO;
 import org.psyzon.domain.MiliVO;
 import org.psyzon.domain.PaymentVO;
-import org.psyzon.insertdomain.UpdateAcademicAbilityVO;
-import org.psyzon.insertdomain.UpdateCareerVO;
-import org.psyzon.insertdomain.UpdateFamilyVO;
-import org.psyzon.insertdomain.UpdateInformationVO;
-import org.psyzon.insertdomain.UpdateInsuranceVO;
-import org.psyzon.insertdomain.UpdateMemberListVO;
-import org.psyzon.insertdomain.UpdateMiliVO;
-import org.psyzon.insertdomain.UpdatePaymentVO;
+import org.psyzon.updatedomain.UpdateAcademicAbilityVO;
+import org.psyzon.updatedomain.UpdateCareerVO;
+import org.psyzon.updatedomain.UpdateFamilyVO;
+import org.psyzon.updatedomain.UpdateInformationVO;
+import org.psyzon.updatedomain.UpdateInsuranceVO;
+import org.psyzon.updatedomain.UpdateMemberListVO;
+import org.psyzon.updatedomain.UpdateMiliVO;
+import org.psyzon.updatedomain.UpdatePaymentVO;
 
 @Mapper
 public interface psyzonBoardMapper {

@@ -1,9 +1,9 @@
 package org.psyzon.controller;
 
 import org.psyzon.domain.EmploymentInfo_1DTO;
-import org.psyzon.insertdomain.UpdateDTO;
-import org.psyzon.insertdomain.UpdateInsuranceVO;
 import org.psyzon.service.psyzonBoardService;
+import org.psyzon.updatedomain.UpdateDTO;
+import org.psyzon.updatedomain.UpdateInsuranceVO;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,6 +28,7 @@ public class psyzonBoardContoller {
 		  
 		
 		model.addAttribute("TotalPage",service.totalList(pageNum));
+		
 		model.addAttribute("WorkCount",service.WorkCount());	
 		model.addAttribute("WorkCount2",service.WorkCount2());	
 		model.addAttribute("TypeCount",service.TypeCount());
@@ -44,6 +45,7 @@ public class psyzonBoardContoller {
 		EmploymentInfo_1DTO test = service.EmploymentInfo_1DTO(m_number);
 		
 		model.addAttribute("MemberInfo",test);
+		model.addAttribute("M_number", m_number);
 		
 		
 		

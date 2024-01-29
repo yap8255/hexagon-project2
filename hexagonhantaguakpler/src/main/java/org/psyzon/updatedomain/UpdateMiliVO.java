@@ -1,4 +1,4 @@
-package org.psyzon.insertdomain;
+package org.psyzon.updatedomain;
 
 import java.sql.Date;
 

@@ -147,7 +147,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</update>
 
 	<update id="UpdateMemberInfo"
-		parameterType="org.psyzon.insertdomain.UpdateMemberListVO">
+		parameterType="org.psyzon.updatedomain.UpdateMemberListVO">
 		update member_list set
 		m_type = #{m_type},
 		m_newdate = #{m_newdate},
@@ -161,7 +161,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		m_byedate = #{m_byedate} where m_number = #{m_number}
 	</update>
 	<update id="UpdateInformation"
-		parameterType="org.psyzon.insertdomain.UpdateInformationVO">
+		parameterType="org.psyzon.updatedomain.UpdateInformationVO">
 		update INFORMATION_LIST set
 		m_number = #{m_number},
 		l_nameeng = #{l_nameeng},
@@ -247,7 +247,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</update>
 
 	<update id="UpdateInsurance"
-		parameterType="org.psyzon.insertdomain.UpdateInsuranceVO">
+		parameterType="org.psyzon.updatedomain.UpdateInsuranceVO">
 		UPDATE insurance
 		SET
 		k_number = #{k_number},

@@ -4,14 +4,14 @@ import java.util.List;
 
 import org.psyzon.domain.EmploymentInfo_1DTO;
 import org.psyzon.domain.psyzonBoardPageDTO;
-import org.psyzon.insertdomain.UpdateAcademicAbilityVO;
-import org.psyzon.insertdomain.UpdateCareerVO;
-import org.psyzon.insertdomain.UpdateFamilyVO;
-import org.psyzon.insertdomain.UpdateInformationVO;
-import org.psyzon.insertdomain.UpdateInsuranceVO;
-import org.psyzon.insertdomain.UpdateMemberListVO;
-import org.psyzon.insertdomain.UpdateMiliVO;
-import org.psyzon.insertdomain.UpdatePaymentVO;
+import org.psyzon.updatedomain.UpdateAcademicAbilityVO;
+import org.psyzon.updatedomain.UpdateCareerVO;
+import org.psyzon.updatedomain.UpdateFamilyVO;
+import org.psyzon.updatedomain.UpdateInformationVO;
+import org.psyzon.updatedomain.UpdateInsuranceVO;
+import org.psyzon.updatedomain.UpdateMemberListVO;
+import org.psyzon.updatedomain.UpdateMiliVO;
+import org.psyzon.updatedomain.UpdatePaymentVO;
 
 public interface psyzonBoardService {
 

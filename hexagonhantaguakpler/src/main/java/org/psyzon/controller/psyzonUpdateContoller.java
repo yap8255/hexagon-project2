@@ -1,7 +1,7 @@
 package org.psyzon.controller;
 
-import org.psyzon.insertdomain.UpdateDTO;
 import org.psyzon.service.psyzonBoardService;
+import org.psyzon.updatedomain.UpdateDTO;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -62,7 +62,7 @@ public class psyzonUpdateContoller {
 	public String updateacademic(@ModelAttribute("UpdateDTO") UpdateDTO InsertDTO){
 		
 		
-		 System.out.println("controller academic" + InsertDTO.getAcademic());  
+		/* System.out.println("controller academic" + InsertDTO.getAcademic()); */  
 		 service.updateAcademicAbilityList(InsertDTO.getAcademic());
 		return "psyzon/insert";
 		

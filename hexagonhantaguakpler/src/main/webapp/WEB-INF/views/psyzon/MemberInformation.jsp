@@ -342,13 +342,8 @@ $( document ).ready( function() {
   $("#paymentInfo").submit(function (event) {
       // 폼이 서버로 전송되는 것을 막음
       event.preventDefault();
-  
-      
-      
       // serialize() 함수를 사용하여 데이터를 직렬화
       var formData = $("#paymentInfo").serialize();
-      
-      
       // 서버로 데이터를 전송
       $.ajax({
           type: "POST",
@@ -363,12 +358,68 @@ $( document ).ready( function() {
               console.error(error);
           }
       });
- 
+  });
+  $("#InsertcareerForm").submit(function (event) {
+      // 폼이 서버로 전송되는 것을 막음
+      event.preventDefault();
+      
+      
+      var careersData = [];
+      // 서버로 데이터를 전송
+      
+       $(".grpCrer").each(function(index) {
+        var careerData = {
+            m_comany_name: $(this).find("#frmEmcrCpNm1").val(),
+            m_newdate: $(this).find("#frmEmcrJind1").val(),
+            m_byedate: $(this).find("#frmEmcrGind1").val(),
+            m_period_year: $(this).find("#frmEmcrPerd11").val(),
+            m_period_month: $(this).find("#frmEmcrPerd21").val(),
+            m_final_class: $(this).find("#frmEmcrPstn1").val(),
+            m_duty: $(this).find("#frmEmcrDuty1").val(),
+            m_bye_why: $(this).find("#frmEmcrPerc1").val(),
+            m_number: $(this).find("#frmEmcrMnum").val()
+            
+            
+            // 나머지 필드에 대한 데이터도 필요한 경우 여기에 추가
+        };
+
+        careersData.push(careerData);
+        console.log(careerData);
+    });
+      $.ajax({
+          type: "POST",
+          url: "/psyzon/insertcareer",
+          data: JSON.stringify(careersData),
+          contentType : "application/json; charset=utf-8",
+          success: function (data) {
+              // 서버 응답에 대한 처리
+              console.log(data);
+          },
+          error: function (error) {
+              // 오류 처리
+              console.error(error);
+          }
+      });
   });
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
   $("#btnEmplSave").click(function() {
-      // #academicForm을 서브밋
+      
       $("#academicForm").submit();
       $("#insuranceInfo").submit();
       $("#paymentInfo").submit();
@@ -376,6 +427,9 @@ $( document ).ready( function() {
       $("#memberinfoForm").submit();
       $("#familyForm").submit();
       $("#careerForm").submit();
+      
+      $("#InsertcareerForm").submit();
+      
       
       
       
@@ -2721,26 +2775,31 @@ console.log('label click');
         <li class="w_120 con3"><input name="career[${status.index}].m_comany_name" id="frmEmcrCpNm0" type="text" value="${MemberInfo.m_comany_name }" class="white G5" style="width:90%;"></li>
         <li class="w_88 con3"><input name="career[${status.index}].m_newdate" id="frmEmcrJind0" type="text" value="${MemberInfo.m_newdate }" class="white G5 frmCalendar c hasDatepicker" style="width:90%;" maxlength="10"></li>
         <li class="w_88 con3"><input name="career[${status.index}].m_byedate" id="frmEmcrGind0" type="text" value="${MemberInfo.m_byedate }" class="white G5 frmCalendar c hasDatepicker" style="width:90%;" maxlength="10"></li>
-        <li class="w_135 con3"><input name="career[${status.index}].m_period_year" id="frmEmcrPerd10" type="text" value="${MemberInfo.m_period_year }" class="white G5 aling_r" style="width:30%;" maxlength="2">년 <input name="frmEmcrPerd2" id="frmEmcrPerd20" type="text" value="${MemberInfo.m_period_month }" class="white G5 aling_r" style="width:30%;" maxlength="2">개월</li>
-        <li class="w_92 con3"><input name="career[${status.index}].m_final_class" id="frmEmcrPstn0" type="text" value="${MemberInfo.m_final_class }" class="white G5" style="width:90%;"></li>
-        <li class="w_88 con3"><input name="career[${status.index}].m_duty" id="frmEmcrDuty0" type="text" value="${MemberInfo.m_duty }" class="white G5" style="width:90%;"></li>
+        <li class="w_135 con3"><input name="career[${status.index}].m_period_year" id="frmEmcrPerd010" type="text" value="${MemberInfo.m_period_year }" class="white G5 aling_r" style="width:30%;" maxlength="2">년 <input name="career[${status.index}].m_period_month" id="frmEmcrPerd20" type="text" value="${MemberInfo.m_period_month }" class="white G5 aling_r" style="width:30%;" maxlength="2">개월</li>
+        <li class="w_92 con3"><input name="career[${status.index}].m_final_class" id="frmEmcrPstn00" type="text" value="${MemberInfo.m_final_class }" class="white G5" style="width:90%;"></li>
+        <li class="w_88 con3"><input name="career[${status.index}].m_duty" id="frmEmcrDuty00" type="text" value="${MemberInfo.m_duty }" class="white G5" style="width:90%;"></li>
         <li class="w_156 con3"><input name="career[${status.index}].m_bye_why" id="frmEmcrPerc0" type="text" value="${MemberInfo.m_bye_why }" class="white G5" style="width:90%;"></li>
      
      </ul>
       </c:forEach>
       </form:form>
+    <form:form modelAttribute="CareerVO" action="/psyzon/insertcareer" method="post" id="InsertcareerForm">
     
       <ul id="grpCrerIdx2" class="grpCrer"><!-- ### G5 2 ### -->
+      <input type="hidden" name="career[0].m_number" value="${M_number}" id="frmEmcrMnum">
       
-        <li class="w_24 con3_check"><label class="label_check" for="grpCrerId2"><input type="checkbox" name="grpCrerId" id="grpCrerId2" class="G5"></label></li>
-        <li class="w_120 con3"><input name="frmEmcrCpNm" id="frmEmcrCpNm2" type="text" value="" class="white G5" style="width:90%;"></li>
-        <li class="w_88 con3"><input name="frmEmcrJind" id="frmEmcrJind2" type="text" value="" class="white G5 frmCalendar c hasDatepicker" style="width:90%;" maxlength="10"></li>
-        <li class="w_88 con3"><input name="frmEmcrGind" id="frmEmcrGind2" type="text" value="" class="white G5 frmCalendar c hasDatepicker" style="width:90%;" maxlength="10"></li>
-        <li class="w_135 con3"><input name="frmEmcrPerd1" id="frmEmcrPerd12" type="text" value="" class="white G5" style="width:30%;" maxlength="2">년 <input name="frmEmcrPerd2" id="frmEmcrPerd22" type="text" value="" class="white G5" style="width:30%;" maxlength="2">개월</li>
-        <li class="w_92 con3"><input name="frmEmcrPstn" id="frmEmcrPstn2" type="text" value="" class="white G5" style="width:90%;"></li>
-        <li class="w_88 con3"><input name="frmEmcrDuty" id="frmEmcrDuty2" type="text" value="" class="white G5" style="width:90%;"></li>
-        <li class="w_156 con3"><input name="frmEmcrPerc" id="frmEmcrPerc2" type="text" value="" class="white G5" style="width:90%;"></li>
+        <li class="w_24 con3_check"><label class="label_check" for="grpCrerId1"><input type="checkbox" name="grpCrerId" id="grpCrerId1" class="G5"></label></li>
+        <li class="w_120 con3"><input name="career[0].m_comany_name" id="frmEmcrCpNm1" type="text" value="" class="white G5" style="width:90%;"></li>
+        <li class="w_88 con3"><input name="career[0].m_newdate" id="frmEmcrJind1" type="text" value="" class="white G5 frmCalendar c hasDatepicker" style="width:90%;" maxlength="10"></li>
+        <li class="w_88 con3"><input name="career[0].m_byedate" id="frmEmcrGind1" type="text" value="" class="white G5 frmCalendar c hasDatepicker" style="width:90%;" maxlength="10"></li>
+        <li class="w_135 con3"><input name="career[0].m_period_year" id="frmEmcrPerd11" type="text" value="" class="white G5" style="width:30%;" maxlength="2">년 <input name="career.m_period_month" id="frmEmcrPerd21" type="text" value="" class="white G5" style="width:30%;" maxlength="2">개월</li>
+        <li class="w_92 con3"><input name="career[0].m_final_class" id="frmEmcrPstn1" type="text" value="" class="white G5" style="width:90%;"></li>
+        <li class="w_88 con3"><input name="career[0].m_duty" id="frmEmcrDuty1" type="text" value="" class="white G5" style="width:90%;"></li>
+        <li class="w_156 con3"><input name="career[0].m_bye_why" id="frmEmcrPerc1" type="text" value="" class="white G5" style="width:90%;"></li>
+        
       </ul>
+      
+      </form:form>
 </ul>      </div>
     </ul>
     <!-- //경력: G5// -->
