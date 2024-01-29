@@ -141,7 +141,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			f_stay_with = #{item.f_stay_with, jdbcType=INTEGER},
 			f_in_tax = #{item.f_in_tax, jdbcType=INTEGER},
 			f_mul_child = #{item.f_mul_child, jdbcType=INTEGER}
-			WHERE m_key = #{item.m_key, jdbcType=INTEGER}
+			WHERE m_key = #{item.m_key, jdbcType=INTEGER} and m_number = #{item.m_number, jdbcType=VARCHAR}
 		</foreach>
 
 	</update>
@@ -242,7 +242,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			jdbcType=INTEGER},
 			p_payment_bank = #{item.p_payment_bank, jdbcType=VARCHAR},
 			p_bank_number = #{item.p_bank_number, jdbcType=VARCHAR}
-			WHERE m_key = #{item.m_key, jdbcType=INTEGER} and m_number = #{item.m_number, jdbcType=VARCHAR}
+			WHERE m_number = #{item.m_number, jdbcType=VARCHAR}
 		</foreach>
 	</update>
 
