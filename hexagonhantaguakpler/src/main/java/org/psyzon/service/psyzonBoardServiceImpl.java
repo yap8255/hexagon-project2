@@ -12,6 +12,7 @@ import org.psyzon.domain.MemberListVO;
 import org.psyzon.domain.MiliVO;
 import org.psyzon.domain.PaymentVO;
 import org.psyzon.domain.psyzonBoardPageDTO;
+import org.psyzon.insertdomain.InsertCareerVO;
 import org.psyzon.mapper.psyzonBoardMapper;
 import org.psyzon.updatedomain.UpdateAcademicAbilityVO;
 import org.psyzon.updatedomain.UpdateCareerVO;
@@ -162,6 +163,11 @@ public class psyzonBoardServiceImpl implements psyzonBoardService {
 	    public void updateAcademicAbilityList(List<UpdateAcademicAbilityVO> acadamicabilityList) {
 	        mapper.UpdateAcademicAbility(acadamicabilityList);
 	    }
+	  
+	  @Override
+	  public void InsertCareer(List<InsertCareerVO> career) {
+		  mapper.InsertCareer(career);
+	  }
 	
 
 

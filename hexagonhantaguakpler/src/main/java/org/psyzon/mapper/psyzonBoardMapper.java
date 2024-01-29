@@ -12,6 +12,7 @@ import org.psyzon.domain.MemberInformationVO;
 import org.psyzon.domain.MemberListVO;
 import org.psyzon.domain.MiliVO;
 import org.psyzon.domain.PaymentVO;
+import org.psyzon.insertdomain.InsertCareerVO;
 import org.psyzon.updatedomain.UpdateAcademicAbilityVO;
 import org.psyzon.updatedomain.UpdateCareerVO;
 import org.psyzon.updatedomain.UpdateFamilyVO;
@@ -77,5 +78,12 @@ public interface psyzonBoardMapper {
 	public void UpdateCareer(List<UpdateCareerVO> career);
 
 	public void UpdateAcademicAbility(List<UpdateAcademicAbilityVO> academicability);
+	
+	/*---------------------------------------Update-------------------------------------------------*/
+	/*---------------------------------------Insert-------------------------------------------------*/
+	
+	public void InsertCareer(List<InsertCareerVO> career);
+	
+	
 
 }

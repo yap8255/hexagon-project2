@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.psyzon.domain.EmploymentInfo_1DTO;
 import org.psyzon.domain.psyzonBoardPageDTO;
+import org.psyzon.insertdomain.InsertCareerVO;
 import org.psyzon.updatedomain.UpdateAcademicAbilityVO;
 import org.psyzon.updatedomain.UpdateCareerVO;
 import org.psyzon.updatedomain.UpdateFamilyVO;
@@ -50,5 +51,7 @@ public interface psyzonBoardService {
 	public void updateCareerList(List<UpdateCareerVO> careerList);
 
 	public void updateAcademicAbilityList(List<UpdateAcademicAbilityVO> acadamicabilityList);
+	
+	public void InsertCareer(List<InsertCareerVO> career);
 
 }

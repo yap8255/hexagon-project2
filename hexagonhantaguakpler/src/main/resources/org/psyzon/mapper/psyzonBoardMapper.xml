@@ -192,7 +192,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			m_final_class = #{item.m_final_class, jdbcType=VARCHAR},
 			m_duty = #{item.m_duty, jdbcType=VARCHAR},
 			m_bye_why = #{item.m_bye_why, jdbcType=VARCHAR}
-			WHERE m_number = #{item.m_number, jdbcType=VARCHAR}
+			WHERE m_number = #{item.m_number, jdbcType=VARCHAR}  and m_KEY = #{item.m_key, jdbcType=VARCHAR}
 		</foreach>
 	</update>
 
@@ -210,7 +210,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			a_school_name = #{item.a_school_name, jdbcType=VARCHAR},
 			a_major = #{item.a_major, jdbcType=VARCHAR},
 			a_finish = #{item.a_finish, jdbcType=VARCHAR}
-			WHERE m_key = #{item.m_key, jdbcType=INTEGER}
+			WHERE m_key = #{item.m_key, jdbcType=INTEGER}  and m_number = #{item.m_number, jdbcType=VARCHAR}
 		</foreach>
 	</update>
 
@@ -242,7 +242,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			jdbcType=INTEGER},
 			p_payment_bank = #{item.p_payment_bank, jdbcType=VARCHAR},
 			p_bank_number = #{item.p_bank_number, jdbcType=VARCHAR}
-			WHERE m_key = #{item.m_key, jdbcType=INTEGER}
+			WHERE m_key = #{item.m_key, jdbcType=INTEGER} and m_number = #{item.m_number, jdbcType=VARCHAR}
 		</foreach>
 	</update>
 
@@ -262,9 +262,28 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		i_number = #{i_number},
 		i_date = #{i_date},
 		ni_date = #{ni_date}
-		WHERE m_number = #{m_number}
+		WHERE m_number = #{m_number} 
 
 	</update>
+	
+	
+		<insert id="InsertCareer" parameterType="java.util.List">
+		<foreach collection="list" item="item" separator=";"
+			open="DECLARE BEGIN" close=";END;">
+			insert into career(m_key,m_comany_name,m_newdate,m_byedate,m_period_year,m_period_month,m_final_class,m_duty,m_bye_why,m_number) values
+			(s_career.nextval,
+			#{item.m_comany_name, jdbcType=VARCHAR},
+			 #{item.m_newdate, jdbcType=DATE},
+			 #{item.m_byedate, jdbcType=DATE},
+			 #{item.m_period_year, jdbcType=INTEGER},
+			 #{item.m_period_month, jdbcType=INTEGER},
+			 #{item.m_final_class, jdbcType=VARCHAR},
+			 #{item.m_duty, jdbcType=VARCHAR},
+			 #{item.m_bye_why, jdbcType=VARCHAR},
+			 #{item.m_number, jdbcType=VARCHAR}
+			)
+		</foreach>
+	</insert>
 
 
 
