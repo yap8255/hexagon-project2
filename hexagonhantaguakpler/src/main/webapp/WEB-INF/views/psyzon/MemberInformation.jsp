@@ -2006,6 +2006,7 @@ console.log('label click');
       <c:forEach var="MemberInfo" items="${MemberInfo.paymentvo}" varStatus = "status">
       <p class="caption"></p>
       <input type="hidden" name="payment[${status.index}].m_number" value="${MemberInfo.m_number}">
+      <input type="hidden" name="payment[${status.index}].m_key" value="${MemberInfo.m_key}">
       <ul>
        
         <li class="titLeft p_l5" style="width:145px;"><font class="c_red">*</font> <strong>4대보험</strong></li>
@@ -2575,6 +2576,7 @@ console.log('label click');
 								<c:forEach var="MemberInfo"
 									items="${MemberInfo.academicabilityvo}" varStatus="status">
 									  <input type="hidden" name="academic[${status.index}].m_number" value="${MemberInfo.m_number}">
+									  <input type="hidden" name="academic[${status.index}].m_key" value="${MemberInfo.m_key}">
 									<ul id="grpEmacIdx0" class="grpEmac">
 										<!-- ### G4 0 ### -->
 										<li class="w_24 con3_check "><label class="label_check"

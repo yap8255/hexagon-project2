@@ -5,6 +5,9 @@ import lombok.Data;
 @Data
 public class PaymentVO {
 	
+	
+	private String m_key;
+	
 	private String m_number;
 	private int p_national_pension;
 	private int p_health_insurance;

@@ -12,10 +12,14 @@ import org.psyzon.domain.MemberInformationVO;
 import org.psyzon.domain.MemberListVO;
 import org.psyzon.domain.MiliVO;
 import org.psyzon.domain.PaymentVO;
+import org.psyzon.insertdomain.UpdateAcademicAbilityVO;
+import org.psyzon.insertdomain.UpdateCareerVO;
 import org.psyzon.insertdomain.UpdateFamilyVO;
 import org.psyzon.insertdomain.UpdateInformationVO;
+import org.psyzon.insertdomain.UpdateInsuranceVO;
 import org.psyzon.insertdomain.UpdateMemberListVO;
 import org.psyzon.insertdomain.UpdateMiliVO;
+import org.psyzon.insertdomain.UpdatePaymentVO;
 
 @Mapper
 public interface psyzonBoardMapper {
@@ -46,24 +50,32 @@ public interface psyzonBoardMapper {
 	public List<FamilyVO> familyinfo(@Param("m_number") String m_number);
 
 	public InsuranceVO insuranceinfo(@Param("m_number") String m_number);
-	
+
 	public MemberInformationVO memberinfo(@Param("m_number") String m_number);
-	
+
 	public List<CareerVO> CareerVO(@Param("m_number") String m_number);
 
 	public List<MiliVO> MiliVO(@Param("m_number") String m_number);
 
 	public List<PaymentVO> PaymentVO(@Param("m_number") String m_number);
-	
+
 	/*-----------------------------------List----------------------------------------------------*/
 	/*---------------------------------------Update-------------------------------------------------*/
-	
-	 public void UpdateMili(List<UpdateMiliVO> mili); 
-	 
-	 public void UpdateFamily(List<UpdateFamilyVO> family); 
-	
-	 public void UpdateMemberInfo(UpdateMemberListVO memberlist);
-	 
-	 public void UpdateInformation(UpdateInformationVO information); 
+
+	public void UpdateMili(List<UpdateMiliVO> mili);
+
+	public void UpdateFamily(List<UpdateFamilyVO> family);
+
+	public void UpdateMemberInfo(UpdateMemberListVO memberlist);
+
+	public void UpdateInformation(UpdateInformationVO information);
+
+	public void UpdatePayment(List<UpdatePaymentVO> payment);
+
+	public void UpdateInsurance(UpdateInsuranceVO insurance);
+
+	public void UpdateCareer(List<UpdateCareerVO> career);
+
+	public void UpdateAcademicAbility(List<UpdateAcademicAbilityVO> academicability);
 
 }
