@@ -2659,7 +2659,7 @@ console.log('label click');
 											id="frmEmacJinD10" type="text"
 											value="${MemberInfo.a_entrance_year}" class="money G4"
 											style="width: 30%;" maxlength="4"> 년&nbsp;&nbsp; <input
-											name="frmEmacJinD2" id="frmEmacJinD20" type="text"
+											name="academic[${status.index}].a_entrance_month" id="frmEmacJinD20" type="text"
 											value="${MemberInfo.a_entrance_month}" class="money G4"
 											style="width: 17%;" maxlength="2"> 월</li>
 										<li class="w_110 con3"><input
@@ -2667,7 +2667,7 @@ console.log('label click');
 											id="frmEmacGinD10" type="text"
 											value="${MemberInfo.a_graduate_year}" class="money G4"
 											style="width: 30%;" maxlength="4"> 년&nbsp;&nbsp; <input
-											name="frmEmacGinD2" id="frmEmacGinD20" type="text"
+											name="academic[${status.index}].a_graduate_month" id="frmEmacGinD20" type="text"
 											value="${MemberInfo.a_graduate_month}" class="money G4"
 											style="width: 17%;" maxlength="2"> 월</li>
 										<li class="con3" style="width: 253px;"><input

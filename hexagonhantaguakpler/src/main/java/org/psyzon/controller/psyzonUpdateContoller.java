@@ -81,7 +81,7 @@ public class psyzonUpdateContoller {
 	@PostMapping("/updatepayment")
 	public String updatepayment(@ModelAttribute("UpdateDTO") UpdateDTO InsertDTO){
 		
-		/* System.out.println("controller PAYMENT" + InsertDTO.getPayment()); */
+		 System.out.println("controller PAYMENT" + InsertDTO.getPayment()); 
 		 service.updatePaymentList(InsertDTO.getPayment());
 		
 		
