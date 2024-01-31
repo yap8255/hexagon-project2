@@ -12,6 +12,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.WebApplicationContext;
@@ -20,6 +21,7 @@ import org.springframework.web.context.support.ServletContextResource;
 import lombok.AllArgsConstructor;
 
 @Controller
+@RequestMapping("/psyzon/*")
 @AllArgsConstructor
 public class ImageController {
 	

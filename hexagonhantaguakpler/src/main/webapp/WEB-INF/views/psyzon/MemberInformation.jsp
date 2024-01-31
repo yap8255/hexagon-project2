@@ -2598,13 +2598,13 @@ console.log('label click');
 				<a name="aTagMenu03"></a>
 				<!-- //학력: G4-->
 				<ul id="lblAcdm">
-					<img src="/_commonImg/emreg_tit_05.gif" width="65px" height="19px"
+					<img src="/resources/images/emreg_tit_05.gif" width="65px" height="19px"
 						vspace="8" hspace="5" border="0" alt="학력" title="학력">
 					<span class="f_right p_t5"><input name="btnEmacAdd"
 						id="btnEmacAdd" type="image" value="추가하기"
-						src="/_commonImg/btn_plus.gif" width="54px" height="21px"
+						src="/psyzon/imageServlet?imageName=add_button.png" width="54px" height="21px"
 						alt="추가하기">&nbsp;<input name="btnEmacDel" id="btnEmacDel"
-						type="image" value="선택삭제" src="/_commonImg/btn_s_delete.gif"
+						type="image" value="선택삭제" src="/psyzon/imageServlet?imageName=delete_button.png"
 						width="61px" height="21px" alt="선택삭제"></span>
 				</ul>
 				<ul>
@@ -2747,7 +2747,7 @@ console.log('label click');
 
     <a name="aTagMenu04"></a>
     <!-- //경력: G5 -->
-    <ul id="lblCrer"><img src="/_commonImg/emreg_tit_06.gif" width="65px" height="19px" vspace="8" hspace="5" border="0" alt="경력" title="경력"><span class="f_right p_t5"><input name="btnCrerAdd" id="btnCrerAdd" type="image" value="추가하기" src="/_commonImg/btn_plus.gif" width="54px" height="21px" alt="추가하기">&nbsp;<input name="btnCrerDel" id="btnCrerDel" type="image" value="선택삭제" src="/_commonImg/btn_s_delete.gif" width="61px" height="21px" alt="선택삭제"></span></ul>
+    <ul id="lblCrer"><img src="/resources/images/emreg_tit_06.gif" width="65px" height="19px" vspace="8" hspace="5" border="0" alt="경력" title="경력"><span class="f_right p_t5"><input name="btnCrerAdd" id="btnCrerAdd" type="image" value="추가하기" src="/psyzon/imageServlet?imageName=add_button.png" width="54px" height="21px" alt="추가하기">&nbsp;<input name="btnCrerDel" id="btnCrerDel" type="image" value="선택삭제" src="/psyzon/imageServlet?imageName=delete_button.png" width="61px" height="21px" alt="선택삭제"></span></ul>
     <ul>
       <div id="table1">
       <p class="caption"></p>
@@ -2799,6 +2799,7 @@ console.log('label click');
         
       </ul>
       
+      
       </form:form>
 </ul>      </div>
     </ul>
@@ -2808,7 +2809,7 @@ console.log('label click');
 
 				<a name="aTagMenu05"></a>
 				 <!-- //병역: G6 -->
-    <ul id="lblMili"><img src="/_commonImg/emreg_tit_07.gif" width="65px" height="19px" vspace="8" hspace="5" border="0" alt="병역" title="병역"></ul>
+    <ul id="lblMili"><img src="/resources/images/emreg_tit_07.gif" width="65px" height="19px" vspace="8" hspace="5" border="0" alt="병역" title="병역"></ul>
     <ul>
       <div id="table1">
       <input name="isG6Id" id="isG6Id" type="hidden" value="368079">
