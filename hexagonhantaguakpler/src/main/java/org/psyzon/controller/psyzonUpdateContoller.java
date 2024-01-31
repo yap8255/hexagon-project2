@@ -1,16 +1,11 @@
 package org.psyzon.controller;
 
-import org.psyzon.domain.EmploymentInfo_1DTO;
-import org.psyzon.insertdomain.UpdateDTO;
-import org.psyzon.insertdomain.UpdateInsuranceVO;
 import org.psyzon.service.psyzonBoardService;
+import org.psyzon.updatedomain.UpdateDTO;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import lombok.AllArgsConstructor;
 
@@ -22,25 +17,95 @@ public class psyzonUpdateContoller {
 
 	private psyzonBoardService service;
 	
-	
-	@PostMapping("/insertacademic")
-	public String insertacademic(@ModelAttribute("InsertDTO") UpdateDTO InsertDTO){
-		
-		
-		System.out.println("controller academic" + InsertDTO.getAcademic());
 
+
+	@PostMapping("/updatemili")
+	public String updatemili(@ModelAttribute("UpdateDTO") UpdateDTO InsertDTO){
+		
+		/* System.out.println("controller mili" + InsertDTO.getMili()); */ 
+		service.updateMiliList(InsertDTO.getMili());
+		
+		
 		return "psyzon/insert";
 		
 	}
-	@PostMapping("/insertinsurance")
-	public String insertinsurance(@ModelAttribute("InsertDTO") UpdateDTO InsertDTO){
+	@PostMapping("/updatememberinfo")
+	public String updatememberinfo(@ModelAttribute("UpdateDTO") UpdateDTO InsertDTO){
 		
-		System.out.println("controller insurance" + InsertDTO.getInsurance());
+		/* System.out.println("controller memberinfo1" + InsertDTO.getInformation()); */ 
+		String memberListPhone  = InsertDTO.getInformation().getL_phone1().concat("-").concat(InsertDTO.getInformation().getL_phone2()).concat("-").concat(InsertDTO.getInformation().getL_phone3());
+		
+		InsertDTO.getMemberlist().setM_phone(memberListPhone);
+		/* System.out.println("controller memberinfo2" + InsertDTO.getMemberlist()); */
+		
+		 service.updateMemberList(InsertDTO.getMemberlist()); 
+		 service.UpdateInformation(InsertDTO.getInformation());
+		 
 		
 		
 		return "psyzon/insert";
 		
 	}
+	
+
+	@PostMapping("/updatefamily")
+	public String updatefamily(@ModelAttribute("UpdateDTO") UpdateDTO InsertDTO){
+		
+		/* System.out.println("controller family" + InsertDTO.getFamily()); */ 
+		service.updateFamilyList(InsertDTO.getFamily());
+		
+		return "psyzon/insert";
+		
+	}
+	
+	@PostMapping("/updateacademic")
+	public String updateacademic(@ModelAttribute("UpdateDTO") UpdateDTO InsertDTO){
+		
+		
+		/* System.out.println("controller academic" + InsertDTO.getAcademic()); */  
+		 service.updateAcademicAbilityList(InsertDTO.getAcademic());
+		return "psyzon/insert";
+		
+	}
+	
+	@PostMapping("/updateinsurance")
+	public String updateinsurance(@ModelAttribute("UpdateDTO") UpdateDTO InsertDTO){
+		
+		/* System.out.println("controller insurance" + InsertDTO.getInsurance()); */ 
+		service.updateInsurance(InsertDTO.getInsurance());
+		
+		return "psyzon/insert";
+		
+	}
+	
+	@PostMapping("/updatepayment")
+	public String updatepayment(@ModelAttribute("UpdateDTO") UpdateDTO InsertDTO){
+		
+		 System.out.println("controller PAYMENT" + InsertDTO.getPayment()); 
+		 service.updatePaymentList(InsertDTO.getPayment());
+		
+		
+		return "psyzon/insert";
+		
+	}
+	
+	@PostMapping("/updatecareer")
+	public String updatecareer(@ModelAttribute("UpdateDTO") UpdateDTO InsertDTO){
+		
+		/* System.out.println("controller career" + InsertDTO.getCareer()); */
+		 service.updateCareerList(InsertDTO.getCareer());
+		
+		
+		return "psyzon/insert";
+		
+	}
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	

@@ -1,13 +1,10 @@
-package org.psyzon.domain;
+package org.psyzon.updatedomain;
 
 import lombok.Data;
 
 @Data
-public class PaymentVO {
-	
-	
+public class UpdatePaymentVO {
 	private String m_key;
-	
 	private String m_number;
 	private int p_national_pension;
 	private int p_health_insurance;

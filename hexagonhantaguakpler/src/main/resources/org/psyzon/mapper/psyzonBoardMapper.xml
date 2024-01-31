@@ -6,86 +6,287 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="org.psyzon.mapper.psyzonBoardMapper">
 
 
-<select id="totalList" resultType="org.psyzon.domain.MemberListVO">
-		SELECT * FROM (SELECT ROWNUM NUM, MEMBER_LIST.* FROM MEMBER_LIST) WHERE NUM BETWEEN (#{pageNum}-1)*#{size}+1 AND (#{pageNum})*#{size}
-</select>
+	<select id="totalList"
+		resultType="org.psyzon.domain.MemberListVO">
+		SELECT * FROM (SELECT ROWNUM NUM, MEMBER_LIST.* FROM
+		MEMBER_LIST) WHERE NUM BETWEEN (#{pageNum}-1)*#{size}+1 AND
+		(#{pageNum})*#{size}
+	</select>
 
-<select id="totalCount" resultType="int">
-		select count(*) from member_list
-		
-		
-</select>
+	<select id="totalCount" resultType="int">
+		select count(*) from
+		member_list
 
-<select id="WorkCount" resultType="int">
-		select count(*) from member_list where M_CONDITION = '재직'
 
-</select>
+	</select>
 
-<select id="WorkCount2" resultType="int">
-		select count(*) from member_list where M_CONDITION = '퇴사'
+	<select id="WorkCount" resultType="int">
+		select count(*) from
+		member_list where M_CONDITION = '재직'
 
-</select>
+	</select>
 
-<select id="TypeCount" resultType="int">
-		select count(*) from member_list where M_TYPE = '정규직'
+	<select id="WorkCount2" resultType="int">
+		select count(*) from
+		member_list where M_CONDITION = '퇴사'
 
-</select>
+	</select>
 
-<select id="TypeCount2" resultType="int">
-		select count(*) from member_list where M_TYPE = '계약직'
+	<select id="TypeCount" resultType="int">
+		select count(*) from
+		member_list where M_TYPE = '정규직'
 
-</select>
+	</select>
 
-<select id="TypeCount3" resultType="int">
-		select count(*) from member_list where M_TYPE = '임시직'
+	<select id="TypeCount2" resultType="int">
+		select count(*) from
+		member_list where M_TYPE = '계약직'
 
-</select>
+	</select>
 
-<select id="TypeCount4" resultType="int">
-		select count(*) from member_list where M_TYPE = '파견직'
+	<select id="TypeCount3" resultType="int">
+		select count(*) from
+		member_list where M_TYPE = '임시직'
 
-</select>
+	</select>
 
-<select id="TypeCount5" resultType="int">
-		select count(*) from member_list where M_TYPE = '위촉직'
+	<select id="TypeCount4" resultType="int">
+		select count(*) from
+		member_list where M_TYPE = '파견직'
 
-</select>
+	</select>
 
-<select id="TypeCount6" resultType="int">
-		select count(*) from member_list where M_TYPE = '일용직'
+	<select id="TypeCount5" resultType="int">
+		select count(*) from
+		member_list where M_TYPE = '위촉직'
 
-</select>
+	</select>
 
-<select id = "AcademicAbilityVO" resultType = "org.psyzon.domain.AcademicAbilityVO">
-select * from Academic_ability where m_number = #{m_number}  
-</select>
+	<select id="TypeCount6" resultType="int">
+		select count(*) from
+		member_list where M_TYPE = '일용직'
 
-<select id="familyinfo" resultType="org.psyzon.domain.FamilyVO">
+	</select>
 
-		select * from member_family where m_number=#{m_number}
+	<select id="AcademicAbilityVO"
+		resultType="org.psyzon.domain.AcademicAbilityVO">
+		select * from Academic_ability where m_number = #{m_number}
+	</select>
 
-</select>
+	<select id="familyinfo" resultType="org.psyzon.domain.FamilyVO">
 
-<select id="insuranceinfo" resultType="org.psyzon.domain.InsuranceVO">
+		select * from member_family
+		where m_number=#{m_number}
+
+	</select>
+
+	<select id="insuranceinfo"
+		resultType="org.psyzon.domain.InsuranceVO">
 
 		select * from insurance where m_number=#{m_number}
-		</select>
-<select id="memberinfo" resultType="org.psyzon.domain.MemberInformationVO">
+	</select>
+	<select id="memberinfo"
+		resultType="org.psyzon.domain.MemberInformationVO">
 
-		SELECT B.M_NUMBER, B.M_TYPE, B.M_NAME, A.L_NAMEENG,B.M_NEWDATE,B.M_BYEDATE,B.M_CLASS,B.M_POSITION,A.L_FOREIGN,B.M_RESI_NUMBER,A.L_ADDRESS,A.L_POSTNUMBER,A.L_TELLEPHONE1,A.L_TELLEPHONE2,A.L_TELLEPHONE3,A.L_PHONE1,A.L_PHONE2,A.L_PHONE3,B.M_MAIL,A.L_SNS,A.L_ETC
-FROM INFORMATION_LIST A, MEMBER_LIST B WHERE A.M_NUMBER = B.M_NUMBER AND A.M_NUMBER = #{m_number}
-		</select>
-<select id = "CareerVO" resultType = "org.psyzon.domain.CareerVO">
-select * from Career where m_number = #{m_number}  
-</select>
+		SELECT B.M_NUMBER, B.M_TYPE, B.M_NAME,
+		A.L_NAMEENG,B.M_NEWDATE,B.M_BYEDATE,B.M_CLASS,B.M_POSITION,A.L_FOREIGN,B.M_RESI_NUMBER,A.L_ADDRESS,A.L_POSTNUMBER,A.L_TELLEPHONE1,A.L_TELLEPHONE2,A.L_TELLEPHONE3,A.L_PHONE1,A.L_PHONE2,A.L_PHONE3,B.M_MAIL,A.L_SNS,A.L_ETC
+		FROM INFORMATION_LIST A, MEMBER_LIST B WHERE A.M_NUMBER = B.M_NUMBER
+		AND A.M_NUMBER = #{m_number}
+	</select>
+	<select id="CareerVO" resultType="org.psyzon.domain.CareerVO">
+		select * from Career where m_number = #{m_number}
+	</select>
 
-<select id = "MiliVO" resultType = "org.psyzon.domain.MiliVO">
-select * from Mili_service where m_number = #{m_number}  
-</select>
+	<select id="MiliVO" resultType="org.psyzon.domain.MiliVO">
+		select * from Mili_service where m_number = #{m_number}
+	</select>
 
-<select id = "PaymentVO" resultType = "org.psyzon.domain.PaymentVO">
-select * from Payment where m_number = #{m_number}  
-</select>		
+	<select id="PaymentVO" resultType="org.psyzon.domain.PaymentVO">
+		select * from Payment where m_number = #{m_number}
+	</select>
+	<!-- ==================================select================================== -->
+
+	<!-- ==================================update================================== -->
+
+
+	<update id="UpdateMili" parameterType="java.util.List">
+		<foreach collection="list" item="item" separator=";"
+			open="DECLARE BEGIN" close=";END;">
+			UPDATE mili_service
+			SET
+			ms_class = #{item.ms_class, jdbcType=VARCHAR},
+			ms_group = #{item.ms_group, jdbcType=VARCHAR},
+			ms_start_date = #{item.ms_start_date, jdbcType=DATE},
+			ms_end_date = #{item.ms_end_date, jdbcType=DATE},
+			ms_final_class = #{item.ms_final_class, jdbcType=VARCHAR},
+			ms_army_kind = #{item.ms_army_kind, jdbcType=VARCHAR},
+			ms_reason = #{item.ms_reason, jdbcType=VARCHAR}
+			WHERE m_number = #{item.m_number, jdbcType=VARCHAR}
+		</foreach>
+	</update>
+
+	<update id="UpdateFamily" parameterType="java.util.List">
+
+		<foreach collection="list" item="item" separator=";"
+			open="DECLARE BEGIN" close=";END;">
+			UPDATE member_family
+			SET
+			relation = #{item.relation, jdbcType=VARCHAR},
+			f_name = #{item.f_name, jdbcType=VARCHAR},
+			f_type = #{item.f_type, jdbcType=VARCHAR},
+			f_resi_number = #{item.f_resi_number, jdbcType=VARCHAR},
+			f_handi = #{item.f_handi, jdbcType=INTEGER},
+			f_per_de = #{item.f_per_de, jdbcType=INTEGER},
+			f_hel_in = #{item.f_hel_in, jdbcType=INTEGER},
+			f_stay_with = #{item.f_stay_with, jdbcType=INTEGER},
+			f_in_tax = #{item.f_in_tax, jdbcType=INTEGER},
+			f_mul_child = #{item.f_mul_child, jdbcType=INTEGER}
+			WHERE m_key = #{item.m_key, jdbcType=INTEGER} and m_number = #{item.m_number, jdbcType=VARCHAR}
+		</foreach>
+
+	</update>
+
+	<update id="UpdateMemberInfo"
+		parameterType="org.psyzon.updatedomain.UpdateMemberListVO">
+		update member_list set
+		m_type = #{m_type},
+		m_newdate = #{m_newdate},
+		m_number = #{m_number},
+		m_name = #{m_name},
+		m_class = #{m_class},
+		m_position = #{m_position},
+		m_resi_number = #{m_resi_number},
+		m_phone = #{m_phone},
+		m_mail = #{m_mail},
+		m_byedate = #{m_byedate} where m_number = #{m_number}
+	</update>
+	<update id="UpdateInformation"
+		parameterType="org.psyzon.updatedomain.UpdateInformationVO">
+		update INFORMATION_LIST set
+		m_number = #{m_number},
+		l_nameeng = #{l_nameeng},
+		l_foreign = #{l_foreign},
+		l_address = #{l_address},
+		l_postnumber = #{l_postnumber},
+		l_tellephone1 = #{l_tellephone1},
+		l_tellephone2 = #{l_tellephone2},
+		l_tellephone3 = #{l_tellephone3},
+		l_phone1 = #{l_phone1},
+		l_phone2 = #{l_phone2},
+		l_phone3 = #{l_phone3},
+		l_sns = #{l_sns},
+		l_etc = #{l_etc}
+		where m_number = #{m_number}
+	</update>
+
+	<update id="UpdateCareer" parameterType="java.util.List">
+		<foreach collection="list" item="item" separator=";"
+			open="DECLARE BEGIN" close=";END;">
+			UPDATE career
+			SET
+			m_comany_name = #{item.m_comany_name, jdbcType=VARCHAR},
+			m_newdate = #{item.m_newdate, jdbcType=DATE},
+			m_byedate = #{item.m_byedate, jdbcType=DATE},
+			m_period_year = #{item.m_period_year, jdbcType=INTEGER},
+			m_period_month = #{item.m_period_month, jdbcType=INTEGER},
+			m_final_class = #{item.m_final_class, jdbcType=VARCHAR},
+			m_duty = #{item.m_duty, jdbcType=VARCHAR},
+			m_bye_why = #{item.m_bye_why, jdbcType=VARCHAR}
+			WHERE m_number = #{item.m_number, jdbcType=VARCHAR}  and m_KEY = #{item.m_key, jdbcType=VARCHAR}
+		</foreach>
+	</update>
+
+	<update id="UpdateAcademicAbility"
+		parameterType="java.util.List">
+		<foreach collection="list" item="item" separator=";"
+			open="DECLARE BEGIN" close=";END;">
+			UPDATE academic_ability
+			SET
+			a_type = #{item.a_type, jdbcType=VARCHAR},
+			a_entrance_year = #{item.a_entrance_year, jdbcType=INTEGER},
+			a_entrance_month = #{item.a_entrance_month, jdbcType=INTEGER},
+			a_graduate_year = #{item.a_graduate_year, jdbcType=INTEGER},
+			a_graduate_month = #{item.a_graduate_month, jdbcType=INTEGER},
+			a_school_name = #{item.a_school_name, jdbcType=VARCHAR},
+			a_major = #{item.a_major, jdbcType=VARCHAR},
+			a_finish = #{item.a_finish, jdbcType=VARCHAR}
+			WHERE m_key = #{item.m_key, jdbcType=INTEGER}  and m_number = #{item.m_number, jdbcType=VARCHAR}
+		</foreach>
+	</update>
+
+	<update id="UpdatePayment" parameterType="java.util.List">
+
+		<foreach collection="list" item="item" separator=";"
+			open="DECLARE BEGIN" close=";END;">
+			UPDATE payment
+			SET
+			p_national_pension = #{item.p_national_pension, jdbcType=INTEGER},
+			p_health_insurance = #{item.p_health_insurance, jdbcType=INTEGER},
+			p_hi_discount = #{item.p_hi_discount, jdbcType=VARCHAR},
+			p_longterm_eldery_insurance = #{item.p_longterm_eldery_insurance,
+			jdbcType=INTEGER},
+			p_longterm_discount = #{item.p_longterm_discount, jdbcType=VARCHAR},
+			p_employment_insurance = #{item.p_employment_insurance,
+			jdbcType=INTEGER},
+			p_sudden_tax = #{item.p_sudden_tax, jdbcType=VARCHAR},
+			p_lei_discount = #{item.p_lei_discount, jdbcType=VARCHAR},
+			p_medium_business_discount = #{item.p_medium_business_discount,
+			jdbcType=INTEGER},
+			p_tax = #{item.p_tax, jdbcType=VARCHAR},
+			p_dorunuri = #{item.p_dorunuri, jdbcType=VARCHAR},
+			p_lsolation = #{item.p_lsolation, jdbcType=INTEGER},
+			p_nomal_payment = #{item.p_nomal_payment, jdbcType=INTEGER},
+			p_national_i_payment = #{item.p_national_i_payment, jdbcType=INTEGER},
+			p_health_i_payment = #{item.p_health_i_payment, jdbcType=INTEGER},
+			p_employment_i_payment = #{item.p_employment_i_payment,
+			jdbcType=INTEGER},
+			p_payment_bank = #{item.p_payment_bank, jdbcType=VARCHAR},
+			p_bank_number = #{item.p_bank_number, jdbcType=VARCHAR}
+			WHERE m_number = #{item.m_number, jdbcType=VARCHAR}
+		</foreach>
+	</update>
+
+	<update id="UpdateInsurance"
+		parameterType="org.psyzon.updatedomain.UpdateInsuranceVO">
+		UPDATE insurance
+		SET
+		k_number = #{k_number},
+		k_date = #{k_date},
+		nk_date = #{nk_date},
+		h_number = #{h_number},
+		h_date = #{h_date},
+		nh_date = #{nh_date},
+		e_number = #{e_number},
+		e_date = #{e_date},
+		ne_date = #{ne_date},
+		i_number = #{i_number},
+		i_date = #{i_date},
+		ni_date = #{ni_date}
+		WHERE m_number = #{m_number} 
+
+	</update>
+	
+	
+		<insert id="InsertCareer" parameterType="java.util.List">
+		<foreach collection="list" item="item" separator=";"
+			open="DECLARE BEGIN" close=";END;">
+			
+			insert into career(m_key,m_comany_name,m_newdate,m_byedate,m_period_year,m_period_month,m_final_class,m_duty,m_bye_why,m_number) values
+			(s_career.nextval,
+			#{item.m_comany_name, jdbcType=VARCHAR},
+			 #{item.m_newdate, jdbcType=DATE},
+			 #{item.m_byedate, jdbcType=DATE},
+			 #{item.m_period_year, jdbcType=INTEGER},
+			 #{item.m_period_month, jdbcType=INTEGER},
+			 #{item.m_final_class, jdbcType=VARCHAR},
+			 #{item.m_duty, jdbcType=VARCHAR},
+			 #{item.m_bye_why, jdbcType=VARCHAR},
+			 #{item.m_number, jdbcType=VARCHAR}
+			)
+		</foreach>
+	</insert>
+
+
 
 
 

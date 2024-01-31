@@ -1,9 +1,9 @@
-package org.psyzon.domain;
+package org.psyzon.updatedomain;
 
 import lombok.Data;
 
 @Data
-public class FamilyVO {
+public class UpdateFamilyVO {
 	private int m_key;
 	private String m_number;
 	private String relation;

@@ -3,7 +3,7 @@ package org.psyzon.insertdomain;
 import lombok.Data;
 
 @Data
-public class UpdateAcademicAbilityVO {
+public class InsertAcademicAbilityVO {
 	String m_key;
 	String m_number;
 	String a_type;

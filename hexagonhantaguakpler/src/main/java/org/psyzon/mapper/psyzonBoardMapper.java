@@ -12,6 +12,15 @@ import org.psyzon.domain.MemberInformationVO;
 import org.psyzon.domain.MemberListVO;
 import org.psyzon.domain.MiliVO;
 import org.psyzon.domain.PaymentVO;
+import org.psyzon.insertdomain.InsertCareerVO;
+import org.psyzon.updatedomain.UpdateAcademicAbilityVO;
+import org.psyzon.updatedomain.UpdateCareerVO;
+import org.psyzon.updatedomain.UpdateFamilyVO;
+import org.psyzon.updatedomain.UpdateInformationVO;
+import org.psyzon.updatedomain.UpdateInsuranceVO;
+import org.psyzon.updatedomain.UpdateMemberListVO;
+import org.psyzon.updatedomain.UpdateMiliVO;
+import org.psyzon.updatedomain.UpdatePaymentVO;
 
 @Mapper
 public interface psyzonBoardMapper {
@@ -42,14 +51,39 @@ public interface psyzonBoardMapper {
 	public List<FamilyVO> familyinfo(@Param("m_number") String m_number);
 
 	public InsuranceVO insuranceinfo(@Param("m_number") String m_number);
-	
+
 	public MemberInformationVO memberinfo(@Param("m_number") String m_number);
-	
+
 	public List<CareerVO> CareerVO(@Param("m_number") String m_number);
 
 	public List<MiliVO> MiliVO(@Param("m_number") String m_number);
 
 	public List<PaymentVO> PaymentVO(@Param("m_number") String m_number);
+
+	/*-----------------------------------List----------------------------------------------------*/
+	/*---------------------------------------Update-------------------------------------------------*/
+
+	public void UpdateMili(List<UpdateMiliVO> mili);
+
+	public void UpdateFamily(List<UpdateFamilyVO> family);
+
+	public void UpdateMemberInfo(UpdateMemberListVO memberlist);
+
+	public void UpdateInformation(UpdateInformationVO information);
+
+	public void UpdatePayment(List<UpdatePaymentVO> payment);
+
+	public void UpdateInsurance(UpdateInsuranceVO insurance);
+
+	public void UpdateCareer(List<UpdateCareerVO> career);
+
+	public void UpdateAcademicAbility(List<UpdateAcademicAbilityVO> academicability);
+	
+	/*---------------------------------------Update-------------------------------------------------*/
+	/*---------------------------------------Insert-------------------------------------------------*/
+	
+	public void InsertCareer(List<InsertCareerVO> career);
+	
 	
 
 }
