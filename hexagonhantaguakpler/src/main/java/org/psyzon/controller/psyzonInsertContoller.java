@@ -48,10 +48,10 @@ public class psyzonInsertContoller {
 	public String insertcareer(@RequestBody List<InsertCareerVO> career){
 		
 		List<InsertCareerVO> filteredList = career.stream()
-			    .filter(item -> item.getM_number() != null).filter(item -> item.getM_comany_name() != null)
+			    .filter(item -> item.getM_number() != null && item.getM_comany_name() != "")
 			    .collect(Collectors.toList());
 		
-		
+		System.out.println("insert career"+ filteredList);
 		
 		  
 		  service.InsertCareer(filteredList);

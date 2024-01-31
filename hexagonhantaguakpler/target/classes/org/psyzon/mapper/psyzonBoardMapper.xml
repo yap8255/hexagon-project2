@@ -270,6 +270,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<insert id="InsertCareer" parameterType="java.util.List">
 		<foreach collection="list" item="item" separator=";"
 			open="DECLARE BEGIN" close=";END;">
+			
 			insert into career(m_key,m_comany_name,m_newdate,m_byedate,m_period_year,m_period_month,m_final_class,m_duty,m_bye_why,m_number) values
 			(s_career.nextval,
 			#{item.m_comany_name, jdbcType=VARCHAR},
